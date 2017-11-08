@@ -41,7 +41,7 @@ export default class StudentForm extends React.Component{
                 <input id="inputfield" type="text" name='name' value={this.state.name} 
                 onChange={this.handleChange.bind(this)}/> 
                 <button onClick={this.handleSave.bind(this)}>Save</button>
-                <div> my test get augdsiuopd</div>
+                <div> my test get asdasd</div>
 
                 <input id= "newinput" type="text" name="price" value={this.state.price}
                 onChange={this.handleChangePrice.bind(this)}/>
