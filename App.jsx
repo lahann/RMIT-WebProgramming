@@ -9,8 +9,7 @@ export default class App extends React.Component{
             <div>
             <div>other change</div>
             <div>Clearly an awesome start</div>
-            <div>test Linh</div>
-            <div>test 2</div>
+            <div>Linh was here</div>
             <div>
             <table class="table table-dark">
             <thead>
