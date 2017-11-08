@@ -7,9 +7,7 @@ export default class App extends React.Component {
     return (
       <html lang="en">
         <div>
-          <div>other change</div>
           <div>Clearly an awesome start</div>
-          <div>Linh was here</div>
           <div>
             <table class="table table-dark">
               <thead>
