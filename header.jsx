@@ -4,7 +4,7 @@ export default class Header extends React.Component{
 
     constructor(){
         super()
-        this.state = {name: 'bla'}
+        this.state = {name: 'asd'}
         
     }
     render(){
