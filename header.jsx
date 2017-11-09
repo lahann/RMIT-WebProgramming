@@ -1,14 +1,15 @@
 import React from 'react'
 
-export default class header extends React.Component{
+export default class Header extends React.Component{
 
     constructor(){
         super()
+        this.state = {name: 'bla'}
         
     }
     render(){
         return(
-            <div>blabla</div>
+            <div>blabla {this.state.name}</div>
         )
     }
 }

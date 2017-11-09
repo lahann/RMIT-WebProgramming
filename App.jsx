@@ -1,6 +1,6 @@
 import React from 'react'
-import footer from './footer.jsx'
-import header from './header.jsx'
+import Footer from './footer.jsx'
+import Header from './header.jsx'
 
 
 export default class App extends React.Component {
@@ -8,7 +8,7 @@ export default class App extends React.Component {
     return (
         <div>
           <div> 
-            <header /> 
+            <Header name='bla'/> 
           </div>
           <div>Clearly an awesome start</div>
           <div>
@@ -52,7 +52,7 @@ export default class App extends React.Component {
 
           </div>
           <div>
-              <footer /> 
+              <Footer /> 
           </div>
         </div>
     )

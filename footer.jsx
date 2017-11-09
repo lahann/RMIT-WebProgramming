@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class footer extends React.Component {
+export default class Footer extends React.Component {
 
     constructor(){
         super()
@@ -8,7 +8,9 @@ export default class footer extends React.Component {
     }
     render(){
         return(
-            <div>blabla</div>
+            <div>
+                <h1>blabla</h1>
+            </div>
         )
     }
 }
