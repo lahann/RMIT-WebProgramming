@@ -1,12 +1,15 @@
 import React from 'react'
-
+import footer from './footer.jsx'
+import header from './header.jsx'
 
 
 export default class App extends React.Component {
   render() {
     return (
-      <html lang="en">
         <div>
+          <div> 
+            <header /> 
+          </div>
           <div>Clearly an awesome start</div>
           <div>
             <table class="table table-dark">
@@ -48,8 +51,10 @@ export default class App extends React.Component {
             </table>
 
           </div>
+          <div>
+              <footer /> 
+          </div>
         </div>
-      </html>
     )
   }
 }
