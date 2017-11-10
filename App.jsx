@@ -8,7 +8,7 @@ export default class App extends React.Component {
     return (
         <div>
           <div> 
-            <Header name='sthhh'/> 
+            <Header /> 
           </div>
           <div>Clearly an awesome start</div>
           <div>
