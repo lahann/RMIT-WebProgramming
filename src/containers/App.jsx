@@ -1,6 +1,6 @@
 import React from 'react'
-import Footer from './footer.jsx'
-import Header from './header.jsx'
+import Footer from '../components/footer.jsx'
+import Header from '../components/header.jsx'
 import { Table, th, tr, thead, td, tbody } from 'react-bootstrap'
 
 export default class App extends React.Component {
