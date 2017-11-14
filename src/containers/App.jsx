@@ -3,7 +3,7 @@ import Footer from '../components/footer.jsx'
 import Header from '../components/header.jsx'
 import { Table, th, tr, thead, td, tbody } from 'react-bootstrap'
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
         <div>
@@ -49,3 +49,11 @@ export default class App extends React.Component {
     )
   }
 }
+function mapStateToProps(centralState){
+  return {
+    product: centralState.product,
+    categorie: centralState.categorie,
+    shoppingCart: centralState.shoppingCart
+  }
+}
+export default connect(mapStateToProps)(App)
