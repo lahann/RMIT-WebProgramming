@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { combineReducers, createStore } from 'redux'
+import thunk from 'redux-thunk'
 import App from './containers/App.jsx'
 
 // action.type => String to identify our action
@@ -16,13 +17,41 @@ import App from './containers/App.jsx'
 }
 export default connect(mapStateToProps)(App) */
 
-function product(state = [], action) {
-    return state;
+function fetchStudent(){
+    return function(dispatch){
+        fetch('http://bestlab.us:8080/students')
+        .then(function(res){
+            return res.json;
+        })
+        .then(function(data){
+            dispatch({
+                type: 'FETCH_STUDENT_SUCCESS',
+                payload: data
+            })
+        })
+    }
 }
-
-function categorie(state = [], action) {
-    return state;
+// dataname ex: 'students'
+function CRUDCreater(dataname){
+    return function(dataname){
+        function students(state=[], action) { 
+            switch (action.type){
+                case('LOAD_' + dataname):
+                return state
+                case('ADD_' + dataname):
+                return [...state, action.payload]
+                case('DELETE_' + dataname):
+                return state.filter((s)=>s.name!==action.payload.name)
+                case('FETCH_' + dataname + '_SUCCESS'):
+                return action.payload;
+                return state;
+            }
+        }
+    }
 }
+CRUDCreater('product')
+CRUDCreater('categorie')
+CRUDCreater('sale')
 
 function shoppingCart(state = [], action) {
     return state;
@@ -31,7 +60,8 @@ function shoppingCart(state = [], action) {
 const centralState = combineReducers({
     product,
     categorie,
-    shoppingCart
+    shoppingCart,
+    sale
 })
 
 ReactDOM.render(
