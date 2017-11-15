@@ -1,24 +1,23 @@
 import React from 'react'
 
-export default class Product extends React.Component {
+export default class shoppingcart extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            products: props.products,
-            customer: props.customer,
-        }
-    }
+constructor(productlist){
+    super()
+    this.state = { productlist: productlist }
+}
 
-    render() {
-        return (
-            <div>
-                Products: {this.state.products.map((p) =>
-                    <li key={p.id}>{p.name}</li>
-                )}<br />
-                Customer: {this.state.customer}<br />
-            </div>
-        )
-    }
 
+
+render(){
+    return(
+        <div>
+            {this.props.productlist.map(p=>
+            <li>
+                {p.name} | {p.price}
+            </li>
+        )}
+        </div>
+    )
+}
 }

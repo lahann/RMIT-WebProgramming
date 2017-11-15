@@ -71,3 +71,11 @@ export default class App extends React.Component {
     )
   }
 }
+function mapStateToProps(centralState){
+  return {
+    product: centralState.product,
+    categorie: centralState.categorie,
+    shoppingCart: centralState.shoppingCart
+  }
+}
+export default connect(mapStateToProps)(App)
