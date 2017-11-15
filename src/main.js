@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { combineReducers, createStore, applyMiddleware } from 'redux'
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
 import { SHOW_PRODUCTS, SHOW_CATEGORIES } from './components/Actions.jsx'
 import App from './containers/App.jsx'
@@ -45,17 +45,15 @@ var initialState = {
         { id: '0', name: 'First Categorie' },
         { id: '1', name: 'Second Categorie' },
         { id: '2', name: 'Third Categorie' }
-    ]
+    ],
+    customers: [],
+    students: []
 }
 
 function products(state = initialState.products, action) {
     switch (action.type) {
         case SHOW_PRODUCTS:
             return state.products
-
-        case 'FETCH_STUDENT_SUCCESS':
-            console.log(action.payload)
-            break;
 
         default:
             break;
@@ -79,12 +77,31 @@ function shoppingCart(state = [], action) {
     return state;
 }
 
+function students(state = initialState.students, action) {
+    switch (action.type) {
+        case 'FETCH_STUDENT_SUCCESS':
+            console.log(action.payload)
+            return [...state, action.payload]
+
+        default:
+            break;
+    }
+
+    return state;
+}
+
 const centralState = combineReducers({
     products,
     categories,
-    shoppingCart
+    shoppingCart,
+    students
 })
-var store = createStore(centralState, applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+var store = createStore(centralState,
+    compose(
+        applyMiddleware(thunk),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
+);
 store.dispatch(fetchStudent())
 
 // Add the respective action in a reducer
@@ -98,7 +115,7 @@ function fetchStudent() {
             .then(function (data) {
                 store.dispatch({
                     type: 'FETCH_STUDENT_SUCCESS',
-                    payload: data
+                    payload: Object.assign({}, initialState, data)
                 })
             })
     }
