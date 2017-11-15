@@ -1,11 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Footer from '../components/footer.jsx'
 import Header from '../components/header.jsx'
-import Product from '../components/Product.jsx'
+import ProductPage from './ProductPage.jsx'
+import CategoriePage from './CategoriePage.jsx'
 import { Table, th, tr, thead, td, tbody } from 'react-bootstrap'
 
-export default class App extends React.Component {
-
+class App extends React.Component {
 
   getData() {
     return {
@@ -60,7 +61,13 @@ export default class App extends React.Component {
 
         <div>
           <br /><br /><br /><br /><br />
-          <Product data={this.getData()} />
+
+          <ProductPage products={this.props.products} />
+
+          <br /><br /><br /><br /><br />
+
+          <CategoriePage categories={this.props.categories} />
+
           <br /><br /><br /><br /><br />
         </div>
 
@@ -71,10 +78,10 @@ export default class App extends React.Component {
     )
   }
 }
-function mapStateToProps(centralState){
+function mapStateToProps(centralState) {
   return {
-    product: centralState.product,
-    categorie: centralState.categorie,
+    products: centralState.products,
+    categories: centralState.categories,
     shoppingCart: centralState.shoppingCart
   }
 }
