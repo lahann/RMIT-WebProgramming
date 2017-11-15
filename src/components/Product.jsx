@@ -5,13 +5,13 @@ export default class Product extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: props.data.id,
-            name: props.data.name,
-            price: props.data.price,
-            description: props.data.description,
-            brand: props.data.brand,
-            producer: props.data.producer,
-            imageURL: props.data.imageURL
+            id: props.id,
+            name: props.name,
+            price: props.price,
+            description: props.description,
+            brand: props.brand,
+            producer: props.producer,
+            imageURL: props.imageURL
         }
     }
 
