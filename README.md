@@ -20,3 +20,17 @@ Project Structure:
 /components => Our basic components, 'What do we want to display?'
 
 /containers => Functionality, 'How do we want to display?'
+
+
+We should also provide the link to this repo, so the prof can see that we created a work environment similiar to a real one.
+
+
+How to use our Product-Component:
+
+//<Product {...p} mode='PRODUCT_OVERVIEW' />
+
+Where p contains all the data, the mode is for determining what should be displayed, there is a new Constants.jsx-file which contains possible values.
+
+
+React-Tooltip:
+https://www.npmjs.com/package/react-tooltip

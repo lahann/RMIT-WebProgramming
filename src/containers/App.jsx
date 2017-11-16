@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Footer from '../components/footer.jsx'
-import Header from '../components/header.jsx'
-import ProductPage from './ProductPage.jsx'
+import Header from '../components/Header.jsx'
+import ProductOverviewPage from './ProductOverviewPage.jsx'
 import CategoriePage from './CategoriePage.jsx'
 import { Table, th, tr, thead, td, tbody } from 'react-bootstrap'
 
@@ -23,9 +23,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <Header />
-        </div>
+
+        <Header />
+        <ProductOverviewPage products={this.props.products} />
+
         <div>Clearly an awesome start</div>
         <div>
           <Table striped bordered condensed hover>
@@ -60,9 +61,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <br /><br /><br /><br /><br />
-
-          <ProductPage products={this.props.products} />
+          
 
           <br /><br /><br /><br /><br />
 

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
-import { SHOW_PRODUCTS, SHOW_CATEGORIES } from './components/Actions.jsx'
+import { SHOW_PRODUCTS, SHOW_CATEGORIES } from './components/Constants.jsx'
 import App from './containers/App.jsx'
 
 // action.type => String to identify our action
@@ -19,22 +19,23 @@ import App from './containers/App.jsx'
 export default connect(mapStateToProps)(App) */
 
 // dataname ex: 'students'
-function CRUDCreater(dataname){
-    return function(dataname){
-        function students(state=[], action) { 
-            switch (action.type){
-                case('LOAD_' + dataname):
-                return state
-                case('ADD_' + dataname):
-                return [...state, action.payload]
-                case('DELETE_' + dataname):
-                return state.filter((s)=>s.name!==action.payload.name)
-                case('FETCH_' + dataname + '_SUCCESS'):
-                return action.payload;
-                return state;
+function CRUDCreater(dataname) {
+    return function (dataname) {
+        function students(state = [], action) {
+            switch (action.type) {
+                case ('LOAD_' + dataname):
+                    return state
+                case ('ADD_' + dataname):
+                    return [...state, action.payload]
+                case ('DELETE_' + dataname):
+                    return state.filter((s) => s.name !== action.payload.name)
+                case ('FETCH_' + dataname + '_SUCCESS'):
+                    return action.payload;
             }
+            return state;
         }
     }
+}
 
 CRUDCreater('product')
 CRUDCreater('categorie')
@@ -113,10 +114,10 @@ function students(state = initialState.students, action) {
 }
 
 const centralState = combineReducers({
-    product,
-    categorie,
+    products,
+    categories,
     shoppingCart,
-    sale
+    students
 })
 var store = createStore(centralState,
     compose(
@@ -124,7 +125,7 @@ var store = createStore(centralState,
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
-store.dispatch(fetchStudent())
+//store.dispatch(fetchStudent())
 
 // Add the respective action in a reducer
 // Call store.dispatch(fetchStudent())
@@ -169,5 +170,3 @@ ReactDOM.render(
     </Provider >, document.getElementById('app')
 
 )
-
-}
