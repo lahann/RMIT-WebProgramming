@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
-import { SHOW_PRODUCTS, SHOW_CATEGORIES } from './components/Constants.jsx'
+import { SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST, VIEW_PRODUCT_GRID } from './components/Constants.jsx'
 import App from './containers/App.jsx'
 
 // action.type => String to identify our action
@@ -70,7 +70,11 @@ var initialState = {
         { id: '2', name: 'Third Categorie' }
     ],
     customers: [],
-    students: []
+    students: [],
+    filter: {
+        sortBy: 'RANDOM',
+        view: VIEW_PRODUCT_GRID
+    }
 }
 
 function products(state = initialState.products, action) {
@@ -113,11 +117,30 @@ function students(state = initialState.students, action) {
     return state;
 }
 
+function filter(state = initialState.filter, action) {
+    switch (action.type) {
+        case SWITCH_VIEW:
+            console.log('SWITCH_VIEW from: ' + state.view)
+            if (state.view === VIEW_PRODUCT_GRID) {
+                return Object.assign({}, state, { view: VIEW_PRODUCT_LIST })
+            } else {
+                return Object.assign({}, state, { view: VIEW_PRODUCT_GRID })
+            }
+
+        case SET_SORTBY:
+            console.log('SET_SORTBY')
+            break;
+
+    }
+    return state;
+}
+
 const centralState = combineReducers({
     products,
     categories,
     shoppingCart,
-    students
+    students,
+    filter
 })
 var store = createStore(centralState,
     compose(
