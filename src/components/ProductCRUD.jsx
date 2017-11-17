@@ -2,6 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Table, Button, ButtonToolbar } from 'react-bootstrap' 
 
+class AddButton extends React.Component {
+    render() {
+        return (
+            <Button bsStyle="success">ADD PRODUCT</Button>
+        );
+    }
+}
+
 class ProductRow extends React.Component {
     render() {
        const product = this.props.product;
@@ -27,7 +35,7 @@ class ProductRow extends React.Component {
        );
     }
 }
-export default class ProductTable extends React.Component {
+class ProductTable extends React.Component {
     render() {
         const rows = []
         this.props.products.forEach((product) => {
@@ -58,6 +66,17 @@ export default class ProductTable extends React.Component {
     }
 }
 
+export default class ProductCRUD extends React.Component {
+    render() {
+        return (
+            <div>
+                <ProductTable products={this.props.products }/>
+                <AddButton />
+            </div>
+        );
+    }
+}
+
 // const PRODUCTS = [
 //     {id: 1, name: 'p1', price: '$29.99', description: 'a product', 
 //     brand: 'Originals', producer: 'adidas', imageUrl: '#'},
@@ -66,6 +85,6 @@ export default class ProductTable extends React.Component {
 // ];
 
 // ReactDOM.render(
-//     <ProductTable products={PRODUCTS} />,
+//     <ProductCRUD products={PRODUCTS} />,
 //     document.getElementById('container')
 // );
