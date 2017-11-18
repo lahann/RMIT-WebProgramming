@@ -5,7 +5,7 @@ import Header from '../components/Header.jsx'
 import ProductOverviewPage from './ProductOverviewPage.jsx'
 import CategoriePage from './CategoriePage.jsx'
 import { Table, th, tr, thead, td, tbody } from 'react-bootstrap'
-import { SWITCH_VIEW, SET_SORTBY } from '../components/Constants.jsx'
+import { SWITCH_VIEW, SET_SORTBY, ADD_TO_CART } from '../components/Constants.jsx'
 
 class App extends React.Component {
 
@@ -16,7 +16,10 @@ class App extends React.Component {
           <Header />
         </div>
 
-        <ProductOverviewPage products={this.props.products} filter={this.props.filter} switchView={() => this.props.dispatch({ type: SWITCH_VIEW })} />
+        <ProductOverviewPage products={this.props.products} categories={this.props.categories} filter={this.props.filter}
+          addToCart={(p) => this.props.dispatch({ type: ADD_TO_CART, payload: p })}
+          switchView={() => this.props.dispatch({ type: SWITCH_VIEW })}
+          setSortBy={(v) => this.props.dispatch({ type: SET_SORTBY, payload: v })} />
 
         <div>
 
