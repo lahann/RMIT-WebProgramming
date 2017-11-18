@@ -11,7 +11,7 @@ export default class ProductOverviewPage extends React.Component {
             <Row className="show-grid">
                 {this.props.products.map(p =>
                     <Col key={p.id} md={amountColumns}>
-                        {<Product {...p} mode={mode} />}
+                        {<Product {...p} mode={mode} addToCart={this.props.addToCart} />}
                     </Col>
                 )}
             </Row>
@@ -35,12 +35,12 @@ export default class ProductOverviewPage extends React.Component {
         } else if (this.props.filter.view === VIEW_PRODUCT_LIST) {
             const listStyle = {
                 top: 59,
-                width: 85 + '%',
+                width: 129 + '%',
                 position: 'relative',
                 paddingRight: 15 + 'px',
                 paddingLeft: 15 + 'px',
                 marginRight: 0 + 'px',
-                marginLeft: 'auto'
+                marginLeft: 15 + '%'
             }
 
             return (
@@ -56,7 +56,9 @@ export default class ProductOverviewPage extends React.Component {
         let outerStructure = this.createOuterStructure.bind(this)();
         return (
             <div>
-                <Filter {...this.props.filter} switchView={this.props.switchView} />
+                <Filter {...this.props.filter} categories={this.props.categories}
+                    switchView={this.props.switchView}
+                    setSortBy={this.props.setSortBy} />
 
                 {outerStructure}
 

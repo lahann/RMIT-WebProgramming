@@ -6,7 +6,8 @@ export default class Categorie extends React.Component {
         super(props)
         this.state = {
             id: props.id,
-            name: props.name
+            name: props.name,
+            products: props.products
         }
     }
 
@@ -15,6 +16,9 @@ export default class Categorie extends React.Component {
             <div>
                 ID: {this.state.id}<br />
                 Name: {this.state.name}<br />
+                {this.state.products.map((p) =>
+                    p
+                )}
             </div>
         )
     }

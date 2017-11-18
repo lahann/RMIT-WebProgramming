@@ -1,7 +1,7 @@
 import React from 'react'
 import { VIEW_PRODUCT_DETAILS, VIEW_PRODUCT_EDIT, VIEW_PRODUCT_LIST, VIEW_PRODUCT_GRID } from '../components/Constants.jsx'
 import logo from '../images/cropped-logo.png';
-import { Panel, Image } from 'react-bootstrap'
+import { Panel, Image, ListGroupItem, Button } from 'react-bootstrap'
 import ReactTooltip from 'react-tooltip'
 
 export default class Product extends React.Component {
@@ -19,15 +19,14 @@ export default class Product extends React.Component {
         }
     }
 
-    handleClick() {
-        alert('Click Event')
-    }
-
     grid() {
         return (
             <div>
-                <Panel footer={this.state.name} onClick={this.handleClick.bind(this)} data-tip data-for={this.state.id}>
+                <Panel header={this.state.name} data-tip data-for={this.state.id}>
                     <Image src={logo} responsive />
+                    <Button onClick={this.props.addToCart.bind(this, this.state)} style={{
+                        marginLeft: 'auto', marginRight: 4 + 'px', display: 'block'
+                    }}>Add to Cart</Button>
                 </Panel>
                 <ReactTooltip id={this.state.id} place="right" type="light" effect="float" delayShow={550} >
                     <span>
@@ -46,19 +45,10 @@ export default class Product extends React.Component {
         return (
             <div>
                 <li className="list-group-item">
-
-                    <Panel header={this.state.name} onClick={this.handleClick.bind(this)}>
-                        <Image src={logo} style={{ width: 50 + '%' }} />
-                    </Panel>
-
-
-                    Name: {this.state.name} <br />
-                    Price: {this.state.price} <br />
-                    Description: {this.state.description} <br />
-                    Brand: {this.state.brand} <br />
-                    Producer: {this.state.producer} <br />
-
-
+                    <ListGroupItem header={this.state.name} style={{ marginTop: 7 + 'px' }}>
+                        <Image src={logo} style={{ width: 30 + '%' }} />
+                        <Button onClick={this.props.addToCart.bind(this, this.state)}>Add to Cart</Button>
+                    </ListGroupItem>
                 </li>
             </div >
         )
