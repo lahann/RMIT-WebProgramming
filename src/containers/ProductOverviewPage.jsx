@@ -1,8 +1,8 @@
 import React from 'react'
-import Product from '../components/Product.jsx'
 import Filter from '../components/Filter.jsx'
-import { VIEW_PRODUCT_GRID, VIEW_PRODUCT_LIST } from '../components/Constants.jsx'
+import Product from '../components/Product.jsx'
 import { Grid, Row, Col, ListGroup } from 'react-bootstrap'
+import { VIEW_PRODUCT_GRID, VIEW_PRODUCT_LIST } from '../components/Constants.jsx'
 
 export default class ProductOverviewPage extends React.Component {
 
@@ -24,7 +24,9 @@ export default class ProductOverviewPage extends React.Component {
                 width: 85 + '%',
                 marginRight: 0 + 'px',
                 position: 'relative',
-                top: 59
+                top: 59,
+                paddingBottom: 100 + 'px',
+                minHeight: 100 + '%'
             }
 
             return (

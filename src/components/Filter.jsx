@@ -1,5 +1,5 @@
 import React from 'react'
-import { Clearfix, MenuItem, Grid, DropdownButton } from 'react-bootstrap'
+import { Clearfix, MenuItem, DropdownButton } from 'react-bootstrap'
 import { VIEW_PRODUCT_LIST, VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE } from './Constants.jsx'
 
 export default class Filter extends React.Component {
@@ -12,7 +12,7 @@ export default class Filter extends React.Component {
         }
     }
 
-    // Is there a way to avoid calling setState()?
+    // Is there a way to avoid calling setState() or is it okay?
     componentWillReceiveProps(nextProps) {
         this.setState({ sortBy: nextProps.sortBy, view: nextProps.view })
     }
@@ -23,7 +23,6 @@ export default class Filter extends React.Component {
 
     render() {
         const panelStyle = {
-            width: 200 + 'px',
             marginLeft: 8 + 'px',
             position: 'fixed',
             top: 59
@@ -32,15 +31,15 @@ export default class Filter extends React.Component {
         return (
             <div>
                 <Clearfix style={panelStyle}>
-                    <ul className="dropdown-menu open" style={{ display: 'block' }}>
+                    <ul className="dropdown-menu open" style={{ display: 'block', width: 200 + 'px' }}>
                         <MenuItem header>Sort by</MenuItem>
                         <MenuItem>Price</MenuItem>
                         <DropdownButton id='categoryDropdown' title='Category' noCaret style={{
-                            borderColor: 'white', width: 158 + 'px',
+                            borderColor: 'white', width: 198 + 'px',
                             textAlign: 'left'
                         }}  >
                             {this.props.categories.map((c) =>
-                                <MenuItem key={c.id} eventKey="1" onSelect={this.props.setSortBy.bind(this, [SORTBY_CATEGORY, c.id])}>
+                                <MenuItem key={c.id} eventKey="1" style={{ width: 196 + 'px' }} onSelect={this.props.setSortBy.bind(this, [SORTBY_CATEGORY, c.id])}>
                                     {c.name}
                                 </MenuItem>
                             )}

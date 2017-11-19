@@ -1,10 +1,13 @@
 import React from 'react'
+import thunk from 'redux-thunk'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import Root from './containers/Root.jsx'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk'
-import { SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST, VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART } from './components/Constants.jsx'
-import App from './containers/App.jsx'
+import {
+    SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
+    VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS
+} from './components/Constants.jsx'
 
 // action.type => String to identify our action
 // action.payload => Params for example
@@ -86,7 +89,6 @@ var initialState = {
         customer: {}
     },
     customers: [],
-    students: [],
     filter: {
         sortBy: 'RANDOM',
         view: VIEW_PRODUCT_GRID
@@ -97,6 +99,10 @@ function products(state = initialState.products, action) {
     switch (action.type) {
         case SHOW_PRODUCTS:
             return state
+
+        case 'FETCH_PRODUCTS_SUCCESS':
+            console.log(action.payload)
+            return [...state, action.payload]
 
         default:
             break;
@@ -128,19 +134,6 @@ function shoppingCart(state = initialState.shoppingCart, action) {
     return state;
 }
 
-function students(state = initialState.students, action) {
-    switch (action.type) {
-        case 'FETCH_STUDENT_SUCCESS':
-            console.log(action.payload)
-            return [...state, action.payload]
-
-        default:
-            break;
-    }
-
-    return state;
-}
-
 function filter(state = initialState.filter, action) {
     switch (action.type) {
         case SWITCH_VIEW:
@@ -154,14 +147,28 @@ function filter(state = initialState.filter, action) {
             if (action.payload[0] === SORTBY_PRICE) {
                 console.log('SORTBY_PRICE')
 
-                this.dispatch(action)
+                // getState() is just my way to make clear that I need the whole state here to access products
+                let newProducts = getState().products.filter((p) => {
+                    return action.payload[1] < p.price < action.payload[2]
+                })
 
                 return Object.assign({}, state, { sortBy: SORTBY_PRICE })
             }
             else if (action.payload[0] === SORTBY_CATEGORY) {
                 console.log('SORTBY_CATEGORY')
 
-                this.dispatch(action)
+                // getState() is just my way to make clear that I need the whole state here to access categories/ products
+                let newProducts = []
+
+                getState().categories.filter((c) => {
+                    return c.id === action.payload[1]
+                }).map((c) =>
+                    getState.products.map((p) => {
+                        if (c.products.indexOf(p.id) !== -1) {
+                            newProducts.push(p)
+                        }
+                    })
+                    )
 
                 return Object.assign({}, state, { sortBy: SORTBY_CATEGORY })
             }
@@ -169,11 +176,11 @@ function filter(state = initialState.filter, action) {
     return state;
 }
 
+
 const centralState = combineReducers({
     products,
     categories,
     shoppingCart,
-    students,
     filter
 })
 
@@ -187,15 +194,15 @@ var store = createStore(centralState,
 
 // Add the respective action in a reducer
 // Call store.dispatch(fetchStudent())
-function fetchStudent() {
+function fetchProducts() {
     return function () {
-        fetch('http://bestlab.us:8080/students')
+        fetch('http://bestlab.us:8080/products')
             .then(function (res) {
                 return res.json()
             })
             .then(function (data) {
                 store.dispatch({
-                    type: 'FETCH_STUDENT_SUCCESS',
+                    type: 'FETCH_PRODUCTS_SUCCESS',
                     payload: Object.assign({}, initialState, data)
                 })
             })
@@ -203,28 +210,28 @@ function fetchStudent() {
 }
 
 // In the respective action => return [...state, action.payload];
-function addStudent(student) {
+function addProduct(product) {
     return function () {
-        fetch('http://bestlab.us:8080/students', {
+        fetch('http://bestlab.us:8080/productss', {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             },
             method: 'post',
-            body: JSON.stringify(student)
+            body: JSON.stringify(product)
         })
             .then((res) => {
                 return res.json()
             })
             .then((data) => {
-                store.dispatch({ type: 'ADD_STUDENT_SUCCESS', payload: data })
+                store.dispatch({ type: 'ADD_PRODUCT_SUCCESS', payload: data })
             })
     }
 }
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Root />
     </Provider >, document.getElementById('app')
 
 )

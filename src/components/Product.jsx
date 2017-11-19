@@ -1,8 +1,8 @@
 import React from 'react'
-import { VIEW_PRODUCT_DETAILS, VIEW_PRODUCT_EDIT, VIEW_PRODUCT_LIST, VIEW_PRODUCT_GRID } from '../components/Constants.jsx'
+import ReactTooltip from 'react-tooltip'
 import logo from '../images/cropped-logo.png';
 import { Panel, Image, ListGroupItem, Button } from 'react-bootstrap'
-import ReactTooltip from 'react-tooltip'
+import { VIEW_PRODUCT_DETAILS, VIEW_PRODUCT_EDIT, VIEW_PRODUCT_LIST, VIEW_PRODUCT_GRID } from '../components/Constants.jsx'
 
 export default class Product extends React.Component {
 
@@ -47,7 +47,9 @@ export default class Product extends React.Component {
                 <li className="list-group-item">
                     <ListGroupItem header={this.state.name} style={{ marginTop: 7 + 'px' }}>
                         <Image src={logo} style={{ width: 30 + '%' }} />
-                        <Button onClick={this.props.addToCart.bind(this, this.state)}>Add to Cart</Button>
+                        <Button style={{ marginLeft: 'auto', display: 'block' }} onClick={this.props.addToCart.bind(this, this.state)}>
+                            Add to Cart
+                        </Button>
                     </ListGroupItem>
                 </li>
             </div >
