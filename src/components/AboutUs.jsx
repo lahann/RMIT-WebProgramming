@@ -21,6 +21,7 @@ export default class AboutUs extends React.Component {
                                 <Image src={laurids} style={imageStyle} />
                                 <br />
                                 <ul>
+                                    <li>S...</li>
                                     <li>From Esbjerg, Denmark</li>
                                     <li>Studies Energy at Aalborg Universitet</li>
                                 </ul>
@@ -32,6 +33,7 @@ export default class AboutUs extends React.Component {
                                 <Image src={linh} style={imageStyle} />
                                 <br />
                                 <ul>
+                                    <li>S...</li>
                                     <li>From Can Tho, Vietnam</li>
                                     <li>Studies Information Technology at RMIT Vietnam</li>
                                 </ul>
@@ -43,6 +45,7 @@ export default class AboutUs extends React.Component {
                                 <Image src={tim} style={imageStyle} />
                                 <br />
                                 <ul>
+                                    <li>S3694604</li>
                                     <li>From Hamburg, Germany</li>
                                     <li>Studies Business Informatics at FernUniversität Hagen</li>
                                 </ul>
