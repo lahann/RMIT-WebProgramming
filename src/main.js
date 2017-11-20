@@ -6,7 +6,8 @@ import Root from './containers/Root.jsx'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import {
     SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
-    VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS
+    VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS,
+    FETCH_PRODUCTS_SUCCESS
 } from './components/Constants.jsx'
 
 // action.type => String to identify our action
@@ -47,24 +48,24 @@ CRUDCreater('sale')
 var initialState = {
     products: [
         {
-            id: '0', name: 'First Product', price: '0', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageURL: 'www.google.com/image0.jpg'
+            _id: '0', name: 'First Product', price: '0', description: 'Random thoughts',
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image0.jpg'
         },
         {
-            id: '1', name: 'Second Product', price: '100', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageURL: 'www.google.com/image1.jpg'
+            _id: '1', name: 'Second Product', price: '100', description: 'Random thoughts',
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image1.jpg'
         },
         {
-            id: '2', name: 'Third Product', price: '200', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageURL: 'www.google.com/image2.jpg'
+            _id: '2', name: 'Third Product', price: '200', description: 'Random thoughts',
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image2.jpg'
         },
         {
-            id: '3', name: 'Fourth Product', price: '300', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageURL: 'www.google.com/image3.jpg'
+            _id: '3', name: 'Fourth Product', price: '300', description: 'Random thoughts',
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image3.jpg'
         },
         {
-            id: '4', name: 'Fifth Product', price: '400', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageURL: 'www.google.com/image4.jpg'
+            _id: '4', name: 'Fifth Product', price: '400', description: 'Random thoughts',
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image4.jpg'
         },
     ],
     categories: [
@@ -100,9 +101,9 @@ function products(state = initialState.products, action) {
         case SHOW_PRODUCTS:
             return state
 
-        case 'FETCH_PRODUCTS_SUCCESS':
+        case FETCH_PRODUCTS_SUCCESS:
             console.log(action.payload)
-            return [...state, action.payload]
+            return [...state, ...action.payload]
 
         default:
             break;
@@ -190,7 +191,8 @@ var store = createStore(centralState,
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
-//store.dispatch(fetchStudent())
+
+store.dispatch(fetchProducts())
 
 // Add the respective action in a reducer
 // Call store.dispatch(fetchStudent())
@@ -202,8 +204,8 @@ function fetchProducts() {
             })
             .then(function (data) {
                 store.dispatch({
-                    type: 'FETCH_PRODUCTS_SUCCESS',
-                    payload: Object.assign({}, initialState, data)
+                    type: FETCH_PRODUCTS_SUCCESS,
+                    payload: data
                 })
             })
     }
@@ -212,7 +214,7 @@ function fetchProducts() {
 // In the respective action => return [...state, action.payload];
 function addProduct(product) {
     return function () {
-        fetch('http://bestlab.us:8080/productss', {
+        fetch('http://bestlab.us:8080/products', {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'

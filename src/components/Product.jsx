@@ -9,13 +9,13 @@ export default class Product extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: props.id,
+            id: props._id,
             name: props.name,
             price: props.price,
             description: props.description,
             brand: props.brand,
             producer: props.producer,
-            imageURL: props.imageURL
+            imageUrl: props.imageUrl
         }
     }
 
@@ -25,7 +25,7 @@ export default class Product extends React.Component {
                 <Panel header={this.state.name} data-tip data-for={this.state.id}>
                     <Image src={logo} responsive />
                     <Button onClick={this.props.addToCart.bind(this, this.state)} style={{
-                        marginLeft: 'auto', marginRight: 4 + 'px', display: 'block'
+                        marginLeft: 'auto', display: 'block'
                     }}>Add to Cart</Button>
                 </Panel>
                 <ReactTooltip id={this.state.id} place="right" type="light" effect="float" delayShow={550} >
@@ -46,7 +46,7 @@ export default class Product extends React.Component {
             <div>
                 <li className="list-group-item">
                     <ListGroupItem header={this.state.name} style={{ marginTop: 7 + 'px' }}>
-                        <Image src={logo} style={{ width: 30 + '%' }} />
+                        <Image src={logo} style={{ width: 40 + '%' }} />
                         <Button style={{ marginLeft: 'auto', display: 'block' }} onClick={this.props.addToCart.bind(this, this.state)}>
                             Add to Cart
                         </Button>
@@ -68,7 +68,7 @@ export default class Product extends React.Component {
                     Description: {this.state.description} <br />
                     Brand: {this.state.brand} <br />
                     Producer: {this.state.producer} <br />
-                    Image URL: {this.state.imageURL} <br />
+                    Image URL: {this.state.imageUrl} <br />
                 </Panel>
             </div >
         )
@@ -86,7 +86,7 @@ export default class Product extends React.Component {
                     Description: <input type="text" />{this.state.description} <br />
                     Brand: <input type="text" />{this.state.brand} <br />
                     Producer: <input type="text" />{this.state.producer} <br />
-                    Image URL: <input type="text" />{this.state.imageURL} <br />
+                    Image URL: <input type="text" />{this.state.imageUrl} <br />
                 </Panel>
             </div >
         )
