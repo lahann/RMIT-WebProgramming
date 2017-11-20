@@ -8,7 +8,8 @@ export default class Filter extends React.Component {
         super(props)
         this.state = {
             sortBy: props.sortBy,
-            view: props.view
+            view: props.view,
+            priceRange: props.priceRange
         }
     }
 
@@ -27,6 +28,9 @@ export default class Filter extends React.Component {
             position: 'fixed',
             top: 59
         }
+        const inputStyle = {
+            width: 40 + 'px'
+        }
 
         return (
             <div>
@@ -34,6 +38,16 @@ export default class Filter extends React.Component {
                     <ul className="dropdown-menu open" style={{ display: 'block', width: 200 + 'px' }}>
                         <MenuItem header>Sort by</MenuItem>
                         <MenuItem>Price</MenuItem>
+                        <ul>
+                            <MenuItem>0-20</MenuItem>
+                            <MenuItem>20-50</MenuItem>
+                            <MenuItem>50-100</MenuItem>
+                            <MenuItem>100-500</MenuItem>
+                            <MenuItem>>500</MenuItem>
+                        </ul>
+                        <input type="text" style={inputStyle} /> - 
+                         <input type="text" style={inputStyle} />
+                        <button>Apply</button>
                         <DropdownButton id='categoryDropdown' title='Category' noCaret style={{
                             borderColor: 'white', width: 198 + 'px',
                             textAlign: 'left'

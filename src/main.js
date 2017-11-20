@@ -7,7 +7,7 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import {
     SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
     VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS,
-    FETCH_PRODUCTS_SUCCESS
+    FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS
 } from './components/Constants.jsx'
 
 // action.type => String to identify our action
@@ -21,6 +21,9 @@ import {
     }
 }
 export default connect(mapStateToProps)(App) */
+
+
+// export functions here, import where we want to use like "import {function} from './main.js'"
 
 // dataname ex: 'students'
 function CRUDCreater(dataname) {
@@ -71,18 +74,15 @@ var initialState = {
     categories: [
         {
             id: '0',
-            name: 'First Categorie',
-            products: [1]
+            name: 'First Categorie'
         },
         {
             id: '1',
-            name: 'Second Categorie',
-            products: [2, 3]
+            name: 'Second Categorie'
         },
         {
             id: '2',
-            name: 'Third Categorie',
-            products: [1, 4, 5]
+            name: 'Third Categorie'
         }
     ],
     shoppingCart: {
@@ -92,7 +92,8 @@ var initialState = {
     customers: [],
     filter: {
         sortBy: 'RANDOM',
-        view: VIEW_PRODUCT_GRID
+        view: VIEW_PRODUCT_GRID,
+        priceRange: [0, Number.MAX_VALUE]
     }
 }
 
@@ -104,6 +105,10 @@ function products(state = initialState.products, action) {
         case FETCH_PRODUCTS_SUCCESS:
             console.log(action.payload)
             return [...state, ...action.payload]
+
+        case FETCH_PRODUCTS_BY_ID_SUCCESS:
+            console.log(action.payload)
+            return [...action.payload]
 
         default:
             break;
@@ -156,20 +161,7 @@ function filter(state = initialState.filter, action) {
                 return Object.assign({}, state, { sortBy: SORTBY_PRICE })
             }
             else if (action.payload[0] === SORTBY_CATEGORY) {
-                console.log('SORTBY_CATEGORY')
-
-                // getState() is just my way to make clear that I need the whole state here to access categories/ products
-                let newProducts = []
-
-                getState().categories.filter((c) => {
-                    return c.id === action.payload[1]
-                }).map((c) =>
-                    getState.products.map((p) => {
-                        if (c.products.indexOf(p.id) !== -1) {
-                            newProducts.push(p)
-                        }
-                    })
-                    )
+                store.dispatch(fetchProductsByTypeId(action.payload[1]))
 
                 return Object.assign({}, state, { sortBy: SORTBY_CATEGORY })
             }
@@ -185,12 +177,11 @@ const centralState = combineReducers({
     filter
 })
 
-var store = createStore(centralState,
-    compose(
-        applyMiddleware(thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(centralState, /* preloadedState, */ composeEnhancers(
+    applyMiddleware(thunk)
+));
 
 store.dispatch(fetchProducts())
 
@@ -205,6 +196,21 @@ function fetchProducts() {
             .then(function (data) {
                 store.dispatch({
                     type: FETCH_PRODUCTS_SUCCESS,
+                    payload: data
+                })
+            })
+    }
+}
+
+function fetchProductsByTypeId(id) {
+    return function () {
+        fetch('http://bestlab.us:8080/products/byType/' + id)
+            .then(function (res) {
+                return res.json()
+            })
+            .then(function (data) {
+                store.dispatch({
+                    type: FETCH_PRODUCTS_BY_ID_SUCCESS,
                     payload: data
                 })
             })
