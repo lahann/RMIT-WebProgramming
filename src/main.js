@@ -10,6 +10,8 @@ import {
     FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS
 } from './components/Constants.jsx'
 
+//LOOK I MADE A CHANGE
+
 // action.type => String to identify our action
 // action.payload => Params for example
 
