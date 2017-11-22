@@ -5,18 +5,22 @@ export default class Product extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            products: props.products,
+            shoppingcart: props.shoppingcart,
             customer: props.customer,
         }
+    }
+
+    removeProduct(id) {
+        //removal logic
     }
 
     render() {
         return (
             <div>
-                Products: {this.state.products.map((p) =>
-                    <li key={p.id}>{p.name}</li>
-                )}<br />
                 Customer: {this.state.customer}<br />
+                Products: {this.state.shoppingcart.map((s) =>
+                    <li key={s.id}>{s.name} | {s.price} <Button bsStyle="danger" onClick={this.removeProduct.bind(this)}>Remove</Button></li>
+                )}<br />
             </div>
         )
     }
