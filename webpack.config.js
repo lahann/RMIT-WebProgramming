@@ -1,12 +1,15 @@
+const path = require('path');
+
 var config = {
   entry: './src/main.js',
 
   output: {
-    path: '/',
-    filename: 'index.js',
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
 
   devServer: {
+    contentBase: path.join(__dirname, "dist"),
     inline: true,
     port: 8080,
     historyApiFallback: true

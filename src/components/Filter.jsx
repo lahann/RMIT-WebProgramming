@@ -9,17 +9,26 @@ export default class Filter extends React.Component {
         this.state = {
             sortBy: props.sortBy,
             view: props.view,
-            priceRange: props.priceRange
+            minPrice: props.minPrice,
+            maxPrice: props.maxPrice
         }
     }
 
-    // Is there a way to avoid calling setState() or is it okay?
     componentWillReceiveProps(nextProps) {
         this.setState({ sortBy: nextProps.sortBy, view: nextProps.view })
     }
 
     determineDisabled(view) {
         return this.state.view === view
+    }
+
+    handleChange(e) {
+        var name = e.target.name
+        this.setState({ [name]: e.target.value })
+    }
+
+    handleFocus(e) {
+        e.target.select();
     }
 
     render() {
@@ -29,42 +38,47 @@ export default class Filter extends React.Component {
             top: 59
         }
         const inputStyle = {
-            width: 40 + 'px'
+            width: 55 + 'px',
+            margin: 5 + 'px',
+            borderRadius: 4 + 'px'
         }
 
         return (
             <div>
                 <Clearfix style={panelStyle}>
                     <ul className="dropdown-menu open" style={{ display: 'block', width: 200 + 'px' }}>
-                        <MenuItem header>Sort by</MenuItem>
-                        <MenuItem>Price</MenuItem>
-                        <ul>
-                            <MenuItem>0-20</MenuItem>
-                            <MenuItem>20-50</MenuItem>
-                            <MenuItem>50-100</MenuItem>
-                            <MenuItem>100-500</MenuItem>
-                            <MenuItem>>500</MenuItem>
-                        </ul>
-                        <input type="text" style={inputStyle} /> - 
-                         <input type="text" style={inputStyle} />
-                        <button>Apply</button>
-                        <DropdownButton id='categoryDropdown' title='Category' noCaret style={{
-                            borderColor: 'white', width: 198 + 'px',
-                            textAlign: 'left'
-                        }}  >
-                            {this.props.categories.map((c) =>
-                                <MenuItem key={c.id} eventKey="1" style={{ width: 196 + 'px' }} onSelect={this.props.setSortBy.bind(this, [SORTBY_CATEGORY, c.id])}>
-                                    {c.name}
-                                </MenuItem>
-                            )}
-                        </DropdownButton>
+
+                        <MenuItem header>Price</MenuItem>
+                        <MenuItem onSelect={this.props.setSortBy.bind(this, [SORTBY_PRICE, 0, 20])}>0-20</MenuItem>
+                        <MenuItem onSelect={this.props.setSortBy.bind(this, [SORTBY_PRICE, 20, 50])}>20-50</MenuItem>
+                        <MenuItem onSelect={this.props.setSortBy.bind(this, [SORTBY_PRICE, 50, 100])}>50-100</MenuItem>
+                        <MenuItem onSelect={this.props.setSortBy.bind(this, [SORTBY_PRICE, 100, 500])}>100-500</MenuItem>
+                        <MenuItem onSelect={this.props.setSortBy.bind(this, [SORTBY_PRICE, 500, Number.MAX_VALUE])}>>500</MenuItem>
+
+                        <div>
+                            <input type="text" name='minPrice' style={inputStyle} value={this.state.minPrice} onChange={this.handleChange.bind(this)} onFocus={this.handleFocus} />
+                            -
+                            <input type="text" name='maxPrice' style={inputStyle} value={this.state.maxPrice} onChange={this.handleChange.bind(this)} onFocus={this.handleFocus} />
+                            <button onClick={this.props.setSortBy.bind(this, [SORTBY_PRICE, this.state.minPrice, this.state.maxPrice])} style={{ width: 55 + 'px' }}>
+                                Apply
+                            </button>
+                        </div>
                         <MenuItem divider />
+
+                        <MenuItem header>Category</MenuItem>
+                        {this.props.categories.map((c) =>
+                            <MenuItem key={c.id} style={{ width: 196 + 'px' }} onSelect={this.props.setSortBy.bind(this, [SORTBY_CATEGORY, c.id])}>
+                                {c.name}
+                            </MenuItem>
+                        )}
+                        <MenuItem divider />
+
                         <MenuItem header>Change View</MenuItem>
                         <MenuItem disabled={this.determineDisabled.bind(this)(VIEW_PRODUCT_LIST)} onSelect={this.props.switchView.bind(this)}>List</MenuItem>
                         <MenuItem disabled={this.determineDisabled.bind(this)(VIEW_PRODUCT_GRID)} onSelect={this.props.switchView.bind(this)}>Grid</MenuItem>
                     </ul>
                 </Clearfix>
-            </div>
+            </div >
         )
     }
 }

@@ -7,7 +7,7 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import {
     SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
     VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS,
-    FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS
+    FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS, FETCH_PRODUCTS_BY_PRICE_SUCCESS
 } from './components/Constants.jsx'
 
 //LOOK I MADE A CHANGE
@@ -95,7 +95,8 @@ var initialState = {
     filter: {
         sortBy: 'RANDOM',
         view: VIEW_PRODUCT_GRID,
-        priceRange: [0, Number.MAX_VALUE]
+        minPrice: 0,
+        maxPrice: 10000
     }
 }
 
@@ -105,12 +106,16 @@ function products(state = initialState.products, action) {
             return state
 
         case FETCH_PRODUCTS_SUCCESS:
-            console.log(action.payload)
             return [...state, ...action.payload]
 
         case FETCH_PRODUCTS_BY_ID_SUCCESS:
-            console.log(action.payload)
             return [...action.payload]
+
+        case FETCH_PRODUCTS_BY_PRICE_SUCCESS:
+            let newProducts = action.payload[0].filter((p) => {
+                return action.payload[1] < p.price && p.price < action.payload[2]
+            })
+            return [...newProducts]
 
         default:
             break;
@@ -155,10 +160,7 @@ function filter(state = initialState.filter, action) {
             if (action.payload[0] === SORTBY_PRICE) {
                 console.log('SORTBY_PRICE')
 
-                // getState() is just my way to make clear that I need the whole state here to access products
-                let newProducts = getState().products.filter((p) => {
-                    return action.payload[1] < p.price < action.payload[2]
-                })
+                store.dispatch(fetchProductsByPrice(action.payload[1], action.payload[2]))
 
                 return Object.assign({}, state, { sortBy: SORTBY_PRICE })
             }
@@ -199,6 +201,21 @@ function fetchProducts() {
                 store.dispatch({
                     type: FETCH_PRODUCTS_SUCCESS,
                     payload: data
+                })
+            })
+    }
+}
+
+function fetchProductsByPrice(min, max) {
+    return function () {
+        fetch('http://bestlab.us:8080/products')
+            .then(function (res) {
+                return res.json()
+            })
+            .then(function (data) {
+                store.dispatch({
+                    type: FETCH_PRODUCTS_BY_PRICE_SUCCESS,
+                    payload: [data, min, max]
                 })
             })
     }
