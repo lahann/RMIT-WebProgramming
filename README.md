@@ -34,3 +34,14 @@ Where p contains all the data, the mode is for determining what should be displa
 
 React-Tooltip:
 https://www.npmjs.com/package/react-tooltip
+
+
+
+Use Webpack to build a deployable project: https://webpack.js.org/guides/getting-started/
+
+Run following npm command to build the app: 'npm run build'
+Output will be in dist directory.
+
+Amazon Deployment:
+
+http://rmitllt-hosting-mobilehub-1570034664.s3-website-ap-southeast-1.amazonaws.com/

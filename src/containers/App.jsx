@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import CategoriePage from './CategoriePage.jsx'
 import ProductOverviewPage from './ProductOverviewPage.jsx'
-import { SWITCH_VIEW, SET_SORTBY, ADD_TO_CART } from '../components/Constants.jsx'
+import { SWITCH_VIEW, SET_SORTBY, SORTBY_PRICE, ADD_TO_CART } from '../components/Constants.jsx'
 
 export default class App extends React.Component {
 
