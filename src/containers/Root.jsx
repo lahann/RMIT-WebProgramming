@@ -2,6 +2,7 @@ import React from 'react'
 import App from './App.jsx'
 import AboutUs from '../components/AboutUs.jsx'
 import Admin from './Admin.jsx'
+import ShoppingCart from './ShoppingCartPage'
 import Footer from '../components/Footer.jsx'
 import Header from '../components/Header.jsx'
 import { connect } from 'react-redux'
@@ -13,6 +14,8 @@ class Root extends React.Component {
             return <AboutUs />
         else if (currentPath.includes('/admin'))
             return <Admin />
+        else if (currentPath.includes('/shopping-cart'))
+            return <shoppingCart />
         return (
             <App dispatch={this.props.dispatch}
                 products={this.props.products}

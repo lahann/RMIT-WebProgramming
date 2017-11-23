@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from '../images/cropped-logo.png';
-import { VISIBILITY_ABOUTUS } from '../components/Constants.jsx'
+import { VISIBILITY_ABOUTUS, VISIBILITY_SHOPPINGCART } from '../components/Constants.jsx'
 import { Navbar, Nav, NavItem, MenuItem } from 'react-bootstrap'
 
 export default class Header extends React.Component {
@@ -33,7 +33,7 @@ export default class Header extends React.Component {
             <NavItem href="/admin">Admin Mode</NavItem>
           </Nav>
           <Nav pullRight>
-            <MenuItem > Shopping Cart</MenuItem>
+            <MenuItem href="/shopping-cart"> Shopping Cart</MenuItem>
           </Nav>
         </Navbar>
       </div>

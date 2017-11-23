@@ -10,9 +10,9 @@ export default class ShoppingCartPage extends React.Component {
     createInnerStructure(mode, amountColumns){
         return (
             <Row className="show-grid">
-                {this.props.shoppingcart.products.map(sp =>
-                    <Col key={sp._id} md={amountColumns} style={{ marginTop: 10 + 'px' }}>
-                        {<Product key={sp._id} {...sp} mode={mode} />}
+                {this.props.shoppingcart.map(sc =>
+                    <Col key={sc._id} md={amountColumns} style={{ marginTop: 10 + 'px' }}>
+                        {<Product key={sc._id} {...sc} mode={mode} />}
                     </Col>
                 )}
             </Row>
@@ -60,6 +60,7 @@ export default class ShoppingCartPage extends React.Component {
         return (
             <div>
             <div>
+                <h1> {this.props.shoppingcart.customer} </h1>
                 {outerStructure}
             </div>
 

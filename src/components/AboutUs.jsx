@@ -21,9 +21,9 @@ export default class AboutUs extends React.Component {
                                 <Image src={laurids} style={imageStyle} />
                                 <br />
                                 <ul>
-                                    <li>S...</li>
+                                    <li>S3694530</li>
                                     <li>From Esbjerg, Denmark</li>
-                                    <li>Studies Energy at Aalborg Universitet</li>
+                                    <li>Studies Computer Science at University College Nordjylland</li>
                                 </ul>
                             </Panel>
 
