@@ -88,7 +88,16 @@ var initialState = {
         }
     ],
     shoppingCart: {
-        products: [],
+        products: [
+            {
+                _id: '3', name: 'Fourth Product', price: '300', description: 'Random thoughts',
+                brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image3.jpg'
+            },
+            {
+                _id: '4', name: 'Fifth Product', price: '400', description: 'Random thoughts',
+                brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image4.jpg'
+            }
+        ],
         customer: {}
     },
     customers: [],

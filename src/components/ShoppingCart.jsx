@@ -13,13 +13,13 @@ export default class ShoppingCart extends React.Component {
     removeProduct(id) {
         //removal logic
     }
-
+//| <Button bsStyle="danger" onClick={this.removeProduct.bind(this)}>Remove</Button>
     render() {
         return (
             <div>
                 Customer: {this.state.customer}<br />
                 Products: {this.state.shoppingcart.products.map((s) =>
-                    <li key={s.id}>{...s} | <Button bsStyle="danger" onClick={this.removeProduct.bind(this)}>Remove</Button></li>
+                    <li key={s.id}>{s} </li>
                 )}<br />
             </div>
         )

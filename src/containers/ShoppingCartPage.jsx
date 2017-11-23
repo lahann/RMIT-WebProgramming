@@ -1,6 +1,7 @@
 import React from 'react'
 import Filter from '../components/Filter.jsx'
 import Product from '../components/Product.jsx'
+import shoppingcart from '../components/ShoppingCart.jsx'
 import { Grid, Row, Col, ListGroup } from 'react-bootstrap'
 import { VIEW_PRODUCT_GRID, VIEW_PRODUCT_LIST } from '../components/Constants.jsx'
 
@@ -56,7 +57,7 @@ export default class ShoppingCartPage extends React.Component {
         }
     }
     render() {
-        outerStructure = this.outerStructure.bind()
+        outerStructure = this.createOuterStructure.bind(this)
         return (
             <div>
             <div>
