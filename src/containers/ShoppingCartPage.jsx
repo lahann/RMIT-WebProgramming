@@ -12,7 +12,7 @@ export default class ShoppingCartPage extends React.Component {
             <Row className="show-grid">
                 {this.props.shoppingcart.products.map(sp =>
                     <Col key={sp._id} md={amountColumns} style={{ marginTop: 10 + 'px' }}>
-                        {<Product {...sp} mode={mode} />}
+                        {<Product key={sp._id} {...sp} mode={mode} />}
                     </Col>
                 )}
             </Row>
@@ -56,12 +56,11 @@ export default class ShoppingCartPage extends React.Component {
         }
     }
     render() {
+        outerStructure = this.outerStructure.bind()
         return (
             <div>
             <div>
-                {this.props.shoppingcart.products.map(sp =>
-                    <Product key={sp.id} {...sp} />
-                )}
+                {outerStructure}
             </div>
 
             <div>
