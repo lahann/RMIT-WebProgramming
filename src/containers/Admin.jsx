@@ -6,9 +6,10 @@ import App from '../admin-site/components/App'
 
 let store = createStore(productApp)
 const Admin = () => (
+    <div style={{position: 'relative', top: 59 + 'px', minHeight: 100 + '%'}}>
         <Provider store={store}>
             <App />
         </Provider> 
+    </div>
 )
-
 export default Admin
