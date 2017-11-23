@@ -5,7 +5,7 @@ export default class ShoppingCart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            shoppingcart: props.shoppingcart,
+            products: props.shoppingcart.products,
             customer: props.customer,
         }
     }
