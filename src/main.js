@@ -99,7 +99,7 @@ var initialState = {
             }
         ],
         customer: {
-            //TODO
+            id: '1', name: 'generic full name', address: 'generic street'
         }
     },
     customers: [],
@@ -146,7 +146,7 @@ function categories(state = initialState.categories, action) {
     return state;
 }
 
-function shoppingCart(state = initialState.shoppingCart, action) {
+function shoppingCart(state = initialState.shoppingcart, action) {
     switch (action.type) {
         case ADD_TO_CART:
             console.log('ADD_TO_CART')
