@@ -23,7 +23,7 @@ export default class Product extends React.Component {
         return (
             <div>
                 <Panel header={this.state.name} data-tip data-for={this.state.id}>
-                    <Image src={logo} responsive />
+                    <Image src={logo} responsive style={{ cursor: 'pointer' }} />
                     <Button onClick={this.props.addToCart.bind(this, this.state)} style={{
                         marginLeft: 'auto', display: 'block'
                     }}>Add to Cart</Button>
@@ -46,7 +46,7 @@ export default class Product extends React.Component {
             <div>
                 <li className="list-group-item">
                     <ListGroupItem header={this.state.name} style={{ marginTop: 7 + 'px' }}>
-                        <Image src={logo} style={{ width: 40 + '%' }} />
+                        <Image src={logo} style={{ width: 40 + '%', cursor: 'pointer' }} />
                         <Button style={{ marginLeft: 'auto', display: 'block' }} onClick={this.props.addToCart.bind(this, this.state)}>
                             Add to Cart
                         </Button>
@@ -57,18 +57,53 @@ export default class Product extends React.Component {
     }
 
     details() {
+        const panelStyle = {
+            top: 59,
+            position: 'relative',
+            marginRight: 10 + 'px',
+            marginLeft: 10 + 'px',
+            marginBottom: 120 + 'px',
+        }
+        const h1Style = {
+            textAlign: 'center',
+            position: 'relative',
+            top: -200 + 'px'
+        }
+        const h3Style = {
+            textAlign: 'center',
+            position: 'relative',
+            top: -100 + 'px'
+        }
+        const h4Style = {
+            textAlign: 'center',
+            position: 'relative',
+        }
+
         return (
             <div>
-                <Panel footer={this.state.name}>
-                    <Image src={logo} responsive />
+                <Panel style={panelStyle}>
+                    <tbody>
+                        <td>
+                            <Image src={logo} />
+                        </td>
+                        <td style={{ width: 100 + '%' }}>
+                            <h1 style={h1Style}>{this.state.name}</h1>
+                            <h3 style={h3Style}>
+                                {this.state.description}
+                            </h3>
+                            <h4 style={h4Style}>
+                                {this.state.brand} produced by {this.state.producer}
+                            </h4>
 
-                    ID: {this.state.id} <br />
-                    Name: {this.state.name} <br />
-                    Price: {this.state.price} <br />
-                    Description: {this.state.description} <br />
-                    Brand: {this.state.brand} <br />
-                    Producer: {this.state.producer} <br />
-                    Image URL: {this.state.imageUrl} <br />
+
+                        </td>
+                    </tbody>
+                    <div style={{ textAlign: 'right' }} >
+                        For only: {this.state.price} $ &nbsp;
+                        <Button onClick={this.props.addToCart.bind(this, this.state)}>
+                            Add to Cart
+                        </Button>
+                    </div>
                 </Panel>
             </div >
         )
@@ -101,7 +136,7 @@ export default class Product extends React.Component {
                 return this.list();
 
             case VIEW_PRODUCT_DETAILS:
-                return this.detail();
+                return this.details();
 
             case VIEW_PRODUCT_EDIT:
                 return this.edit();

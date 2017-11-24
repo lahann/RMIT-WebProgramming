@@ -10,22 +10,23 @@ import { connect } from 'react-redux'
 class Root extends React.Component {
 
     display(currentPath) {
-        if (currentPath.includes('/about-us')) 
+        if (currentPath.includes('/about-us'))
             return <AboutUs />
         else if (currentPath.includes('/admin'))
             return <Admin />
         else if (currentPath.includes('/shopping-cart'))
-            return <ShoppingCart 
-                        products={this.props.products}
-                        filter={this.props.filter}
-                    />
+            return <ShoppingCart
+                products={this.props.products}
+                filter={this.props.filter}
+            />
         else if (currentPath.includes('/checkout'))
-        return <Checkout />
+            return <Checkout />
         return (
             <App dispatch={this.props.dispatch}
                 products={this.props.products}
                 categories={this.props.categories}
                 filter={this.props.filter}
+                currentProduct={this.props.currentProduct}
             />
         )
     }
@@ -46,7 +47,7 @@ class Root extends React.Component {
                         filter={this.props.filter}
                     />
                 } */}
-                
+
                 <div>{this.display(currentPath)}</div>
 
                 <div>
@@ -61,7 +62,8 @@ function mapStateToProps(centralState) {
         products: centralState.products,
         categories: centralState.categories,
         ShoppingCart: centralState.shoppingcart,
-        filter: centralState.filter
+        filter: centralState.filter,
+        currentProduct: centralState.currentProduct
     }
 }
 export default connect(mapStateToProps)(Root)

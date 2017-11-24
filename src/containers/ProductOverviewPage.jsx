@@ -10,7 +10,7 @@ export default class ProductOverviewPage extends React.Component {
         return (
             <Row className="show-grid">
                 {this.props.products.map(p =>
-                    <Col key={p._id} md={amountColumns} style={{ marginTop: 10 + 'px' }}>
+                    <Col key={p._id} md={amountColumns} style={{ marginTop: 10 + 'px' }} onClick={this.props.onProductClick.bind(this, p)}>
                         {<Product {...p} mode={mode} addToCart={this.props.addToCart} />}
                     </Col>
                 )}

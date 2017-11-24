@@ -7,7 +7,8 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import {
     SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
     VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS,
-    FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS, FETCH_PRODUCTS_BY_PRICE_SUCCESS
+    FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS, FETCH_PRODUCTS_BY_PRICE_SUCCESS,
+    SET_CURRENTPRODUCT
 } from './components/Constants.jsx'
 
 //LOOK I MADE A CHANGE
@@ -108,7 +109,8 @@ var initialState = {
         view: VIEW_PRODUCT_GRID,
         minPrice: 0,
         maxPrice: 10000
-    }
+    },
+    currentProduct: {}
 }
 
 function products(state = initialState.products, action) {
@@ -169,8 +171,6 @@ function filter(state = initialState.filter, action) {
 
         case SET_SORTBY:
             if (action.payload[0] === SORTBY_PRICE) {
-                console.log('SORTBY_PRICE')
-
                 store.dispatch(fetchProductsByPrice(action.payload[1], action.payload[2]))
 
                 return Object.assign({}, state, { sortBy: SORTBY_PRICE })
@@ -184,12 +184,23 @@ function filter(state = initialState.filter, action) {
     return state;
 }
 
+function currentProduct(state = initialState.currentProduct, action) {
+    switch (action.type) {
+        case SET_CURRENTPRODUCT:
+            console.log('SET_CURRENTPRODUCT')
+            return Object.assign({}, state, action.payload)
+
+    }
+    return state;
+}
+
 
 const centralState = combineReducers({
     products,
     categories,
     shoppingCart,
-    filter
+    filter,
+    currentProduct
 })
 
 

@@ -1,14 +1,16 @@
 import React from 'react'
 import Product from '../components/Product.jsx'
+import { VIEW_PRODUCT_DETAILS } from '../components/Constants.jsx'
 
 export default class ProductDetailPage extends React.Component {
 
     render() {
         return (
             <div>
-                {this.props.products.map(p =>
-                    <Product key={p.id} {...p} />
-                )}
+                {<Product {...this.props.currentProduct}
+                    mode={VIEW_PRODUCT_DETAILS}
+                    addToCart={this.props.addToCart}
+                />}
             </div>
         )
     }
