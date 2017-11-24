@@ -3,18 +3,13 @@ import { VIEW_PRODUCT_DETAILS, VIEW_PRODUCT_EDIT, VIEW_PRODUCT_LIST, VIEW_PRODUC
 import ReactTooltip from 'react-tooltip'
 import logo from '../images/cropped-logo.png';
 import { Panel, Image, ListGroupItem, Button } from 'react-bootstrap'
+import product from '../components/Product.jsx'
 export default class ShoppingCart extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            products: {id: props._id,
-                name: props.name,
-                price: props.price,
-                description: props.description,
-                brand: props.brand,
-                producer: props.producer,
-                imageUrl: props.imageUrl},
+            products: props.product,
             customer: props.customer,
         }
     }

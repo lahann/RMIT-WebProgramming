@@ -19,6 +19,8 @@ class Root extends React.Component {
                         products={this.props.products}
                         filter={this.props.filter}
                     />
+        else if (currentPath.includes('/checkout'))
+        return <Checkout />
         return (
             <App dispatch={this.props.dispatch}
                 products={this.props.products}
