@@ -188,7 +188,7 @@ function filter(state = initialState.filter, action) {
 const centralState = combineReducers({
     products,
     categories,
-    shoppingcart,
+    shoppingCart,
     filter
 })
 
