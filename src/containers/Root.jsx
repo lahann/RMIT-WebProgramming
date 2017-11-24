@@ -15,7 +15,7 @@ class Root extends React.Component {
         else if (currentPath.includes('/admin'))
             return <Admin />
         else if (currentPath.includes('/shopping-cart'))
-            return <shoppingCart />
+            return <ShoppingCart />
         return (
             <App dispatch={this.props.dispatch}
                 products={this.props.products}
@@ -55,7 +55,7 @@ function mapStateToProps(centralState) {
     return {
         products: centralState.products,
         categories: centralState.categories,
-        shoppingCart: centralState.shoppingCart,
+        ShoppingCart: centralState.shoppingcart,
         filter: centralState.filter
     }
 }

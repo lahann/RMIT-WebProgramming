@@ -5,7 +5,7 @@ export default class ShoppingCart extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            products: props.shoppingcart.products,
+            products: props.products,
             customer: props.customer,
         }
     }
@@ -18,7 +18,7 @@ export default class ShoppingCart extends React.Component {
         return (
             <div>
                 Customer: {this.state.customer}<br />
-                Products: {this.state.shoppingcart.products.map((s) =>
+                Products: {this.state.products.map((s) =>
                     <li key={s.id}>{s} </li>
                 )}<br />
             </div>

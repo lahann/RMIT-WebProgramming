@@ -87,7 +87,7 @@ var initialState = {
             name: 'Third Categorie'
         }
     ],
-    shoppingCart: {
+    shoppingcart: {
         products: [
             {
                 _id: '3', name: 'Fourth Product', price: '300', description: 'Random thoughts',
@@ -98,7 +98,9 @@ var initialState = {
                 brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image4.jpg'
             }
         ],
-        customer: {}
+        customer: {
+            //TODO
+        }
     },
     customers: [],
     filter: {
