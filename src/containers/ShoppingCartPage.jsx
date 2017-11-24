@@ -56,17 +56,19 @@ export default class ShoppingCartPage extends React.Component {
             )
         }
     }
+    //<h1> {this.props.ShoppingCart.customer} </h1>
+    //<Button bsStyle="success">Checkout</Button>
     render() {
-        outerStructure = this.createOuterStructure.bind(this)
+        let outerStructure = this.createOuterStructure.bind(this)()
         return (
             <div>
             <div>
-                <h1> {this.props.ShoppingCart.customer} </h1>
+                
                 {outerStructure}
             </div>
 
             <div>
-            <Button bsStyle="success">Checkout</Button>
+            
             </div>
 
             </div>
