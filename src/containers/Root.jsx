@@ -15,7 +15,10 @@ class Root extends React.Component {
         else if (currentPath.includes('/admin'))
             return <Admin />
         else if (currentPath.includes('/shopping-cart'))
-            return <ShoppingCart />
+            return <ShoppingCart 
+                        products={this.props.products}
+                        filter={this.props.filter}
+                    />
         return (
             <App dispatch={this.props.dispatch}
                 products={this.props.products}
