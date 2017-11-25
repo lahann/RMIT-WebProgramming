@@ -1,5 +1,5 @@
 import { connect} from 'react-redux'
-import { addProduct, updateProduct } from '../actions'
+import { addProduct, updateProduct, deleteProduct } from '../actions'
 import ProductTable from '../components/ProductTable.jsx'
 
 const mapStateToProps = state => {
@@ -13,6 +13,9 @@ const mapDispatchToProps = dispatch => {
         },
         handleUpdateProduct: update => {
             dispatch(updateProduct(update))
+        },
+        handleDeleteProduct: id => {
+            dispatch(deleteProduct(id))
         }
     }
 }

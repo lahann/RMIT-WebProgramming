@@ -98,13 +98,7 @@ export default class AddProduct extends React.Component {
                 />
             </td>                          
             <td>
-            {
-            <ButtonToolbar>
-                <Button bsStyle="success" onClick={this.handleAddProduct}>ADD</Button>
-                <Button bsStyle="danger">DELETE</Button>
-            </ButtonToolbar>
-
-            }
+            <Button bsStyle="success" onClick={this.handleAddProduct}>ADD</Button>
             </td>
         </tr>
 

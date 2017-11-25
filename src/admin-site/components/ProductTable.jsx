@@ -12,6 +12,10 @@ export default class ProductTable extends React.Component {
         this.handleAddProduct = this.handleAddProduct.bind(this)
     }
 
+    handleDeleteProduct(id) {
+        this.props.handleDeleteProduct(id)
+    }
+
     handleAddProduct(product) {
         this.props.handleAddProduct(product)
     }
@@ -33,7 +37,8 @@ export default class ProductTable extends React.Component {
                     />
         } else {
             return <ProductRow 
-            onClick={this.toggleEditing.bind(this, product.id)} 
+            toggleEditing={this.toggleEditing.bind(this, product.id)}
+            deleteProduct={this.handleDeleteProduct.bind(this, product.id)} 
             key={product.id} 
             {...product}
             />

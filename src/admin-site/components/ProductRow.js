@@ -15,10 +15,14 @@ export default class ProductRow extends React.Component {
                 <td>
                 {
                 <ButtonToolbar>
-                    <Button onClick={this.props.onClick}>EDIT</Button>
-                    <Button bsStyle="danger">DELETE</Button>
+                    <Button onClick={this.props.toggleEditing}>EDIT</Button>
+                    <Button 
+                        onClick={(e)=>{
+                            if (confirm(`Are you sure you want to delete product with id '${this.props.id}'?`))
+                                this.props.deleteProduct()}} 
+                        bsStyle="danger">DELETE
+                    </Button>
                 </ButtonToolbar>
-
                 }
                 </td>
             </tr>
