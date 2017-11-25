@@ -11,8 +11,7 @@ var config = {
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     inline: true,
-    port: 8080,
-    historyApiFallback: true
+    port: 8080
   },
 
   module: {

@@ -1,6 +1,7 @@
 import React from 'react'
 import thunk from 'redux-thunk'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import Root from './containers/Root.jsx'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
@@ -280,7 +281,9 @@ function addProduct(product) {
 
 ReactDOM.render(
     <Provider store={store}>
-        <Root />
+        <BrowserRouter>
+            <Root />
+        </BrowserRouter>
     </Provider >, document.getElementById('app')
 
 )
