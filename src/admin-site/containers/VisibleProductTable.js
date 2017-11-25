@@ -1,11 +1,25 @@
 import { connect} from 'react-redux'
-import ProductTable from '../components/ProductTable'
-
+import { addProduct, updateProduct } from '../actions'
+import ProductTable from '../components/ProductTable.jsx'
 
 const mapStateToProps = state => {
     return {products: state.products}
 }
 
-const VisibleProductTable = connect(mapStateToProps)(ProductTable)
+const mapDispatchToProps = dispatch => {
+    return {
+        handleAddProduct: product => {
+            dispatch(addProduct(product))
+        },
+        handleUpdateProduct: update => {
+            dispatch(updateProduct(update))
+        }
+    }
+}
+
+const VisibleProductTable = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProductTable)
 
 export default VisibleProductTable
