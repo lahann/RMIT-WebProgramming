@@ -7,6 +7,13 @@ export const addProduct = product => {
     }
 }
 
+export const updateProduct = product => {
+    return {
+        type: 'UPDATE_PRODUCT',
+        product
+    }
+}
+
 export const deleteProduct = id => {
     return {
         type: 'DELETE_PRODUCT',
