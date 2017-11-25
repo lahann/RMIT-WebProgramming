@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductRow from './ProductRow'
 import EditProduct from './EditProduct.jsx'
+import AddProduct from './AddProduct.jsx'
 import { Table, Button, ButtonToolbar } from 'react-bootstrap' 
 
 export default class ProductTable extends React.Component {
@@ -8,12 +9,15 @@ export default class ProductTable extends React.Component {
         super()
         this.state ={editing: null}
         this.handleProductUpdate = this.handleProductUpdate.bind(this)
+        this.handleAddProduct = this.handleAddProduct.bind(this)
     }
 
+    handleAddProduct(product) {
+        this.props.handleAddProduct(product)
+    }
     handleProductUpdate(update) {
         this.setState({editing: null})
-        console.log(update)
-        alert("Product updated")
+        this.props.handleUpdateProduct(update)
     }
 
     toggleEditing(productId) {
@@ -56,6 +60,7 @@ export default class ProductTable extends React.Component {
                     {this.props.products.map((product) => {
                         return this.renderProductOrEditFields(product);
                     })}
+                    <AddProduct handleAddProduct={this.handleAddProduct}/>
                     </tbody>
                 </Table> 
             </div>
