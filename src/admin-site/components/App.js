@@ -5,7 +5,7 @@ import VisibleProductTable from '../containers/VisibleProductTable'
 const App = () => (
     <div>
         <VisibleProductTable />
-        <AddProduct />
+        {/* <AddProduct /> */}
     </div>
 )
 
