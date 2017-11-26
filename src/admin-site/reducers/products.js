@@ -15,6 +15,9 @@ const products = (state = [], action) => {
            var newProducts = state.filter(product => product.id !== action.id)
            return newProducts
 
+        case 'FETCH_PRODUCTS':
+           return action.data
+
         default:
             return state
     }
