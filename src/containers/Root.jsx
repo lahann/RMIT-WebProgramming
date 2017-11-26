@@ -3,7 +3,7 @@ import App from './App.jsx'
 import AboutUs from '../components/AboutUs.jsx'
 import Admin from './Admin.jsx'
 import { Switch, Route, withRouter } from 'react-router-dom';
-import ShoppingCart from '../containers/ShoppingCartPage.jsx'
+import ShoppingCartPage from '../containers/ShoppingCartPage.jsx'
 import Checkout from '../components/Checkout.jsx'
 import Footer from '../components/Footer.jsx'
 import Header from '../components/Header.jsx'
@@ -34,8 +34,8 @@ class Root extends React.Component {
                         <Admin />
                     )} />
                     <Route exact path='/shopping-cart' render={() => (
-                        <ShoppingCart
-                            products={this.props.products}
+                        <ShoppingCartPage //might need to be modal shopping cart passed as object arg?????
+                            products={this.props.shoppingcart.products}
                             filter={this.props.filter}
                         />
                     )} />
@@ -55,7 +55,7 @@ function mapStateToProps(centralState) {
     return {
         products: centralState.products,
         categories: centralState.categories,
-        ShoppingCart: centralState.shoppingcart,
+        shoppingcart: centralState.shoppingcart,
         filter: centralState.filter,
         currentProduct: centralState.currentProduct
     }
