@@ -68,7 +68,7 @@ export default class ShoppingCartPage extends React.Component {
                 {outerStructure}
             </div>
 
-            <div margin="auto">
+            <div class="col-md-4 col-md-offset-6">
             <Button bsStyle="success">Checkout</Button>
             </div>
 
