@@ -54,10 +54,37 @@ export default class Checkout extends React.Component{
                         </Col>
                     </FormGroup>
 
+                        <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Password
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl type="password" placeholder="Password" />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Password
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl type="password" placeholder="Password" />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Password
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl type="password" placeholder="Password" />
+                        </Col>
+                    </FormGroup>
+
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
                             <Button type="submit">
-                            Sign in
+                                Sign in
                             </Button>
                         </Col>
                     </FormGroup>
