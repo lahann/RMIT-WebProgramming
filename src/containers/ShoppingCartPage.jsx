@@ -1,21 +1,23 @@
 import React from 'react'
 import Filter from '../components/Filter.jsx'
 import ShoppingCart from '../components/ShoppingCart.jsx'
-import Product from '../components/Product.jsx'
 import { Grid, Row, Col, ListGroup, Button } from 'react-bootstrap'
 import { VIEW_PRODUCT_GRID, VIEW_PRODUCT_LIST } from '../components/Constants.jsx'
 
 export default class ShoppingCartPage extends React.Component {
 
-
+    constructor(props){
+        super(props)
+        this.state = {myShoppingCart: props.ShoppingCart}
+    }
     createInnerStructure(mode, amountColumns){
         return (
             <Row className="show-grid">
-                {this.props.products.map(sc =>
-                    <Col key={sc._id} md={amountColumns} style={{ marginTop: 10 + 'px' }}>
-                        {<ShoppingCart key={sc._id} {...sc} mode={mode} />}
+                {
+                    <Col key={this.props.myShoppingCart.products._id} md={amountColumns} style={{ marginTop: 10 + 'px' }}>
+                        {<ShoppingCart myproducts= {this.props.myShoppingCart.products} mode={mode} />}
                     </Col>
-                )}
+                }
             </Row>
         )
     }
@@ -66,7 +68,7 @@ export default class ShoppingCartPage extends React.Component {
                 {outerStructure}
             </div>
 
-            <div>
+            <div margin="auto">
             <Button bsStyle="success">Checkout</Button>
             </div>
 

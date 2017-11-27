@@ -34,8 +34,8 @@ class Root extends React.Component {
                         <Admin />
                     )} />
                     <Route exact path='/shopping-cart' render={() => (
-                        <ShoppingCartPage //might need to be modal shopping cart passed as object arg?????
-                            products={this.props.shoppingcart.products}
+                        <ShoppingCartPage 
+                            myShoppingCart={this.props.shoppingcart}
                             filter={this.props.filter}
                         />
                     )} />
@@ -55,7 +55,7 @@ function mapStateToProps(centralState) {
     return {
         products: centralState.products,
         categories: centralState.categories,
-        shoppingcart: centralState.shoppingcart,
+        shoppingcart: centralState.shoppingCart,
         filter: centralState.filter,
         currentProduct: centralState.currentProduct
     }
