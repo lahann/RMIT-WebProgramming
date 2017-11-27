@@ -3,6 +3,7 @@ import Filter from '../components/Filter.jsx'
 import ShoppingCart from '../components/ShoppingCart.jsx'
 import { Grid, Row, Col, ListGroup, Button } from 'react-bootstrap'
 import { VIEW_PRODUCT_GRID, VIEW_PRODUCT_LIST } from '../components/Constants.jsx'
+import { LinkContainer } from 'react-router-bootstrap';
 
 export default class ShoppingCartPage extends React.Component {
 
@@ -69,7 +70,9 @@ export default class ShoppingCartPage extends React.Component {
             </div>
 
             <div class="col-md-4 col-md-offset-6">
-            <Button bsStyle="success">Checkout</Button>
+            <LinkContainer to="/checkout"> 
+            <Button bsStyle="success">Checkout</Button> 
+            </LinkContainer>
             </div>
 
             </div>
