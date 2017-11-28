@@ -29,17 +29,17 @@ export default class ProductTable extends React.Component {
     }
 
     renderProductOrEditFields(product) {
-        if (this.state.editing === product.id) {
+        if (this.state.editing === product._id) {
             return <EditProduct 
-                    key={`editing-${product.id}`}
+                    key={`editing-${product._id}`}
                     {...product} 
                     handleProductUpdate={this.handleProductUpdate}
                     />
         } else {
             return <ProductRow 
-            toggleEditing={this.toggleEditing.bind(this, product.id)}
-            deleteProduct={this.handleDeleteProduct.bind(this, product.id)} 
-            key={product.id} 
+            toggleEditing={this.toggleEditing.bind(this, product._id)}
+            deleteProduct={this.handleDeleteProduct.bind(this, product._id)} 
+            key={product._id} 
             {...product}
             />
         }

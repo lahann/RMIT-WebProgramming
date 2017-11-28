@@ -27,9 +27,9 @@ export default class EditProduct extends React.Component {
     }
 
     handleEditProduct() {
-        let productId = this.props.id
         this.props.handleProductUpdate({
-            id: productId,
+            _id: this.props._id,
+            id: this.state.id.value,
             name: this.state.name.value,
             price: this.state.price.value, 
             description: this.state.description.value,
@@ -43,8 +43,16 @@ export default class EditProduct extends React.Component {
 
         return (
             <tr>
-            <td>{this.props.id}</td>
             <td>
+            <FormControl
+                onKeyDown={ this.handleEditField}
+                type="text"
+                inputRef={node=>this.state.id=node}
+                name="id"
+                defaultValue={this.props.id}
+            />
+        </td>
+        <td>
                 <FormControl
                     onKeyDown={ this.handleEditField}
                     type="text"
