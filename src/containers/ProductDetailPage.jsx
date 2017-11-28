@@ -10,6 +10,7 @@ export default class ProductDetailPage extends React.Component {
                 {<Product {...this.props.currentProduct}
                     mode={VIEW_PRODUCT_DETAILS}
                     addToCart={this.props.addToCart}
+                    onProductClick={this.props.onProductClick}
                 />}
             </div>
         )

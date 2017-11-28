@@ -9,7 +9,7 @@ import {
     SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
     VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS,
     FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS, FETCH_PRODUCTS_BY_PRICE_SUCCESS,
-    SET_CURRENTPRODUCT
+    SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT
 } from './components/Constants.jsx'
 
 //LOOK I MADE A CHANGE
@@ -56,23 +56,23 @@ var initialState = {
     products: [
         {
             _id: '0', name: 'First Product', price: '0', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image0.jpg'
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/U3QKXPAPGO.jpg'
         },
         {
             _id: '1', name: 'Second Product', price: '100', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image1.jpg'
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/KXFLEZCXWV.jpg'
         },
         {
             _id: '2', name: 'Third Product', price: '200', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image2.jpg'
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/VEQY2MMJYL.jpg'
         },
         {
             _id: '3', name: 'Fourth Product', price: '300', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image3.jpg'
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/AFUKKEBFK8.jpg'
         },
         {
             _id: '4', name: 'Fifth Product', price: '400', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image4.jpg'
+            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/SZTIEMSNOR.jpg'
         },
     ],
     categories: [
@@ -188,9 +188,10 @@ function filter(state = initialState.filter, action) {
 function currentProduct(state = initialState.currentProduct, action) {
     switch (action.type) {
         case SET_CURRENTPRODUCT:
-            console.log('SET_CURRENTPRODUCT')
             return Object.assign({}, state, action.payload)
 
+        case EMPTY_CURRENTPRODUCT:
+            return Object.assign({}, {})
     }
     return state;
 }

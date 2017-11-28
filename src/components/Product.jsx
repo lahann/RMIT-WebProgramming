@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
 import logo from '../images/cropped-logo.png';
+import cross from '../images/cross.jpg';
 import { Panel, Image, ListGroupItem, Button } from 'react-bootstrap'
 import { VIEW_PRODUCT_DETAILS, VIEW_PRODUCT_EDIT, VIEW_PRODUCT_LIST, VIEW_PRODUCT_GRID } from '../components/Constants.jsx'
 
@@ -20,12 +21,21 @@ export default class Product extends React.Component {
     }
 
     grid() {
+
+        const imageStyle = {
+            cursor: 'pointer',
+            position: 'relative',
+            float: 'left',
+            maxHeight: 230 + 'px',
+            minHeight: 230 + 'px'
+        }
+
         return (
             <div>
                 <Panel header={this.state.name} data-tip data-for={this.state.id}>
-                    <Image src={logo} responsive style={{ cursor: 'pointer' }} />
+                    <Image src={this.state.imageUrl} responsive style={imageStyle} onClick={this.props.onProductClick} />
                     <Button onClick={this.props.addToCart.bind(this, this.state)} style={{
-                        marginLeft: 'auto', display: 'block'
+                        marginLeft: 'auto', display: 'block', zIndex: 2
                     }}>Add to Cart</Button>
                 </Panel>
                 <ReactTooltip id={this.state.id} place="right" type="light" effect="float" delayShow={550} >
@@ -46,8 +56,8 @@ export default class Product extends React.Component {
             <div>
                 <li className="list-group-item">
                     <ListGroupItem header={this.state.name} style={{ marginTop: 7 + 'px' }}>
-                        <Image src={logo} style={{ width: 40 + '%', cursor: 'pointer' }} />
-                        <Button style={{ marginLeft: 'auto', display: 'block' }} onClick={this.props.addToCart.bind(this, this.state)}>
+                        <Image src={logo} style={{ width: 40 + '%', cursor: 'pointer' }} onClick={this.props.onProductClick} />
+                        <Button style={{ marginLeft: 'auto', display: 'block', zIndex: 2 }} onClick={this.props.addToCart.bind(this, this.state)}>
                             Add to Cart
                         </Button>
                     </ListGroupItem>
@@ -78,26 +88,39 @@ export default class Product extends React.Component {
             textAlign: 'center',
             position: 'relative',
         }
+        const crossStyle = {
+            width: 25 + 'px',
+            cursor: 'pointer',
+            position: 'relative',
+            top: -250 + 'px',
+            right: -7 + 'px'
+        }
 
         return (
             <div>
                 <Panel style={panelStyle}>
-                    <tbody>
-                        <td>
-                            <Image src={logo} />
-                        </td>
-                        <td style={{ width: 100 + '%' }}>
-                            <h1 style={h1Style}>{this.state.name}</h1>
-                            <h3 style={h3Style}>
-                                {this.state.description}
-                            </h3>
-                            <h4 style={h4Style}>
-                                {this.state.brand} produced by {this.state.producer}
-                            </h4>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <Image src={logo} />
+                                </td>
+                                <td style={{ width: 100 + '%' }}>
+                                    <h1 style={h1Style}>{this.state.name}</h1>
+                                    <h3 style={h3Style}>
+                                        {this.state.description}
+                                    </h3>
+                                    <h4 style={h4Style}>
+                                        {this.state.brand} produced by {this.state.producer}
+                                    </h4>
+                                </td>
+                                <td>
+                                    <Image src={cross} style={crossStyle} onClick={this.props.onProductClick.bind(this, {})} />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-
-                        </td>
-                    </tbody>
                     <div style={{ textAlign: 'right' }} >
                         For only: {this.state.price} $ &nbsp;
                         <Button onClick={this.props.addToCart.bind(this, this.state)}>
