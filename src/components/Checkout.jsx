@@ -30,7 +30,7 @@ export default class Checkout extends React.Component{
         validationStateStringCheck(this.state.email)
         validationStateStringCheck(this.state.fullname)
         //dumb, static way to do it. hard to do with callback / hard to get object ref of the FromGroup.
-        //also might not work. '123' would pass a string check, but fail a number check.
+        //Might not work. '123' would pass a string check, but fail a number check.
         if(errors){
             alert('Errors in the form')
         } else{
@@ -125,6 +125,7 @@ export default class Checkout extends React.Component{
                             </Button>
                         </Col>
                     </FormGroup>
+                    <br/> <br/> <br/>
                 </Form>
             </div>
         )
