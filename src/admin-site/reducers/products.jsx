@@ -12,8 +12,7 @@ const products = (state = [], action) => {
             return updatedProducts
         
         case 'DELETE_PRODUCT':
-           var newProducts = state.filter(product => product.id !== action.id)
-           return newProducts
+           return state.filter(product => product._id !== action.id)
 
         case 'FETCH_PRODUCTS':
            return action.data

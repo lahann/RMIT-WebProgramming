@@ -1,11 +1,12 @@
 import React from 'react'
-import AddProduct from '../containers/AddProduct'
 import VisibleProductTable from '../containers/VisibleProductTable'
+import VisibleProductTypeTable from '../containers/VisibleProductTypeTable'
+
 
 const App = () => (
     <div>
         <VisibleProductTable />
-        {/* <AddProduct /> */}
+        <VisibleProductTypeTable />
     </div>
 )
 
