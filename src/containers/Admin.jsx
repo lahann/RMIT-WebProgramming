@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware} from 'redux'
 import adminApp from '../admin-site/reducers'
-import App from '../admin-site/components/App'
+import App from '../admin-site/components/App.jsx'
 import thunk from 'redux-thunk'
 import { fetchProducts, fetchProductTypes } from '../admin-site/actions'
 

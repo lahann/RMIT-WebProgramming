@@ -13,7 +13,8 @@ export default class AddProduct extends React.Component {
             description: '', 
             brand: '', 
             producer: '', 
-            imageUrl: ''
+            imageUrl: '',
+            productType: ''
         }
     }
 
@@ -26,7 +27,8 @@ export default class AddProduct extends React.Component {
             description: '', 
             brand: '', 
             producer: '', 
-            imageUrl: ''
+            imageUrl: '',
+            productType: ''
         })
     }
 
@@ -54,6 +56,14 @@ export default class AddProduct extends React.Component {
                     type="text"
                     value={this.state.name}
                     name="name"
+                    onChange={this.handleChange}
+                />
+            </td>
+            <td>
+                <FormControl
+                    type="text"
+                    value={this.state.productType}
+                    name="productType"
                     onChange={this.handleChange}
                 />
             </td>

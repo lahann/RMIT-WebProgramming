@@ -50,8 +50,8 @@ export default class ProductTypeTable extends React.Component {
                 <Table striped bordered condensed hover> 
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Name</th>
-                            <th>Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>

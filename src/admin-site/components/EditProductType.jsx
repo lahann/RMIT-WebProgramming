@@ -6,16 +6,16 @@ export default class EditProductType extends React.Component {
         super(props)
         this.handleProductTypeUpdate = this.handleProductTypeUpdate.bind(this)
         this.state = {
+            id: null,
             name: null, 
-            description: null, 
         }
     }
 
     handleProductTypeUpdate() {
         this.props.handleProductTypeUpdate({
             _id: this.props._id,
+            id: this.props.id,
             name: this.state.name.value,
-            description: this.state.description.value,
         })
     }
 
@@ -25,24 +25,23 @@ export default class EditProductType extends React.Component {
             <td>
                 <FormControl
                     type="text"
+                    inputRef={node=>this.state.id=node}
+                    name="id"
+                    defaultValue={this.props.id}
+                />
+            </td>
+            <td>
+                <FormControl
+                    type="text"
                     inputRef={node=>this.state.name=node}
                     name="name"
                     defaultValue={this.props.name}
                 />
             </td>
             <td>
-                <FormControl
-                    type="text"
-                    inputRef={node=>this.state.description=node}
-                    name="description"
-                    defaultValue={this.props.description}
-                />
-            </td>
-            <td>
             {
             <ButtonToolbar>
                 <Button bsStyle="success" onClick={this.handleProductTypeUpdate}>SAVE</Button>
-                <Button bsStyle="danger">DELETE</Button>
             </ButtonToolbar>
 
             }

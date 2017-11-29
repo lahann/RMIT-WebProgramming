@@ -4,7 +4,6 @@ import {FormControl, Button, ButtonToolbar} from 'react-bootstrap'
 export default class EditProduct extends React.Component {
     constructor(props) {
         super(props)
-        this.handleEditField = this.handleEditField.bind(this)
         this.handleEditProduct = this.handleEditProduct.bind(this)
         this.state = {
             id: null, 
@@ -13,16 +12,8 @@ export default class EditProduct extends React.Component {
             description: null, 
             brand: null, 
             producer: null, 
-            imageUrl: null
-        }
-    }
-
-    handleEditField(event) {
-        if (event.keyCode === 13) {
-            let target = event.target, update = {}
-            update.id = this.props.id
-            update[target.name] = target.value
-            this.props.handleProductUpdate(update)
+            imageUrl: null,
+            productType: null            
         }
     }
 
@@ -35,7 +26,8 @@ export default class EditProduct extends React.Component {
             description: this.state.description.value,
             brand: this.state.brand.value, 
             producer: this.state.producer.value, 
-            imageUrl: this.state.imageUrl.value
+            imageUrl: this.state.imageUrl.value,
+            productType: this.state.productType.value
         })
     }
 
@@ -45,7 +37,6 @@ export default class EditProduct extends React.Component {
             <tr>
             <td>
             <FormControl
-                onKeyDown={ this.handleEditField}
                 type="text"
                 inputRef={node=>this.state.id=node}
                 name="id"
@@ -54,7 +45,6 @@ export default class EditProduct extends React.Component {
         </td>
         <td>
                 <FormControl
-                    onKeyDown={ this.handleEditField}
                     type="text"
                     inputRef={node=>this.state.name=node}
                     name="name"
@@ -63,7 +53,14 @@ export default class EditProduct extends React.Component {
             </td>
             <td>
                 <FormControl
-                    onKeyDown={ this.handleEditField}
+                    type="text"
+                    inputRef={node=>this.state.productType=node}
+                    name="productType"
+                    defaultValue={this.props.productType}
+                />
+            </td>
+            <td>
+                <FormControl
                     type="text"
                     inputRef={node=>this.state.price=node}
                     name="price"
@@ -72,7 +69,6 @@ export default class EditProduct extends React.Component {
             </td>
             <td>
                 <FormControl
-                    onKeyDown={ this.handleEditField}
                     type="text"
                     inputRef={node=>this.state.description=node}
                     name="description"
@@ -81,7 +77,6 @@ export default class EditProduct extends React.Component {
             </td>
             <td>
                 <FormControl
-                    onKeyDown={ this.handleEditField}
                     type="text"
                     inputRef={node=>this.state.brand=node}
                     name="brand"
@@ -90,7 +85,6 @@ export default class EditProduct extends React.Component {
             </td>       
             <td>
                 <FormControl
-                    onKeyDown={ this.handleEditField}
                     type="text"
                     inputRef={node=>this.state.producer=node}
                     name="producer"
@@ -99,7 +93,6 @@ export default class EditProduct extends React.Component {
             </td>
             <td>
                 <FormControl
-                    onKeyDown={ this.handleEditField}
                     type="text"
                     inputRef={node=>this.state.imageUrl=node}
                     name="imageUrl"
@@ -110,7 +103,6 @@ export default class EditProduct extends React.Component {
             {
             <ButtonToolbar>
                 <Button bsStyle="success" onClick={this.handleEditProduct}>SAVE</Button>
-                <Button bsStyle="danger">DELETE</Button>
             </ButtonToolbar>
 
             }

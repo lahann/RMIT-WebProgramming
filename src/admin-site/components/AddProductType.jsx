@@ -7,16 +7,16 @@ export default class AddProductType extends React.Component {
         this.handleAddProductType = this.handleAddProductType.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.state = {
+            id: '',
             name: '', 
-            description: '', 
         }
     }
 
     handleAddProductType() {
         this.props.handleAddProductType(this.state)
         this.setState({
+            id: '',
             name: '', 
-            description: '', 
         })
     }
 
@@ -33,17 +33,17 @@ export default class AddProductType extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.name}
-                    name="name"
+                    value={this.state.id}
+                    name="id"
                     onChange={this.handleChange}
                 />
             </td>
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.description}
+                    value={this.state.name}
                     onChange={this.handleChange}
-                    name="description"
+                    name="name"
                 />
             </td>
             <td>

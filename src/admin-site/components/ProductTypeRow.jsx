@@ -5,8 +5,8 @@ export default class ProductTypeRow extends React.Component {
     render() {
         return (
             <tr>
+                <td>{this.props.id}</td>
                 <td>{this.props.name}</td>
-                <td>{this.props.description}</td>
                 <td>
                 {
                 <ButtonToolbar>

@@ -53,6 +53,7 @@ export default class ProductTable extends React.Component {
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Type</th>
                             <th>Price</th>
                             <th>Description</th>
                             <th>Brand</th>
