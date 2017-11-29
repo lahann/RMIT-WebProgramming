@@ -12,7 +12,8 @@ export default class Checkout extends React.Component{
             cardCCV: 123,
             cardholdername: 'Name',
             email: 'FullName@Domain.com',
-            fullname: 'Full Name'
+            fullname: 'Full Name',
+            errors: false
         }
         this.validationStateStringCheck = this.validationStateStringCheck.bind(this) //bind the function to this component
         this.validationStateNumberCheck = this.validationStateNumberCheck.bind(this) //bind the function to this component
@@ -21,10 +22,15 @@ export default class Checkout extends React.Component{
     handleSave(){
         //dispatch to DB TODO
         confirm('Are you sure?')
-        errors = false
 
-        theformgroup = this.props.FormGroup.controlId; // TODO
+        validationStateNumberCheck(this.state.cardCCV)
+        validationStateNumberCheck(this.state.cardnumber)
 
+        validationStateStringCheck(this.state.cardholdername)
+        validationStateStringCheck(this.state.email)
+        validationStateStringCheck(this.state.fullname)
+        //dumb, static way to do it. hard to do with callback / hard to get object ref of the FromGroup.
+        //also might not work. '123' would pass a string check, but fail a number check.
         if(errors){
             alert('Errors in the form')
         } else{
@@ -34,22 +40,20 @@ export default class Checkout extends React.Component{
     }
 
     validationStateNumberCheck(value){
-        console.log(value)
-        if(value.type === PropTypes.number){
-            return "success"
+        if(this.state.value === PropTypes.number){
+            this.setState({errors:false})
         }
-        else{
-            return "error"
+        else {
+            this.setState({errors: true})
         }
     }
 
-    validationStateStringCheck(e){
-        console.log(e)
-        if(formgroup.value.type === PropTypes.string){
-            formgroup.validationState = null
+    validationStateStringCheck(value){
+        if(this.state.value === PropTypes.string){
+            this.setState({errors:false})
         }
         else {
-            formgroup.validationState = "error"
+            this.setState({errors: true})
         }
     }
 
@@ -110,7 +114,7 @@ export default class Checkout extends React.Component{
                         </Col>
                         <Col sm={10}>
                             <FormControl type="text" placeholder={this.state.cardCCV} 
-                            onChange={this.handleChange.bind(this)} value={this.state.cardCCV} name="cardnumber"/>
+                            onChange={this.handleChange.bind(this)} value={this.state.cardCCV} name="cardCCV"/>
                         </Col>
                     </FormGroup>
 
