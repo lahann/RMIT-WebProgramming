@@ -65,16 +65,16 @@ export default class ShoppingCartPage extends React.Component {
         return (
             <div>
                 <h1> {this.props.myShoppingCart.customer.name} </h1>
-            <div>
-                {outerStructure}
-            </div>
+                <div>
+                    {outerStructure}
+                </div>
 
-            <div class="col-md-4 col-md-offset-6">
-            <LinkContainer to="/checkout"> 
-            <Button bsStyle="success">Checkout</Button> 
-            </LinkContainer>
-            </div>
-
+                <div class="col-md-4 col-md-offset-6">
+                    <LinkContainer to="/checkout"> 
+                    <Button bsStyle="success">Checkout</Button> 
+                    </LinkContainer>
+                    <br/> <br/>
+                </div>
             </div>
         )
     }

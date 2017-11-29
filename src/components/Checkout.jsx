@@ -19,8 +19,17 @@ export default class Checkout extends React.Component{
     }
     
     handleSave(){
-        //dispatch to DB TODO //dispatch!!?? onchange???
+        //dispatch to DB TODO
         confirm('Are you sure?')
+        errors = false
+
+        theformgroup = this.props.FormGroup.controlId; // TODO
+
+        if(errors){
+            alert('Errors in the form')
+        } else{
+            this.props.saveOrderClick(this.state)
+        }
         //this.setState({submittedname: this.state.name})
     }
 
