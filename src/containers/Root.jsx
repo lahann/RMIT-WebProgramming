@@ -40,7 +40,9 @@ class Root extends React.Component {
                         />
                     )} />
                     <Route exact path='/checkout' render={() => (
-                        <Checkout />
+                        <Checkout 
+                            //wtf
+                        />
                     )} />
                 </Switch>
 

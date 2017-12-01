@@ -4,56 +4,45 @@ import PropTypes from 'prop-types'
 
 export default class Checkout extends React.Component{
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             //default values to be displayed initially
-            cardnumber: 1234,
-            cardCCV: 123,
-            cardholdername: 'Name',
-            email: 'FullName@Domain.com',
-            fullname: 'Full Name',
-            errors: false
+            fields: {
+                cardnumber: 1234,
+                cardCCV: 123,
+                cardholdername: 'Name',
+                email: 'FullName@Domain.com',
+                fullname: 'Full Name',
+            },
+            FormValid: true,
+            errors: []
         }
+        this.handleSave = this.handleSave.bind(this)
         this.validationStateStringCheck = this.validationStateStringCheck.bind(this) //bind the function to this component
-        this.validationStateNumberCheck = this.validationStateNumberCheck.bind(this) //bind the function to this component
     }
     
     handleSave(){
         //dispatch to DB TODO
         confirm('Are you sure?')
-
-        validationStateNumberCheck(this.state.cardCCV)
-        validationStateNumberCheck(this.state.cardnumber)
-
+        validationStateStringCheck(this.state.cardCCV)
+        validationStateStringCheck(this.state.cardnumber)
         validationStateStringCheck(this.state.cardholdername)
         validationStateStringCheck(this.state.email)
         validationStateStringCheck(this.state.fullname)
         //dumb, static way to do it. hard to do with callback / hard to get object ref of the FromGroup.
-        //Might not work. '123' would pass a string check, but fail a number check.
-        if(errors){
-            alert('Errors in the form')
+        if(!this.state.FormValid){
+            ()=> alert(this.state.errors.join("\n"))
         } else{
-            this.props.saveOrderClick(this.state)
+            this.props.saveNewOrder(this.state.fields)
         }
-        //this.setState({submittedname: this.state.name})
-    }
-
-    validationStateNumberCheck(value){
-        if(this.state.value === PropTypes.number){
-            this.setState({errors:false})
-        }
-        else {
-            this.setState({errors: true})
-        }
+        this.setState({errors: []})
     }
 
     validationStateStringCheck(value){
-        if(this.state.value === PropTypes.string){
-            this.setState({errors:false})
-        }
-        else {
-            this.setState({errors: true})
+        if(value !== PropTypes.string || value == ''){
+            this.state.errors.push(value.string + ' cannot be empty and must be a string')
+            setState({FormValid: false})
         }
     }
 
@@ -73,8 +62,8 @@ export default class Checkout extends React.Component{
                             Email
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder={this.state.email} 
-                            onChange={this.handleChange.bind(this)} value={this.state.email} name="email"/> 
+                            <FormControl type="text" placeholder={this.state.fields.email} 
+                            onChange={this.handleChange.bind(this)} value={this.state.fields.email} name="email"/> 
                         </Col>
                     </FormGroup>
 
@@ -83,8 +72,8 @@ export default class Checkout extends React.Component{
                             Full Name
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder={this.state.fullname} 
-                            onChange={this.handleChange.bind(this)} value={this.state.fullname} name="fullname"/>
+                            <FormControl type="text" placeholder={this.state.fields.fullname} 
+                            onChange={this.handleChange.bind(this)} value={this.state.fields.fullname} name="fullname"/>
                         </Col>
                     </FormGroup>
 
@@ -93,8 +82,8 @@ export default class Checkout extends React.Component{
                             Cardholder
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder={this.state.cardholdername} 
-                            onChange={this.handleChange.bind(this)} value={this.state.cardholdername} name="cardholdername"/>
+                            <FormControl type="text" placeholder={this.state.fields.cardholdername} 
+                            onChange={this.handleChange.bind(this)} value={this.state.fields.cardholdername} name="cardholdername"/>
                         </Col>
                     </FormGroup>
 
@@ -103,8 +92,8 @@ export default class Checkout extends React.Component{
                             Cardnumber
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder={this.state.cardnumber + "..."} 
-                            onChange={this.handleChange.bind(this)} value={this.state.cardnumber} name="cardnumber"/>
+                            <FormControl type="text" placeholder={this.state.fields.cardnumber + "..."} 
+                            onChange={this.handleChange.bind(this)} value={this.state.fields.cardnumber} name="cardnumber"/>
                         </Col>
                     </FormGroup>
 
@@ -113,14 +102,14 @@ export default class Checkout extends React.Component{
                             Card CCV
                         </Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder={this.state.cardCCV} 
-                            onChange={this.handleChange.bind(this)} value={this.state.cardCCV} name="cardCCV"/>
+                            <FormControl type="text" placeholder={this.state.fields.cardCCV} 
+                            onChange={this.handleChange.bind(this)} value={this.state.fields.cardCCV} name="cardCCV"/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup>
                         <Col smOffset={2} sm={10}>
-                            <Button type="submit" onClick={this.handleSave.bind(this)}>
+                            <Button type="submit" onClick={this.handleSave}>
                                 Confirm
                             </Button>
                         </Col>
