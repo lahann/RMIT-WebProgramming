@@ -33,7 +33,7 @@ export default class AboutUs extends React.Component {
                                 <Image src={linh} style={imageStyle} />
                                 <br />
                                 <ul>
-                                    <li>S...</li>
+                                    <li>S3689251</li>
                                     <li>From Can Tho, Vietnam</li>
                                     <li>Studies Information Technology at RMIT Vietnam</li>
                                 </ul>

@@ -123,7 +123,9 @@ function products(state = initialState.products, action) {
             return [...state, ...action.payload]
 
         case FETCH_PRODUCTS_BY_ID_SUCCESS:
-            return [...action.payload]
+            let products = action.products
+            return products.filter(p => p.productType === action.typeId)
+            //return [...action.payload]
 
         case FETCH_PRODUCTS_BY_PRICE_SUCCESS:
             let newProducts = action.payload[0].filter((p) => {
@@ -142,7 +144,8 @@ function categories(state = initialState.categories, action) {
     switch (action.type) {
         case SHOW_CATEGORIES:
             return state
-
+        case 'FETCH_PRODUCT_TYPES':
+            return action.data
         default:
             break;
     }
@@ -178,7 +181,6 @@ function filter(state = initialState.filter, action) {
             }
             else if (action.payload[0] === SORTBY_CATEGORY) {
                 store.dispatch(fetchProductsByTypeId(action.payload[1]))
-
                 return Object.assign({}, state, { sortBy: SORTBY_CATEGORY })
             }
     }
@@ -212,6 +214,7 @@ const store = createStore(centralState, /* preloadedState, */ composeEnhancers(
 ));
 
 store.dispatch(fetchProducts())
+store.dispatch(fetchProductTypes())
 
 // Add the respective action in a reducer
 // Call store.dispatch(fetchStudent())
@@ -247,16 +250,27 @@ function fetchProductsByPrice(min, max) {
 
 function fetchProductsByTypeId(id) {
     return function () {
-        fetch('http://bestlab.us:8080/products/byType/' + id)
+        fetch('http://bestlab.us:8080/products')
             .then(function (res) {
                 return res.json()
             })
             .then(function (data) {
                 store.dispatch({
                     type: FETCH_PRODUCTS_BY_ID_SUCCESS,
-                    payload: data
+                    products: data,
+                    typeId: id
                 })
             })
+    }
+}
+function fetchProductTypes() {
+    return dispatch => {
+        fetch('http://bestlab.us:8080/productTypes')
+        .then(response => response.json())
+        .then(data => dispatch({
+            type: 'FETCH_PRODUCT_TYPES',
+            data
+        }))
     }
 }
 
