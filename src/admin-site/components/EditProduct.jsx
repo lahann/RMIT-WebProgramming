@@ -25,10 +25,7 @@ export default class EditProduct extends React.Component {
         let err = []
         let formIsValid = true
 
-        if (fields.id.value === '') {
-            formIsValid = false
-            err.push("ID cannot be empty.")
-        } else if (fields.id.value.charAt(0) !== 'p') {
+        if (fields.id.value.charAt(0) !== 'p') {
             formIsValid = false
             err.push("ID must start with 'p'.")
         }
@@ -38,18 +35,12 @@ export default class EditProduct extends React.Component {
             err.push("Name cannot be empty.")
         }
 
-        if (fields.productType.value === '') {
-            formIsValid = false
-            err.push("Type cannot be empty.")
-        } else if (fields.productType.value.charAt(0) !== 'c') {
+        if (fields.productType.value.charAt(0) !== 'c') {
             formIsValid = false
             err.push("Type must start with 'c'.")
         } 
 
-        if (fields.price.value === '') {
-            formIsValid = false
-            err.push("Price cannot be empty.")
-        } else if (!/^\d+$/.test(fields.price.value)) {
+        if (!/^\d+$/.test(fields.price.value)) {
             formIsValid = false
             err.push("Price must be a number.")
         }
