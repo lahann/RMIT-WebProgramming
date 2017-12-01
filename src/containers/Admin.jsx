@@ -11,7 +11,7 @@ store.dispatch(fetchProducts())
 store.dispatch(fetchProductTypes())
 
 const Admin = () => (
-    <div style={{position: 'relative', top: 59 + 'px', minHeight: 100 + '%'}}>
+    <div style={{position: 'relative', top: 59 + 'px', minHeight: 100 + '%', paddingBottom: 100 + 'px'}}>
         <Provider store={store}>
             <App />
         </Provider> 

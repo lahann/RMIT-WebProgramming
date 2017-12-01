@@ -6,36 +6,103 @@ export default class AddProduct extends React.Component {
         super(props)
         this.handleAddProduct = this.handleAddProduct.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleValidation = this.handleValidation.bind(this)
         this.state = {
-            id: '', 
-            name: '', 
-            price: '', 
-            description: '', 
-            brand: '', 
-            producer: '', 
-            imageUrl: '',
-            productType: ''
+            fields: {
+                id: '', 
+                name: '', 
+                price: '', 
+                description: '', 
+                brand: '', 
+                producer: '', 
+                imageUrl: '',
+                productType: ''
+            },
+            errors: []
         }
     }
 
+    handleValidation() {
+        let fields = this.state.fields
+        let err = []
+        let formIsValid = true
+
+        if (fields.id === '') {
+            formIsValid = false
+            err.push("ID cannot be empty.")
+        } else if (fields.id.charAt(0) !== 'p') {
+            formIsValid = false
+            err.push("ID must start with 'p'.")
+        }
+
+        if (fields.name === '') {
+            formIsValid = false
+            err.push("Name cannot be empty.")
+        }
+
+        if (fields.productType === '') {
+            formIsValid = false
+            err.push("Type cannot be empty.")
+        } else if (fields.productType.charAt(0) !== 'c') {
+            formIsValid = false
+            err.push("Type must start with 'c'.")
+        } 
+
+        if (fields.price === '') {
+            formIsValid = false
+            err.push("Price cannot be empty.")
+        } else if (!/^\d+$/.test(fields.price)) {
+            formIsValid = false
+            err.push("Price must be a number.")
+        }
+
+        if (fields.description === '') {
+            formIsValid = false
+            err.push("Description cannot be empty.")
+        }
+
+        if (fields.brand === '') {
+            formIsValid = false
+            err.push("Brand cannot be empty.")
+        }
+
+        if (fields.producer === '') {
+            formIsValid = false
+            err.push("Producer cannot be empty.")
+        }
+
+        if (fields.imageUrl === '') {
+            formIsValid = false
+            err.push("Image URL cannot be empty.")
+        } 
+        
+        if (!formIsValid) 
+            this.setState({errors: err}, ()=> alert(this.state.errors.join("\n")))
+        else this.setState({errors: err})
+        return formIsValid
+    }
+
+
     handleAddProduct() {
-        this.props.handleAddProduct(this.state)
-        this.setState({
-            id: '', 
-            name: '', 
-            price: '', 
-            description: '', 
-            brand: '', 
-            producer: '', 
-            imageUrl: '',
-            productType: ''
-        })
+        if (this.handleValidation()) {
+            this.props.handleAddProduct(this.state.fields)
+            this.setState({fields: {
+                id: '', 
+                name: '', 
+                price: '', 
+                description: '', 
+                brand: '', 
+                producer: '', 
+                imageUrl: '',
+                productType: ''
+            }})
+        } 
     }
 
     handleChange(e) {
-        let change = {}
-        change[e.target.name] = e.target.value
-        this.setState(change)
+        let fields = this.state.fields
+        fields[e.target.name] = e.target.value
+        this.setState({fields})
     }
 
     render() {
@@ -46,7 +113,7 @@ export default class AddProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.id}
+                    value={this.state.fields.id}
                     name="id"
                     onChange={this.handleChange}
                 />
@@ -54,7 +121,7 @@ export default class AddProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.name}
+                    value={this.state.fields.name}
                     name="name"
                     onChange={this.handleChange}
                 />
@@ -62,7 +129,7 @@ export default class AddProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.productType}
+                    value={this.state.fields.productType}
                     name="productType"
                     onChange={this.handleChange}
                 />
@@ -70,7 +137,7 @@ export default class AddProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.price}
+                    value={this.state.fields.price}
                     onChange={this.handleChange}
                     name="price"
                 />
@@ -78,7 +145,7 @@ export default class AddProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.description}
+                    value={this.state.fields.description}
                     onChange={this.handleChange}
                     name="description"
                 />
@@ -86,7 +153,7 @@ export default class AddProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.brand}
+                    value={this.state.fields.brand}
                     onChange={this.handleChange}
                     name="brand"
                 />
@@ -94,7 +161,7 @@ export default class AddProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.producer}
+                    value={this.state.fields.producer}
                     onChange={this.handleChange}
                     name="producer"
                 />
@@ -102,7 +169,7 @@ export default class AddProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    value={this.state.imageUrl}
+                    value={this.state.fields.imageUrl}
                     onChange={this.handleChange}
                     name="imageUrl"
                 />

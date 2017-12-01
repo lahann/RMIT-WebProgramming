@@ -6,29 +6,94 @@ export default class EditProduct extends React.Component {
         super(props)
         this.handleEditProduct = this.handleEditProduct.bind(this)
         this.state = {
-            id: null, 
-            name: null, 
-            price: null, 
-            description: null, 
-            brand: null, 
-            producer: null, 
-            imageUrl: null,
-            productType: null            
+            fields: {
+                id: null, 
+                name: null, 
+                price: null,  
+                description: null,  
+                brand: null,  
+                producer: null,  
+                imageUrl: null, 
+                productType: null
+            },
+            errors: []
         }
     }
 
+    handleValidation() {
+        let fields = this.state.fields
+        let err = []
+        let formIsValid = true
+
+        if (fields.id.value === '') {
+            formIsValid = false
+            err.push("ID cannot be empty.")
+        } else if (fields.id.value.charAt(0) !== 'p') {
+            formIsValid = false
+            err.push("ID must start with 'p'.")
+        }
+
+        if (fields.name.value === '') {
+            formIsValid = false
+            err.push("Name cannot be empty.")
+        }
+
+        if (fields.productType.value === '') {
+            formIsValid = false
+            err.push("Type cannot be empty.")
+        } else if (fields.productType.value.charAt(0) !== 'c') {
+            formIsValid = false
+            err.push("Type must start with 'c'.")
+        } 
+
+        if (fields.price.value === '') {
+            formIsValid = false
+            err.push("Price cannot be empty.")
+        } else if (!/^\d+$/.test(fields.price.value)) {
+            formIsValid = false
+            err.push("Price must be a number.")
+        }
+
+        if (fields.description.value === '') {
+            formIsValid = false
+            err.push("Description cannot be empty.")
+        }
+
+        if (fields.brand.value === '') {
+            formIsValid = false
+            err.push("Brand cannot be empty.")
+        }
+
+        if (fields.producer.value === '') {
+            formIsValid = false
+            err.push("Producer cannot be empty.")
+        }
+
+        if (fields.imageUrl.value === '') {
+            formIsValid = false
+            err.push("Image URL cannot be empty.")
+        } 
+        
+        if (!formIsValid) 
+            this.setState({errors: err}, ()=> alert(this.state.errors.join("\n")))
+        else this.setState({errors: err})
+        return formIsValid
+    }
+
     handleEditProduct() {
-        this.props.handleProductUpdate({
-            _id: this.props._id,
-            id: this.state.id.value,
-            name: this.state.name.value,
-            price: this.state.price.value, 
-            description: this.state.description.value,
-            brand: this.state.brand.value, 
-            producer: this.state.producer.value, 
-            imageUrl: this.state.imageUrl.value,
-            productType: this.state.productType.value
-        })
+        if (this.handleValidation()) {
+            this.props.handleProductUpdate({
+                _id: this.props._id,
+                id: this.state.fields.id.value,
+                name: this.state.fields.name.value,
+                price: this.state.fields.price.value, 
+                description: this.state.fields.description.value,
+                brand: this.state.fields.brand.value, 
+                producer: this.state.fields.producer.value, 
+                imageUrl: this.state.fields.imageUrl.value,
+                productType: this.state.fields.productType.value
+            })
+        }
     }
 
     render() {
@@ -38,7 +103,7 @@ export default class EditProduct extends React.Component {
             <td>
             <FormControl
                 type="text"
-                inputRef={node=>this.state.id=node}
+                inputRef={node=>this.state.fields.id=node}
                 name="id"
                 defaultValue={this.props.id}
             />
@@ -46,7 +111,7 @@ export default class EditProduct extends React.Component {
         <td>
                 <FormControl
                     type="text"
-                    inputRef={node=>this.state.name=node}
+                    inputRef={node=>this.state.fields.name=node}
                     name="name"
                     defaultValue={this.props.name}
                 />
@@ -54,7 +119,7 @@ export default class EditProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    inputRef={node=>this.state.productType=node}
+                    inputRef={node=>this.state.fields.productType=node}
                     name="productType"
                     defaultValue={this.props.productType}
                 />
@@ -62,7 +127,7 @@ export default class EditProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    inputRef={node=>this.state.price=node}
+                    inputRef={node=>this.state.fields.price=node}
                     name="price"
                     defaultValue={this.props.price}
                 />
@@ -70,7 +135,7 @@ export default class EditProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    inputRef={node=>this.state.description=node}
+                    inputRef={node=>this.state.fields.description=node}
                     name="description"
                     defaultValue={this.props.description}
                 />
@@ -78,7 +143,7 @@ export default class EditProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    inputRef={node=>this.state.brand=node}
+                    inputRef={node=>this.state.fields.brand=node}
                     name="brand"
                     defaultValue={this.props.brand}
                 />
@@ -86,7 +151,7 @@ export default class EditProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    inputRef={node=>this.state.producer=node}
+                    inputRef={node=>this.state.fields.producer=node}
                     name="producer"
                     defaultValue={this.props.producer}
                 />
@@ -94,7 +159,7 @@ export default class EditProduct extends React.Component {
             <td>
                 <FormControl
                     type="text"
-                    inputRef={node=>this.state.imageUrl=node}
+                    inputRef={node=>this.state.fields.imageUrl=node}
                     name="imageUrl"
                     defaultValue={this.props.imageUrl}
                 />
