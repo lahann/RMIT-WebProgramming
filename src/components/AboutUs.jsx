@@ -36,6 +36,7 @@ export default class AboutUs extends React.Component {
                                     <li>S3689251</li>
                                     <li>From Can Tho, Vietnam</li>
                                     <li>Studies Information Technology at RMIT Vietnam</li>
+                                    <li>Worked on admin (main), checkout (main), filter by category (minor)</li>
                                 </ul>
                             </Panel>
 

@@ -40,13 +40,24 @@ class QuantityEditing extends React.Component {
 
 export default class CheckoutPage extends React.Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {editing: null}
+        this.addTotal = this.addTotal.bind(this)
     }
     
+    addTotal() {
+        var total = 0
+        var products = this.props.cartItems
+        products.forEach(function(p) {
+            total += Number(p.price) * Number(p.quantity)
+        })
+        
+        return total
+    }
     toggleEditing(id) {
         this.setState({editing: id})
+        this.handleDeleteCartItem = this.handleDeleteCartItem.bind(this)
     }
      
     handleDeleteCartItem(id) {
@@ -59,8 +70,10 @@ export default class CheckoutPage extends React.Component {
     }
 
     handleAddCartAndReset(customer) {
-        let products = this.props.cartItems.map( p => ({id: p.id, quantity: p.quantity}) ) 
-        this.props.handleAddCartAndReset({customer, products})
+        let products = this.props.cartItems.map( p => {
+            return  {id: p.idd, quantity: p.quantity}
+        })
+        this.props.handleAddCartAndReset({customer, products})        
     }
 
     render() {
@@ -78,9 +91,10 @@ export default class CheckoutPage extends React.Component {
                     </thead>
                     <tbody>
                         {this.props.cartItems.map(p => {
+                            
                             let quantityTd = null
                             if (this.state.editing === p.id) 
-                                quantityTd = <QuantityEditing quantity={p.quantity} id={p.id} handleUpdateQuantity={this.handleUpdateQuantity}/>
+                                quantityTd = <QuantityEditing quantity={p.quantity} id={p.id} handleUpdateQuantity={this.handleUpdateQuantity.bind(this)}/>
                             else 
                                 quantityTd = <QuantityNotEditing quantity={p.quantity} toggleEditing={this.toggleEditing.bind(this, p.id)} />
 
@@ -90,8 +104,10 @@ export default class CheckoutPage extends React.Component {
                                     <td>{p.name}</td>
                                     <td>{p.price}</td>
                                     <td>{quantityTd}</td>
-                                    <td><Button bsStyle="danger" onClick={()=>{if (confirm(`Are you sure you want to delete product '${p.name}'?`)) 
-                                                        this.handleDeleteCartItem.bind(this, p.id)}}>
+                                    <td><Button bsStyle="danger" onClick={(e)=>{if (confirm(`Are you sure you want to delete product '${p.name}'?`)) {
+                                                                 this.handleDeleteCartItem(p.id)
+                                    } 
+                                                       }}>
                                     DELETE</Button></td>  
                                 </tr>
                             )
@@ -102,7 +118,10 @@ export default class CheckoutPage extends React.Component {
                     </tbody>
 
                 </Table>
-                <AddCustomer handleAddCartAndReset={this.handleAddCartAndReset}/>
+
+                <h3>Total: ${this.addTotal()}</h3>
+                <hr/>
+                <AddCustomer handleAddCartAndReset={this.handleAddCartAndReset.bind(this)}/>
 
             </div>
         )

@@ -51,17 +51,18 @@ export default class AddCustomer extends React.Component {
 
         if (!/^\d+$/.test(fields.phone)) {
             formIsValid = false
-            err.push("Phone must be a number.")
+            errors.push("Phone must be a number.")
         }
 
         if (!formIsValid) 
-            this.setState({errors: err}, ()=> alert(this.state.errors.join("\n")))
-        else this.setState({errors: err})
+            this.setState({errors: errors}, ()=> alert(this.state.errors.join("\n")))
+        else this.setState({errors: errors})
         return formIsValid
     }
 
     handleAddCartAndReset() {
         if (this.handleValidation()) {
+            alert('Your order has been placed.')
             this.props.handleAddCartAndReset(this.state.fields)
             this.setState({fields: {
                 name: '', 

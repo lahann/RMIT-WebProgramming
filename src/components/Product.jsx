@@ -11,6 +11,7 @@ export default class Product extends React.Component {
         super(props)
         this.state = {
             id: props._id,
+            idd: props.id,
             name: props.name,
             price: props.price,
             description: props.description,
