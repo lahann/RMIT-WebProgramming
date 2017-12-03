@@ -1,0 +1,41 @@
+/dist - Directory
+    - For easier deployment we wanted only a few files
+    - We added a new script in package.json, 'build'. Webpack then compress our whole code into the 'bundle.js' file
+    - We updated the webpack.config.js so that the local server knows where to find the sources
+    - https://webpack.js.org/guides/getting-started/
+
+/src - Directory
+    - Contains our sourcecode
+    - Code splitted into more directories because of the clarity and to provide a 'real-life-project' structure
+
+/admin-site - Directory
+    -
+
+/checkout-site - Directory
+    - 
+
+/components - Directory
+    - Our basic components
+    - What to we want to display
+    - 'Constants.jsx' - Single point for the used strings/ actions
+
+/containers - Directory
+    - Our functionality
+    - How do we want to display
+
+.gitignore - File
+    - Things (files/ directories) we do not want to have in our GIT Repository
+
+package.json - File
+    - Configuration of our dependencies
+    - 'react-bootstrap' - Display our content more beautiful
+    - 'react-router-dom' - Simply routing with boilerplate components
+        - Therefore we implemented the 'Root.jsx'-Component
+        - https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
+    - 'react-tooltip' - Easy tooltip for our products
+    - 'redux-devtools-extension' - Chrome Plugin to have an overview on the actual state/ the invoked actions
+
+webpack.config.js - File
+    - Webpack configuration file
+    - 'output' to specify our bundled filename and the path where to find it
+    - 'file-loader'/ 'image-webpack-loader' to load images
