@@ -3,7 +3,9 @@ import logo from '../images/cropped-logo.png';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem, } from 'react-bootstrap'
-import { VISIBILITY_ABOUTUS, VISIBILITY_SHOPPINGCART } from '../components/Constants.jsx'
+import { VISIBILITY_ABOUTUS, VISIBILITY_SHOPPINGCART,
+  ROUTE_BASE, ROUTE_ABOUTUS, ROUTE_ADMIN, ROUTE_SHOPPINGCART
+ } from '../components/Constants.jsx'
 
 export default class Header extends React.Component {
 
@@ -26,7 +28,7 @@ export default class Header extends React.Component {
         <Navbar style={headerStyle}>
           <Navbar.Header>
             <Navbar.Brand>
-              <LinkContainer to="/" >
+              <LinkContainer to={ROUTE_BASE} >
                 <a>
                   <img src={logo} style={logoStyle} onClick={this.props.reset.bind(this)} />
                 </a>
@@ -34,19 +36,19 @@ export default class Header extends React.Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
-            <LinkContainer to="/about-us">
+            <LinkContainer to={ROUTE_ABOUTUS}>
               <NavItem>
                 About Us
             </NavItem>
             </LinkContainer>
-            <LinkContainer to="/admin">
+            <LinkContainer to={ROUTE_ADMIN}>
               <NavItem>
                 Admin Mode
             </NavItem>
             </LinkContainer>
           </Nav>
           <Nav pullRight>
-            <LinkContainer to="/shopping-cart">
+            <LinkContainer to={ROUTE_SHOPPINGCART}>
               <NavItem>
                 Shopping Cart
             </NavItem>

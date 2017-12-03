@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import CategoriePage from './CategoriePage.jsx'
 import ProductOverviewPage from './ProductOverviewPage.jsx'
 import ProductDetailPage from './ProductDetailPage.jsx'
 import {

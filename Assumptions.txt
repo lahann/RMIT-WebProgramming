@@ -24,7 +24,12 @@
 
 /containers - Directory
     - Our functionality
-    - How do we want to display
+    - How do we want to 
+    
+/images - Directory
+    - Contains the images we use in our application
+    - The three GitHub images for the About Us-Page
+    - cropped-logo.png as placeholder in case a product provides no imageUrl
 
 .gitignore - File
     - Things (files/ directories) we do not want to have in our GIT Repository

@@ -28,6 +28,11 @@ export default class Product extends React.Component {
         return imageUrl
     }
 
+    onClick(e) {
+        this.props.addToCart(this.state)
+        e.target.className = "btn btn-success"
+    }
+
     grid() {
         const imageStyle = {
             cursor: 'pointer',
@@ -41,7 +46,7 @@ export default class Product extends React.Component {
             <div>
                 <Panel header={this.state.name} data-tip data-for={this.state.id}>
                     <Image src={this.getImageUrl(this.state.imageUrl)} responsive style={imageStyle} onClick={this.props.onProductClick} />
-                    <Button onClick={this.props.addToCart.bind(this, this.state)} style={{
+                    <Button onClick={this.onClick.bind(this)} style={{
                         marginLeft: 'auto', display: 'block', zIndex: 2
                     }}>Add to Cart</Button>
                 </Panel>
@@ -64,7 +69,7 @@ export default class Product extends React.Component {
                 <li className="list-group-item">
                     <ListGroupItem header={this.state.name} style={{ marginTop: 7 + 'px' }}>
                         <Image src={this.getImageUrl(this.state.imageUrl)} style={{ width: 40 + '%', cursor: 'pointer' }} onClick={this.props.onProductClick} />
-                        <Button style={{ marginLeft: 'auto', display: 'block', zIndex: 2 }} onClick={this.props.addToCart.bind(this, this.state)}>
+                        <Button style={{ marginLeft: 'auto', display: 'block', zIndex: 2 }} onClick={this.onClick.bind(this)}>
                             Add to Cart
                         </Button>
                     </ListGroupItem>
@@ -144,7 +149,7 @@ export default class Product extends React.Component {
 
                     <div style={{ textAlign: 'right' }} >
                         For only: {this.state.price} $ &nbsp;
-                        <Button onClick={this.props.addToCart.bind(this, this.state)}>
+                        <Button onClick={this.onClick.bind(this)}>
                             Add to Cart
                         </Button>
                     </div>

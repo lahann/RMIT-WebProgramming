@@ -9,51 +9,18 @@ import {
     SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
     VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS,
     FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS, FETCH_PRODUCTS_BY_PRICE_SUCCESS,
-    SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT, RESET_FILTER, RESET
+    SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT, RESET_FILTER, RESET,
+    RESET_CART, UPDATE_QUANTITY, DELETE_CART_ITEM, FETCH_PRODUCT_TYPES, RANDOM,
+    PRODUCTS, PRODUCT_TYPES, SHOPPING_CART
 } from './components/Constants.jsx'
 
-function CRUDCreater(dataname) {
-    return function (dataname) {
-        function students(state = [], action) {
-            switch (action.type) {
-                case ('LOAD_' + dataname):
-                    return state
-                case ('ADD_' + dataname):
-                    return [...state, action.payload]
-                case ('DELETE_' + dataname):
-                    return state.filter((s) => s.name !== action.payload.name)
-                case ('FETCH_' + dataname + '_SUCCESS'):
-                    return action.payload;
-            }
-            return state;
-        }
-    }
-}
-
-CRUDCreater('product')
-CRUDCreater('categorie')
-CRUDCreater('sale')
-
 var initialState = {
-
     shoppingcart: {
-        products: [
-            {
-                _id: '3', name: 'Fourth Product', price: '300', description: 'Random thoughts',
-                brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image3.jpg'
-            },
-            {
-                _id: '4', name: 'Fifth Product', price: '400', description: 'Random thoughts',
-                brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'www.google.com/image4.jpg'
-            }
-        ],
-        customer: {
-            id: '1', name: 'generic full name', address: 'generic street'
-        }
+        products: [],
+        customer: {}
     },
-    customers: [],
     filter: {
-        sortBy: 'RANDOM',
+        sortBy: RANDOM,
         view: VIEW_PRODUCT_GRID,
         minPrice: 0,
         maxPrice: 10000
@@ -90,7 +57,7 @@ function categories(state = [], action) {
     switch (action.type) {
         case SHOW_CATEGORIES:
             return state
-        case 'FETCH_PRODUCT_TYPES':
+        case FETCH_PRODUCT_TYPES:
             return action.data
         default:
             break;
@@ -101,22 +68,20 @@ function categories(state = [], action) {
 function shoppingCart(state = initialState.shoppingcart, action) {
     switch (action.type) {
         case ADD_TO_CART:
-            // console.log('ADD_TO_CART')
-            // return Object.assign({}, state, { products: [...state.products, action.payload] })
             return [...state, { ...action.payload, quantity: 1 }]
 
-        case 'RESET_CART':
+        case RESET_CART:
             return []
 
-        case 'UPDATE_QUANTITY':
+        case UPDATE_QUANTITY:
             return state.map(p => {
                 if (p.id === action.id)
-                    return {...p, quantity: action.quantity}
+                    return { ...p, quantity: action.quantity }
                 return p
             })
-        
-        case 'DELETE_CART_ITEM':
-           return state.filter(product => product.id !== action.id)
+
+        case DELETE_CART_ITEM:
+            return state.filter(product => product.id !== action.id)
 
         default:
             break;
@@ -147,7 +112,7 @@ function filter(state = initialState.filter, action) {
         case RESET_FILTER:
             store.dispatch(fetchProducts())
             return Object.assign({}, {
-                sortBy: 'RANDOM',
+                sortBy: RANDOM,
                 view: VIEW_PRODUCT_GRID,
                 minPrice: 0,
                 maxPrice: 10000
@@ -156,7 +121,7 @@ function filter(state = initialState.filter, action) {
         case RESET:
             store.dispatch(fetchProducts())
             return Object.assign({}, {
-                sortBy: 'RANDOM',
+                sortBy: RANDOM,
                 view: VIEW_PRODUCT_GRID,
                 minPrice: 0,
                 maxPrice: 10000
@@ -173,7 +138,7 @@ function currentProduct(state = initialState.currentProduct, action) {
         case EMPTY_CURRENTPRODUCT:
             return Object.assign({}, {})
 
-        case 'RESET':
+        case RESET:
             return Object.assign({}, {})
     }
     return state;
@@ -201,7 +166,7 @@ store.dispatch(fetchProductTypes())
 // Call store.dispatch(fetchStudent())
 function fetchProducts() {
     return function () {
-        fetch('http://bestlab.us:8080/products')
+        fetch(PRODUCTS)
             .then(function (res) {
                 return res.json()
             })
@@ -216,7 +181,7 @@ function fetchProducts() {
 
 function fetchProductsByPrice(min, max) {
     return function () {
-        fetch('http://bestlab.us:8080/products')
+        fetch(PRODUCTS)
             .then(function (res) {
                 return res.json()
             })
@@ -231,7 +196,7 @@ function fetchProductsByPrice(min, max) {
 
 function fetchProductsByTypeId(id) {
     return function () {
-        fetch('http://bestlab.us:8080/products')
+        fetch(PRODUCTS)
             .then(function (res) {
                 return res.json()
             })
@@ -246,38 +211,18 @@ function fetchProductsByTypeId(id) {
 }
 function fetchProductTypes() {
     return dispatch => {
-        fetch('http://bestlab.us:8080/productTypes')
+        fetch(PRODUCT_TYPES)
             .then(response => response.json())
             .then(data => dispatch({
-                type: 'FETCH_PRODUCT_TYPES',
+                type: FETCH_PRODUCT_TYPES,
                 data
             }))
     }
 }
 
-// In the respective action => return [...state, action.payload];
-function addProduct(product) {
-    return function () {
-        fetch('http://bestlab.us:8080/products', {
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            method: 'post',
-            body: JSON.stringify(product)
-        })
-            .then((res) => {
-                return res.json()
-            })
-            .then((data) => {
-                store.dispatch({ type: 'ADD_PRODUCT_SUCCESS', payload: data })
-            })
-    }
-}
-
 function addShoppingCart(shoppingcart) {
     return function () {
-        fetch('http://bestlab.us:8080/shoppingCarts', {
+        fetch(SHOPPING_CART, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'

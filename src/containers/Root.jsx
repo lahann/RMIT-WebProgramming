@@ -9,7 +9,7 @@ import CheckoutPage from '../checkout-site/components/CheckoutPage.jsx'
 import { addCartAndReset, deleteCartItem, updateQuantity } from '../checkout-site/actions'
 import Header from '../components/Header.jsx'
 import { connect } from 'react-redux'
-import { RESET } from '../components/Constants.jsx'
+import { RESET, ROUTE_BASE, ROUTE_ABOUTUS, ROUTE_ADMIN, ROUTE_SHOPPINGCART } from '../components/Constants.jsx'
 
 class Root extends React.Component {
 
@@ -21,7 +21,7 @@ class Root extends React.Component {
                 </div>
 
                 <Switch>
-                    <Route exact path='/' render={() => (
+                    <Route exact path={ROUTE_BASE} render={() => (
                         <App dispatch={this.props.dispatch}
                             products={this.props.products}
                             categories={this.props.categories}
@@ -29,24 +29,24 @@ class Root extends React.Component {
                             currentProduct={this.props.currentProduct}
                         />
                     )} />
-                    <Route exact path='/about-us' render={() => (
+                    <Route exact path={ROUTE_ABOUTUS} render={() => (
                         <AboutUs />
                     )} />
-                    <Route exact path='/admin' render={() => (
+                    <Route exact path={ROUTE_ADMIN} render={() => (
                         <Admin />
                     )} />
-                    <Route exact path='/shopping-cart' render={() => (
-                        <CheckoutPage 
-                        cartItems={this.props.shoppingcart}
-                        handleAddCartAndReset={cart => this.props.dispatch(addCartAndReset(cart))}
-                        handleDeleteCartItem={id => {
-                            this.props.dispatch(deleteCartItem(id))
-                        }}
-                        handleUpdateQuantity={update => this.props.dispatch(updateQuantity(update))}
+                    <Route exact path={ROUTE_SHOPPINGCART} render={() => (
+                        <CheckoutPage
+                            cartItems={this.props.shoppingcart}
+                            handleAddCartAndReset={cart => this.props.dispatch(addCartAndReset(cart))}
+                            handleDeleteCartItem={id => {
+                                this.props.dispatch(deleteCartItem(id))
+                            }}
+                            handleUpdateQuantity={update => this.props.dispatch(updateQuantity(update))}
                         />
                     )}
                     />
-                        {/* <ShoppingCartPage
+                    {/* <ShoppingCartPage
                             myShoppingCart={this.props.shoppingcart}
                             filter={this.props.filter}
                             //handleSave = {this.props.addShoppingCart(cartitems)}
