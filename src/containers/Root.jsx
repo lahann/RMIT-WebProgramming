@@ -37,12 +37,11 @@ class Root extends React.Component {
                         <ShoppingCartPage
                             myShoppingCart={this.props.shoppingcart}
                             filter={this.props.filter}
+                            handleSave = {this.props.addShoppingCart(fields)}
                         />
                     )} />
                     <Route exact path='/checkout' render={() => (
-                        <Checkout
-                            handleSave = {this.props.addShoppingCart(fields)}
-                        />
+                        <Checkout/>
                     )} />
                 </Switch>
             </div>
