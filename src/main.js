@@ -109,15 +109,15 @@ function shoppingCart(state = [], action) {
             return []
 
         case 'UPDATE_QUANTITY':
-            const updatedProducts = state.map(product => {
-                if (product.id === action.product.id) 
-                    return { ...product, ...action.product}
-                return product
+            return state.map(p => {
+                if (p.id === action.id)
+                    return {...p, quantity: action.quantity}
+                return p
             })
-            return updatedProducts
         
         case 'DELETE_CART_ITEM':
-           return state.filter(product => product._id !== action.id)
+            console.log(action.id)
+           return state.filter(product => product.id !== action.id)
 
         default:
             break;

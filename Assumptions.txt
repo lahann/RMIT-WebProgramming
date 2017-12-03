@@ -9,10 +9,12 @@
     - Code splitted into more directories because of the clarity and to provide a 'real-life-project' structure
 
 /admin-site - Directory
-    -
+    - 
 
 /checkout-site - Directory
-    - 
+    - only place to edit quantity and remove selected items
+    - if you click 'add to cart' on the same product more than once in the product-overview or product-detail page, 
+    the quantity of that product is still 1 in your shopping cart
 
 /components - Directory
     - Our basic components
