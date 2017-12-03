@@ -288,6 +288,25 @@ function addProduct(product) {
     }
 }
 
+function addShoppingCart(shoppingcart) {
+    return function () {
+        fetch('http://bestlab.us:8080/shoppingCarts', {
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify(shoppingcart)
+        })
+            .then((res) => {
+                return res.json()
+            })
+            .then((data) => {
+                store.dispatch({ type: 'ADD_SHOPPINGCART_SUCCESS', payload: data })
+            })
+    }
+}
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
