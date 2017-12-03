@@ -15,6 +15,7 @@
     - only place to edit quantity and remove selected items
     - if you click 'add to cart' on the same product more than once in the product-overview or product-detail page, 
     the quantity of that product is still 1 in your shopping cart
+    - cart resets once submitted 
 
 /components - Directory
     - Our basic components
