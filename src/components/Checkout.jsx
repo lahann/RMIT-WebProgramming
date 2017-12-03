@@ -22,7 +22,7 @@ export default class Checkout extends React.Component{
         this.validationStateStringCheck = this.validationStateStringCheck.bind(this) //bind the function to this component
     }
     
-    handleSave(){
+    handleSave(e){
         confirm('Are you sure?')
         validationStateStringCheck(this.state.cardCCV)
         validationStateStringCheck(this.state.cardnumber)
@@ -32,7 +32,10 @@ export default class Checkout extends React.Component{
         if(!this.state.FormValid){
             ()=> alert(this.state.errors.join("\n"))
         } else{
-            this.props.addNewOrder(this.state.fields)
+            e.preventDefault()
+            dispatch(addNewShoppingCart({
+                //nothing because noone cares
+            }))
         }
         this.setState({errors: []})
     }
