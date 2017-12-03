@@ -37,7 +37,7 @@ class Root extends React.Component {
                         <ShoppingCartPage
                             myShoppingCart={this.props.shoppingcart}
                             filter={this.props.filter}
-                            handleSave = {this.props.addShoppingCart(fields)}
+                            handleSave = {this.props.addShoppingCart(cartitems)}
                         />
                     )} />
                     <Route exact path='/checkout' render={() => (
