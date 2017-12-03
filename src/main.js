@@ -290,7 +290,7 @@ function addShoppingCart(shoppingcart) {
                 return res.json()
             })
             .then((data) => {
-                store.dispatch({ type: 'ADD_SHOPPINGCART_SUCCESS', payload: data })
+                store.dispatch({ type: ADD_TO_CART, payload: data })
             })
     }
 }

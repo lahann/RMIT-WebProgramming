@@ -32,10 +32,7 @@ export default class Checkout extends React.Component{
         if(!this.state.FormValid){
             ()=> alert(this.state.errors.join("\n"))
         } else{
-            e.preventDefault()
-            dispatch(addNewShoppingCart({
-                //nothing because noone cares
-            }))
+            () => alert("No errors, checkout completed.")
         }
         this.setState({errors: []})
     }
