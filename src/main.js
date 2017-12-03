@@ -12,24 +12,6 @@ import {
     SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT, RESET_FILTER
 } from './components/Constants.jsx'
 
-//LOOK I MADE A CHANGE
-
-// action.type => String to identify our action
-// action.payload => Params for example
-
-// this.props.dispatch({type: 'ASD', payload: s})
-
-/* function mapStateToProps(centralState){
-    return{
-        localVar: centralState.*reducer*,
-    }
-}
-export default connect(mapStateToProps)(App) */
-
-
-// export functions here, import where we want to use like "import {function} from './main.js'"
-
-// dataname ex: 'students'
 function CRUDCreater(dataname) {
     return function (dataname) {
         function students(state = [], action) {
@@ -53,29 +35,7 @@ CRUDCreater('categorie')
 CRUDCreater('sale')
 
 var initialState = {
-    products: [
-        /* {
-            _id: '0', name: 'First Product', price: '0', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/U3QKXPAPGO.jpg'
-        },
-        {
-            _id: '1', name: 'Second Product', price: '100', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/KXFLEZCXWV.jpg'
-        },
-        {
-            _id: '2', name: 'Third Product', price: '200', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/VEQY2MMJYL.jpg'
-        },
-        {
-            _id: '3', name: 'Fourth Product', price: '300', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/AFUKKEBFK8.jpg'
-        },
-        {
-            _id: '4', name: 'Fifth Product', price: '400', description: 'Random thoughts',
-            brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/SZTIEMSNOR.jpg'
-        }, */
-    ],
-    categories: [],
+    
     shoppingcart: {
         products: [
             {
@@ -101,7 +61,7 @@ var initialState = {
     currentProduct: {}
 }
 
-function products(state = initialState.products, action) {
+function products(state = [], action) {
     switch (action.type) {
         case SHOW_PRODUCTS:
             return state
@@ -126,7 +86,7 @@ function products(state = initialState.products, action) {
     return state;
 }
 
-function categories(state = initialState.categories, action) {
+function categories(state = [], action) {
     switch (action.type) {
         case SHOW_CATEGORIES:
             return state
@@ -138,10 +98,26 @@ function categories(state = initialState.categories, action) {
     return state;
 }
 
-function shoppingCart(state = initialState.shoppingcart, action) {
+function shoppingCart(state = [], action) {
     switch (action.type) {
         case ADD_TO_CART:
-            return Object.assign({}, state, { products: [...state.products, action.payload] })
+            // console.log('ADD_TO_CART')
+            // return Object.assign({}, state, { products: [...state.products, action.payload] })
+            return [...state, {...action.payload, quantity: 1}]
+
+        case 'RESET_CART':
+            return []
+
+        case 'UPDATE_QUANTITY':
+            const updatedProducts = state.map(product => {
+                if (product.id === action.product.id) 
+                    return { ...product, ...action.product}
+                return product
+            })
+            return updatedProducts
+        
+        case 'DELETE_CART_ITEM':
+           return state.filter(product => product._id !== action.id)
 
         default:
             break;
@@ -284,6 +260,25 @@ function addProduct(product) {
             })
             .then((data) => {
                 store.dispatch({ type: 'ADD_PRODUCT_SUCCESS', payload: data })
+            })
+    }
+}
+
+function addShoppingCart(shoppingcart) {
+    return function () {
+        fetch('http://bestlab.us:8080/shoppingCarts', {
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify(shoppingcart)
+        })
+            .then((res) => {
+                return res.json()
+            })
+            .then((data) => {
+                store.dispatch({ type: 'ADD_SHOPPINGCART_SUCCESS', payload: data })
             })
     }
 }

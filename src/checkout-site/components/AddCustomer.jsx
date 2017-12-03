@@ -15,7 +15,7 @@ export default class AddCustomer extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleValidation = this.handleValidation.bind(this)
-        this.handleAddCustomer = this.handleAddCustomer.bind(this)
+        this.handleAddCartAndReset = this.handleAddCartAndReset.bind(this)
     }
 
     handleChange(e) {
@@ -130,7 +130,7 @@ export default class AddCustomer extends React.Component {
                         />
                     </Col>
                 </FormGroup>
-                
+                <Col sm={2}></Col>
                 <Col sm={4}>
                     <ButtonToolbar >
                         <Button bsStyle="success" onClick={this.handleAddCartAndReset}>PLACE MY ORDER</Button>
