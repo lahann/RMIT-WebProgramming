@@ -23,18 +23,16 @@ export default class Checkout extends React.Component{
     }
     
     handleSave(){
-        //dispatch to DB TODO
         confirm('Are you sure?')
         validationStateStringCheck(this.state.cardCCV)
         validationStateStringCheck(this.state.cardnumber)
         validationStateStringCheck(this.state.cardholdername)
         validationStateStringCheck(this.state.email)
         validationStateStringCheck(this.state.fullname)
-        //dumb, static way to do it. hard to do with callback / hard to get object ref of the FromGroup.
         if(!this.state.FormValid){
             ()=> alert(this.state.errors.join("\n"))
         } else{
-            this.props.saveNewOrder(this.state.fields)
+            this.props.addNewOrder(this.state.fields)
         }
         this.setState({errors: []})
     }
