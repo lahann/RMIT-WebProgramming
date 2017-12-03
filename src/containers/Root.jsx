@@ -9,7 +9,7 @@ import CheckoutPage from '../checkout-site/components/CheckoutPage.jsx'
 import { addCartAndReset, deleteCartItem, updateQuantity } from '../checkout-site/actions'
 import Header from '../components/Header.jsx'
 import { connect } from 'react-redux'
-import { RESET_FILTER, EMPTY_CURRENTPRODUCT } from '../components/Constants.jsx'
+import { RESET } from '../components/Constants.jsx'
 
 class Root extends React.Component {
 
@@ -17,7 +17,7 @@ class Root extends React.Component {
         return (
             <div>
                 <div>
-                    <Header reset={() => this.props.dispatch({ type: RESET_FILTER })} />
+                    <Header reset={() => this.props.dispatch({ type: RESET })} />
                 </div>
 
                 <Switch>
@@ -49,7 +49,7 @@ class Root extends React.Component {
                         {/* <ShoppingCartPage
                             myShoppingCart={this.props.shoppingcart}
                             filter={this.props.filter}
-                            handleSave = {this.props.addShoppingCart(fields)}
+                            handleSave={this.props.addShoppingCart(cartitems)}
                         />
                     )} />
                     <Route exact path='/checkout' render={() => (

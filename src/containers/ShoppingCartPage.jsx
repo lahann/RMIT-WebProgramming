@@ -10,6 +10,7 @@ export default class ShoppingCartPage extends React.Component {
     constructor(props){
         super(props)
         this.state = {myShoppingCart: props.ShoppingCart}
+        
     }
     createInnerStructure(mode, amountColumns){
         return (
