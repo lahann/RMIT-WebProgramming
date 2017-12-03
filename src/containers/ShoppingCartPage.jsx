@@ -10,18 +10,30 @@ export default class ShoppingCartPage extends React.Component {
     constructor(props){
         super(props)
         this.state = {myShoppingCart: props.ShoppingCart}
-        
+        this.handlesave = this.handlesave.bind(this)
     }
+
     createInnerStructure(mode, amountColumns){
         return (
+            <div>
             <Row className="show-grid">
                 {
+                    <div>
                     <Col key={this.props.myShoppingCart.products._id} md={amountColumns} style={{ marginTop: 10 + 'px' }}>
-                        {<ShoppingCart myproducts= {this.props.myShoppingCart.products} mode={mode} />}
+                        {<ShoppingCart myproducts= {this.props.myShoppingCart.products} mode={mode} />}                     
                     </Col>
+                    <Col>
+                        {<Button bsStyle="danger" onClick={this.removeProduct.bind(this)(this.props.myShoppingCart.products.id)}>Remove</Button>}
+                    </Col>
+                    </div>
                 }
             </Row>
+            </div>
         )
+    }
+
+    removeProduct(id){
+
     }
 
     createOuterStructure() {
@@ -60,7 +72,13 @@ export default class ShoppingCartPage extends React.Component {
             )
         }
     }
-    //
+    
+    handlesave(){
+        if(confirm("Are you sure the shopping cart is correct?")){
+            
+        }
+    }
+
     render() {
         let outerStructure = this.createOuterStructure.bind(this)()
         return (

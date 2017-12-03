@@ -19,7 +19,6 @@ export default class ShoppingCart extends React.Component {
             return (
                     <ListGroupItem header={this.state.name} style={{ marginTop: 7 + 'px' }} {...product}>
                         <Image src={logo} style={{ width: 40 + '%' }} />
-                        <Button bsStyle="danger" onClick={this.removeProduct.bind(this)}>Remove</Button>
                     </ListGroupItem>
             )
         })
@@ -31,10 +30,6 @@ export default class ShoppingCart extends React.Component {
                 {this.list()}
             </ListGroup>
         )
-    }
-
-    removeProduct(id) {
-        //removal logic
     }
 
     render() {

@@ -98,7 +98,7 @@ function categories(state = [], action) {
     return state;
 }
 
-function shoppingCart(state = [], action) {
+function shoppingCart(state = initialState.shoppingcart, action) {
     switch (action.type) {
         case ADD_TO_CART:
             // console.log('ADD_TO_CART')
