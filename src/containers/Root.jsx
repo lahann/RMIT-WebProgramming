@@ -5,9 +5,9 @@ import Admin from './Admin.jsx'
 import { Switch, Route, withRouter } from 'react-router-dom';
 import ShoppingCartPage from '../containers/ShoppingCartPage.jsx'
 import Checkout from '../components/Checkout.jsx'
-import Footer from '../components/Footer.jsx'
 import Header from '../components/Header.jsx'
 import { connect } from 'react-redux'
+import { RESET_FILTER, EMPTY_CURRENTPRODUCT } from '../components/Constants.jsx'
 
 class Root extends React.Component {
 
@@ -15,7 +15,7 @@ class Root extends React.Component {
         return (
             <div>
                 <div>
-                    <Header />
+                    <Header reset={() => this.props.dispatch({ type: RESET_FILTER })} />
                 </div>
 
                 <Switch>
@@ -34,21 +34,17 @@ class Root extends React.Component {
                         <Admin />
                     )} />
                     <Route exact path='/shopping-cart' render={() => (
-                        <ShoppingCartPage 
+                        <ShoppingCartPage
                             myShoppingCart={this.props.shoppingcart}
                             filter={this.props.filter}
                         />
                     )} />
                     <Route exact path='/checkout' render={() => (
-                        <Checkout 
-                            //wtf
+                        <Checkout
+                        //wtf
                         />
                     )} />
                 </Switch>
-
-                <div>
-                    <Footer />
-                </div>
             </div>
         )
     }

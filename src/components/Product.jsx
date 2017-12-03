@@ -20,8 +20,14 @@ export default class Product extends React.Component {
         }
     }
 
-    grid() {
+    getImageUrl(imageUrl) {
+        if (imageUrl === '' || imageUrl === undefined) {
+            return logo
+        }
+        return imageUrl
+    }
 
+    grid() {
         const imageStyle = {
             cursor: 'pointer',
             position: 'relative',
@@ -33,7 +39,7 @@ export default class Product extends React.Component {
         return (
             <div>
                 <Panel header={this.state.name} data-tip data-for={this.state.id}>
-                    <Image src={this.state.imageUrl} responsive style={imageStyle} onClick={this.props.onProductClick} />
+                    <Image src={this.getImageUrl(this.state.imageUrl)} responsive style={imageStyle} onClick={this.props.onProductClick} />
                     <Button onClick={this.props.addToCart.bind(this, this.state)} style={{
                         marginLeft: 'auto', display: 'block', zIndex: 2
                     }}>Add to Cart</Button>
@@ -56,7 +62,7 @@ export default class Product extends React.Component {
             <div>
                 <li className="list-group-item">
                     <ListGroupItem header={this.state.name} style={{ marginTop: 7 + 'px' }}>
-                        <Image src={logo} style={{ width: 40 + '%', cursor: 'pointer' }} onClick={this.props.onProductClick} />
+                        <Image src={this.getImageUrl(this.state.imageUrl)} style={{ width: 40 + '%', cursor: 'pointer' }} onClick={this.props.onProductClick} />
                         <Button style={{ marginLeft: 'auto', display: 'block', zIndex: 2 }} onClick={this.props.addToCart.bind(this, this.state)}>
                             Add to Cart
                         </Button>
@@ -72,12 +78,25 @@ export default class Product extends React.Component {
             position: 'relative',
             marginRight: 10 + 'px',
             marginLeft: 10 + 'px',
-            marginBottom: 120 + 'px',
+            maxHeight: 800 + 'px'
+        }
+        const secondTdStyle = {
+            width: 100 + '%',
+            width: 100 + '%',
+            top: 200 + 'px',
+            left: 20 + '%',
+            position: 'fixed'
+        }
+        const thirdTdStyle = {
+            width: 10 + '%',
+            position: 'fixed',
+            top: 320 + 'px',
+            right: 690 + 'px'
         }
         const h1Style = {
             textAlign: 'center',
             position: 'relative',
-            top: -200 + 'px'
+            top: -160 + 'px'
         }
         const h3Style = {
             textAlign: 'center',
@@ -92,8 +111,9 @@ export default class Product extends React.Component {
             width: 25 + 'px',
             cursor: 'pointer',
             position: 'relative',
-            top: -250 + 'px',
-            right: -7 + 'px'
+            top: -247 + 'px',
+            right: -780 + 'px',
+            zIndex: 1
         }
 
         return (
@@ -103,9 +123,9 @@ export default class Product extends React.Component {
                         <tbody>
                             <tr>
                                 <td>
-                                    <Image src={logo} />
+                                    <Image src={this.getImageUrl(this.state.imageUrl)} />
                                 </td>
-                                <td style={{ width: 100 + '%' }}>
+                                <td style={secondTdStyle}>
                                     <h1 style={h1Style}>{this.state.name}</h1>
                                     <h3 style={h3Style}>
                                         {this.state.description}
@@ -114,8 +134,8 @@ export default class Product extends React.Component {
                                         {this.state.brand} produced by {this.state.producer}
                                     </h4>
                                 </td>
-                                <td>
-                                    <Image src={cross} style={crossStyle} onClick={this.props.onProductClick.bind(this, {})} />
+                                <td style={thirdTdStyle}>
+                                    <Image src={cross} style={crossStyle} onClick={this.props.closeProduct.bind(this)} />
                                 </td>
                             </tr>
                         </tbody>
@@ -132,24 +152,6 @@ export default class Product extends React.Component {
         )
     }
 
-    edit() {
-        return (
-            <div>
-                <Panel footer={this.state.name}>
-                    <Image src={logo} responsive />
-
-                    ID: <input type="text" /> {this.state.id} <br />
-                    Name: <input type="text" />{this.state.name} <br />
-                    Price: <input type="text" />{this.state.price} <br />
-                    Description: <input type="text" />{this.state.description} <br />
-                    Brand: <input type="text" />{this.state.brand} <br />
-                    Producer: <input type="text" />{this.state.producer} <br />
-                    Image URL: <input type="text" />{this.state.imageUrl} <br />
-                </Panel>
-            </div >
-        )
-    }
-
     render() {
         switch (this.props.mode) {
             case VIEW_PRODUCT_GRID:
@@ -160,10 +162,7 @@ export default class Product extends React.Component {
 
             case VIEW_PRODUCT_DETAILS:
                 return this.details();
-
-            case VIEW_PRODUCT_EDIT:
-                return this.edit();
         }
-        return (<div></div>)
+        return (<div />)
     }
 }

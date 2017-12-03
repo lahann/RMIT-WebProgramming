@@ -9,7 +9,7 @@ import {
     SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
     VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS,
     FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS, FETCH_PRODUCTS_BY_PRICE_SUCCESS,
-    SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT
+    SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT, RESET_FILTER
 } from './components/Constants.jsx'
 
 //LOOK I MADE A CHANGE
@@ -54,7 +54,7 @@ CRUDCreater('sale')
 
 var initialState = {
     products: [
-        {
+        /* {
             _id: '0', name: 'First Product', price: '0', description: 'Random thoughts',
             brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/U3QKXPAPGO.jpg'
         },
@@ -73,22 +73,9 @@ var initialState = {
         {
             _id: '4', name: 'Fifth Product', price: '400', description: 'Random thoughts',
             brand: 'Cool Brand', producer: 'Cool Producer', imageUrl: 'https://cdn.stocksnap.io/img-thumbs/960w/SZTIEMSNOR.jpg'
-        },
+        }, */
     ],
-    categories: [
-        {
-            id: '0',
-            name: 'First Categorie'
-        },
-        {
-            id: '1',
-            name: 'Second Categorie'
-        },
-        {
-            id: '2',
-            name: 'Third Categorie'
-        }
-    ],
+    categories: [],
     shoppingcart: {
         products: [
             {
@@ -120,12 +107,11 @@ function products(state = initialState.products, action) {
             return state
 
         case FETCH_PRODUCTS_SUCCESS:
-            return [...state, ...action.payload]
+            return [...action.payload]
 
         case FETCH_PRODUCTS_BY_ID_SUCCESS:
             let products = action.products
             return products.filter(p => p.productType === action.typeId)
-            //return [...action.payload]
 
         case FETCH_PRODUCTS_BY_PRICE_SUCCESS:
             let newProducts = action.payload[0].filter((p) => {
@@ -155,7 +141,6 @@ function categories(state = initialState.categories, action) {
 function shoppingCart(state = initialState.shoppingcart, action) {
     switch (action.type) {
         case ADD_TO_CART:
-            console.log('ADD_TO_CART')
             return Object.assign({}, state, { products: [...state.products, action.payload] })
 
         default:
@@ -183,6 +168,15 @@ function filter(state = initialState.filter, action) {
                 store.dispatch(fetchProductsByTypeId(action.payload[1]))
                 return Object.assign({}, state, { sortBy: SORTBY_CATEGORY })
             }
+
+        case RESET_FILTER:
+            store.dispatch(fetchProducts())
+            return Object.assign({}, {
+                sortBy: 'RANDOM',
+                view: VIEW_PRODUCT_GRID,
+                minPrice: 0,
+                maxPrice: 10000
+            })
     }
     return state;
 }
@@ -266,11 +260,11 @@ function fetchProductsByTypeId(id) {
 function fetchProductTypes() {
     return dispatch => {
         fetch('http://bestlab.us:8080/productTypes')
-        .then(response => response.json())
-        .then(data => dispatch({
-            type: 'FETCH_PRODUCT_TYPES',
-            data
-        }))
+            .then(response => response.json())
+            .then(data => dispatch({
+                type: 'FETCH_PRODUCT_TYPES',
+                data
+            }))
     }
 }
 
