@@ -9,7 +9,7 @@ import {
     SHOW_PRODUCTS, SHOW_CATEGORIES, SWITCH_VIEW, SET_SORTBY, VIEW_PRODUCT_LIST,
     VIEW_PRODUCT_GRID, SORTBY_CATEGORY, SORTBY_PRICE, ADD_TO_CART, VISIBILITY_ABOUTUS,
     FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS, FETCH_PRODUCTS_BY_PRICE_SUCCESS,
-    SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT, RESET_FILTER
+    SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT, RESET_FILTER, RESET
 } from './components/Constants.jsx'
 
 function CRUDCreater(dataname) {
@@ -35,7 +35,7 @@ CRUDCreater('categorie')
 CRUDCreater('sale')
 
 var initialState = {
-    
+
     shoppingcart: {
         products: [
             {
@@ -103,21 +103,21 @@ function shoppingCart(state = [], action) {
         case ADD_TO_CART:
             // console.log('ADD_TO_CART')
             // return Object.assign({}, state, { products: [...state.products, action.payload] })
-            return [...state, {...action.payload, quantity: 1}]
+            return [...state, { ...action.payload, quantity: 1 }]
 
         case 'RESET_CART':
             return []
 
         case 'UPDATE_QUANTITY':
             const updatedProducts = state.map(product => {
-                if (product.id === action.product.id) 
-                    return { ...product, ...action.product}
+                if (product.id === action.product.id)
+                    return { ...product, ...action.product }
                 return product
             })
             return updatedProducts
-        
+
         case 'DELETE_CART_ITEM':
-           return state.filter(product => product._id !== action.id)
+            return state.filter(product => product._id !== action.id)
 
         default:
             break;
@@ -153,6 +153,15 @@ function filter(state = initialState.filter, action) {
                 minPrice: 0,
                 maxPrice: 10000
             })
+
+        case RESET:
+            store.dispatch(fetchProducts())
+            return Object.assign({}, {
+                sortBy: 'RANDOM',
+                view: VIEW_PRODUCT_GRID,
+                minPrice: 0,
+                maxPrice: 10000
+            })
     }
     return state;
 }
@@ -163,6 +172,9 @@ function currentProduct(state = initialState.currentProduct, action) {
             return Object.assign({}, state, action.payload)
 
         case EMPTY_CURRENTPRODUCT:
+            return Object.assign({}, {})
+
+        case 'RESET':
             return Object.assign({}, {})
     }
     return state;
