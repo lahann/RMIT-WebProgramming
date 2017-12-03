@@ -76,6 +76,9 @@ export default class Filter extends React.Component {
                         <MenuItem header>Change View</MenuItem>
                         <MenuItem disabled={this.determineDisabled.bind(this)(VIEW_PRODUCT_LIST)} onSelect={this.props.switchView.bind(this)}>List</MenuItem>
                         <MenuItem disabled={this.determineDisabled.bind(this)(VIEW_PRODUCT_GRID)} onSelect={this.props.switchView.bind(this)}>Grid</MenuItem>
+                        <MenuItem divider />
+
+                        <MenuItem onSelect={this.props.resetFilter.bind(this)}>Reset </MenuItem>
                     </ul>
                 </Clearfix>
             </div >

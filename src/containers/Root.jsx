@@ -7,9 +7,10 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 // import Checkout from '../components/Checkout.jsx'
 import CheckoutPage from '../checkout-site/components/CheckoutPage.jsx'
 import { addCartAndReset, deleteCartItem, updateQuantity } from '../checkout-site/actions'
-import Footer from '../components/Footer.jsx'
+//import Footer from '../components/Footer.jsx'
 import Header from '../components/Header.jsx'
 import { connect } from 'react-redux'
+import { RESET_FILTER, EMPTY_CURRENTPRODUCT } from '../components/Constants.jsx'
 
 class Root extends React.Component {
 
@@ -17,7 +18,7 @@ class Root extends React.Component {
         return (
             <div>
                 <div>
-                    <Header />
+                    <Header reset={() => this.props.dispatch({ type: RESET_FILTER })} />
                 </div>
 
                 <Switch>
@@ -54,11 +55,6 @@ class Root extends React.Component {
                     //         //wtf
                     //     />
                     //)} /> */}
-                
-
-                <div>
-                    <Footer />
-                </div>
             </div>
         )
     }

@@ -18,6 +18,7 @@ export default class Header extends React.Component {
       position: 'fixed',
       zIndex: 1,
       width: 100 + '%',
+      top: 0 + 'px'
     }
 
     return (
@@ -25,9 +26,9 @@ export default class Header extends React.Component {
         <Navbar style={headerStyle}>
           <Navbar.Header>
             <Navbar.Brand>
-              <LinkContainer to="/">
+              <LinkContainer to="/" >
                 <a>
-                  <img src={logo} style={logoStyle} />
+                  <img src={logo} style={logoStyle} onClick={this.props.reset.bind(this)} />
                 </a>
               </LinkContainer>
             </Navbar.Brand>

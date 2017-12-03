@@ -27,6 +27,7 @@ export const SWITCH_VIEW = 'SWITCH_VIEW'
 export const SET_SORTBY = 'SET_SORTBY'
 export const SORTBY_CATEGORY = 'CATEGORY'
 export const SORTBY_PRICE = 'PRICE'
+export const RESET_FILTER = 'RESET_FILTER'
 
 // Visibility
 export const VISIBILITY_ABOUTUS = 'VISIBILITY_ABOUTUS'
