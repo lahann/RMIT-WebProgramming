@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Button, FormControl } from 'react-bootstrap'
+import { Table, Button, FormControl, Image } from 'react-bootstrap'
 import AddCustomer from './AddCustomer.jsx'
 
 class QuantityNotEditing extends React.Component {
@@ -59,13 +59,13 @@ export default class CheckoutPage extends React.Component {
     }
 
     handleAddCartAndReset(customer) {
-        let products = this.props.cartItems.map(p => ( {id: p.id, quantity: p.quantity} ))
+        let products = this.props.cartItems.map( p => ({id: p.id, quantity: p.quantity}) ) 
         this.props.handleAddCartAndReset({customer, products})
     }
 
     render() {
         return (
-            <div>
+            <div style={{position: 'relative', top: 59 + 'px', minHeight: 100 + '%', paddingBottom: 100 + 'px'}}>
                 <Table striped bordered condensed hover>
                     <thead>
                         <tr>
@@ -86,7 +86,7 @@ export default class CheckoutPage extends React.Component {
 
                             return (
                                 <tr>
-                                    <td><Image src={p.imageUrl} /></td>
+                                    <td><Image src={p.imageUrl} style={{maxHeight: 100 + 'px', minHeight: 100 + 'px'}}/></td>
                                     <td>{p.name}</td>
                                     <td>{p.price}</td>
                                     <td>{quantityTd}</td>
