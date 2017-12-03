@@ -49,6 +49,7 @@ export default class AboutUs extends React.Component {
                                     <li>S3694604</li>
                                     <li>From Hamburg, Germany</li>
                                     <li>Studies Business Informatics at FernUniversität Hagen</li>
+                                    <li>Worked on product overview/ detail page, header, filter, about us, deployment</li>
                                 </ul>
                             </Panel>
 

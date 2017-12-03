@@ -75,7 +75,7 @@ function products(state = [], action) {
 
         case FETCH_PRODUCTS_BY_PRICE_SUCCESS:
             let newProducts = action.payload[0].filter((p) => {
-                return action.payload[1] < p.price && p.price < action.payload[2]
+                return action.payload[1] < Number.parseInt(p.price) && Number.parseInt(p.price) < action.payload[2]
             })
             return [...newProducts]
 
