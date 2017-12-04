@@ -24,7 +24,7 @@ export default class AboutUs extends React.Component {
                                     <li>S3694530</li>
                                     <li>From Esbjerg, Denmark</li>
                                     <li>Studies Computer Science at University College Nordjylland</li>
-                                    <li>Worked on project setup, introduction of bootstrap, shopping cart page, checkout (minor)</li>
+                                    <li>Worked on project setup, introduction of bootstrap, checkout (minor)</li>
                                 </ul>
                             </Panel>
 
