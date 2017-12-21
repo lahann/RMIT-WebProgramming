@@ -34,6 +34,11 @@ export const SORTBY_PRICE = 'PRICE'
 export const RESET_FILTER = 'RESET_FILTER'
 export const RANDOM = 'RANDOM'
 
+// Auth
+export const LOGOUT = 'LOGOUT'
+export const LOGIN = 'LOGIN'
+export const FETCH_USER = 'FETCH_USER'
+
 // Visibility
 export const VISIBILITY_ABOUTUS = 'VISIBILITY_ABOUTUS'
 export const VISIBILITY_SHOPPINGCART = 'VISIBILITY_SHOPPINGCART'
@@ -41,11 +46,12 @@ export const VISIBILITY_SHOPPINGCART = 'VISIBILITY_SHOPPINGCART'
 export const RESET = 'RESET'
 
 // URLs
-export const PRODUCTS = 'http://bestlab.us:8080/products'
-export const PRODUCT_TYPES = 'http://bestlab.us:8080/productTypes'
-export const SHOPPING_CART = 'http://bestlab.us:8080/shoppingCarts'
+export const PRODUCTS = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/products/'
+export const PRODUCT_TYPES = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/productTypes/'
+export const SHOPPING_CART = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/shoppingCarts/'
+export const USER = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/user/'
 
-// Routing
+// Routing  
 export const ROUTE_BASE = '/'
 export const ROUTE_ABOUTUS = '/about-us'
 export const ROUTE_ADMIN = '/admin'

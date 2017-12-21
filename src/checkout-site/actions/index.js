@@ -1,6 +1,8 @@
+import { SHOPPING_CART } from '../../components/Constants.jsx'
+
 export const addCartAndReset = cart => {
     return dispatch => {
-        fetch('http://bestlab.us:8080/shoppingCarts', {
+        fetch(SHOPPING_CART, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'

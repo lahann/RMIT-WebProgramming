@@ -45,3 +45,24 @@ Output will be in dist directory.
 Amazon Deployment:
 
 http://rmitllt-hosting-mobilehub-1570034664.s3-website-ap-southeast-1.amazonaws.com/
+
+
+
+A way to avoid the CORS-Extension:
+
+Add the following to your node application which handles the requests:
+
+app.use(function(req, res, next) {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+            res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+            // intercept OPTIONS method
+            if ('OPTIONS' == req.method) {
+              res.send(200);
+            } else {
+              req.db = db;
+              next();
+            }
+        }
+);

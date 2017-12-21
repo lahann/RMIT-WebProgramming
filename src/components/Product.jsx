@@ -107,7 +107,10 @@ export default class Product extends React.Component {
         const h3Style = {
             textAlign: 'center',
             position: 'relative',
-            top: -100 + 'px'
+            top: -100 + 'px',
+            lineBreak: 'auto',
+            maxWidth: 600 + 'px',
+            marginLeft: 29 + '%'
         }
         const h4Style = {
             textAlign: 'center',

@@ -76,7 +76,7 @@ export default class CheckoutPage extends React.Component {
 
     handleAddCartAndReset(customer) {
         let products = this.props.cartItems.map(p => {
-            return { id: p.idd, quantity: p.quantity }
+            return { id: p.id, quantity: p.quantity }
         })
         this.props.handleAddCartAndReset({ customer, products })
     }

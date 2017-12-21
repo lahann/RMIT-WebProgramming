@@ -2,11 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import ProductOverviewPage from './ProductOverviewPage.jsx'
 import ProductDetailPage from './ProductDetailPage.jsx'
+import { fetchProductTypes } from '../main.js'
 import {
   SWITCH_VIEW, SET_SORTBY, SORTBY_PRICE, ADD_TO_CART, SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT, RESET_FILTER
 } from '../components/Constants.jsx'
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    this.props.dispatch(fetchProductTypes())
+  }
 
   render() {
     if (Object.keys(this.props.currentProduct).length === 0 && this.props.currentProduct.constructor === Object) {
@@ -20,7 +25,7 @@ export default class App extends React.Component {
             onProductClick={(p) => this.props.dispatch({ type: SET_CURRENTPRODUCT, payload: p })}
             switchView={() => this.props.dispatch({ type: SWITCH_VIEW })}
             setSortBy={(v) => this.props.dispatch({ type: SET_SORTBY, payload: v })}
-            resetFilter={() => this.props.dispatch({ type: RESET_FILTER } )} />
+            resetFilter={() => this.props.dispatch({ type: RESET_FILTER })} />
         </div>
       )
     } else {

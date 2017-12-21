@@ -1,24 +1,26 @@
+import { PRODUCTS, PRODUCT_TYPES } from '../../components/Constants.jsx'
+
 export const addProduct = product => {
     return dispatch => {
-        fetch('http://bestlab.us:8080/products', {
+        fetch(PRODUCTS, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
-              },
-            method: 'post', 
-            body: JSON.stringify(product)                
+            },
+            method: 'post',
+            body: JSON.stringify(product)
         })
-        .then(response => response.json())
-        .then(product => dispatch({
-            type: 'ADD_PRODUCT',
-            product
-        }))
+            .then(response => response.json())
+            .then(product => dispatch({
+                type: 'ADD_PRODUCT',
+                product
+            }))
     }
 }
 
 export const updateProduct = update => {
     return dispatch => {
-        fetch(`http://bestlab.us:8080/products`, {
+        fetch(PRODUCTS + update._id, {
             headers: {
                 'Accept': 'application.json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -26,55 +28,55 @@ export const updateProduct = update => {
             method: 'put',
             body: JSON.stringify(update)
         })
-        .then(res=>res.json())
-        .then( () => dispatch(fetchProducts()) )
+            .then(res => res.json())
+            .then(() => dispatch(fetchProducts()))
     }
 }
 
 export const deleteProduct = id => {
     return dispatch => {
-        fetch(`http://bestlab.us:8080/products/${id}`, {method: 'delete'})
-        .then(response => response.json())
-        .then(data => {
-            dispatch({type: 'DELETE_PRODUCT', id})
-        })
+        fetch(PRODUCTS + id, { method: 'delete' })
+            .then(response => response.json())
+            .then(data => {
+                dispatch({ type: 'DELETE_PRODUCT', id })
+            })
     }
 }
 
 export function fetchProducts() {
     return dispatch => {
-        fetch('http://bestlab.us:8080/products')
-        .then(response => response.json())
-        .then(data => dispatch({
-            type: 'FETCH_PRODUCTS',
-            data
-        }))
+        fetch(PRODUCTS)
+            .then(response => response.json())
+            .then(data => dispatch({
+                type: 'FETCH_PRODUCTS',
+                data
+            }))
     }
 }
 
 
 export const addProductType = productType => {
     return dispatch => {
-        fetch('http://bestlab.us:8080/productTypes/', {
+        fetch(PRODUCT_TYPES, {
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
-              },
-            method: 'post', 
-            body: JSON.stringify(productType)                
+            },
+            method: 'post',
+            body: JSON.stringify(productType)
         })
-        .then(response => response.json())
-        .then(productType => dispatch({
-            type: 'ADD_PRODUCT_TYPE',
-            productType
-        }))
+            .then(response => response.json())
+            .then(productType => dispatch({
+                type: 'ADD_PRODUCT_TYPE',
+                productType
+            }))
     }
 }
 
 export const updateProductType = update => {
     console.log(update)
     return dispatch => {
-        fetch(`http://bestlab.us:8080/productTypes`, {
+        fetch(PRODUCT_TYPES + update._id, {
             headers: {
                 'Accept': 'application.json, text/plain, */*',
                 'Content-Type': 'application/json'
@@ -82,27 +84,27 @@ export const updateProductType = update => {
             method: 'put',
             body: JSON.stringify(update)
         })
-        .then(res=>res.json())
-        .then( () => dispatch(fetchProductTypes()) )
+            .then(res => res.json())
+            .then(() => dispatch(fetchProductTypes()))
     }
 }
 export const deleteProductType = id => {
     return dispatch => {
-        fetch(`http://bestlab.us:8080/productTypes/${id}`, {method: 'delete'})
-        .then(response => response.json())
-        .then(data => {
-            dispatch({type: 'DELETE_PRODUCT_TYPE', id})
-        })
+        fetch(PRODUCT_TYPES + id, { method: 'delete' })
+            .then(response => response.json())
+            .then(data => {
+                dispatch({ type: 'DELETE_PRODUCT_TYPE', id })
+            })
     }
 }
 
 export function fetchProductTypes() {
     return dispatch => {
-        fetch('http://bestlab.us:8080/productTypes')
-        .then(response => response.json())
-        .then(data => dispatch({
-            type: 'FETCH_PRODUCT_TYPES',
-            data
-        }))
+        fetch(PRODUCT_TYPES)
+            .then(response => response.json())
+            .then(data => dispatch({
+                type: 'FETCH_PRODUCT_TYPES',
+                data
+            }))
     }
 }

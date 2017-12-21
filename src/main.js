@@ -11,7 +11,7 @@ import {
     FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_BY_ID_SUCCESS, FETCH_PRODUCTS_BY_PRICE_SUCCESS,
     SET_CURRENTPRODUCT, EMPTY_CURRENTPRODUCT, RESET_FILTER, RESET,
     RESET_CART, UPDATE_QUANTITY, DELETE_CART_ITEM, FETCH_PRODUCT_TYPES, RANDOM,
-    PRODUCTS, PRODUCT_TYPES, SHOPPING_CART
+    PRODUCTS, PRODUCT_TYPES, SHOPPING_CART, LOGOUT, LOGIN, USER, FETCH_USER
 } from './components/Constants.jsx'
 
 var initialState = {
@@ -25,7 +25,11 @@ var initialState = {
         minPrice: 0,
         maxPrice: 10000
     },
-    currentProduct: {}
+    currentProduct: {},
+    auth: {
+        loggedIn: false,
+        user: {}
+    }
 }
 
 function products(state = [], action) {
@@ -144,13 +148,28 @@ function currentProduct(state = initialState.currentProduct, action) {
     return state;
 }
 
+function auth(state = initialState.auth, action) {
+    switch (action.type) {
+        case LOGIN:
+            return Object.assign({}, state, { loggedIn: true })
+
+        case LOGOUT:
+            return Object.assign({}, state, { loggedIn: false })
+
+        case FETCH_USER:
+            return Object.assign({}, state, { user: action.payload[0] })
+    }
+    return state;
+}
+
 
 const centralState = combineReducers({
     products,
     categories,
     shoppingCart,
     filter,
-    currentProduct
+    currentProduct,
+    auth
 })
 
 
@@ -161,6 +180,7 @@ const store = createStore(centralState, /* preloadedState, */ composeEnhancers(
 
 store.dispatch(fetchProducts())
 store.dispatch(fetchProductTypes())
+store.dispatch(fetchUser())
 
 // Add the respective action in a reducer
 // Call store.dispatch(fetchStudent())
@@ -209,7 +229,7 @@ function fetchProductsByTypeId(id) {
             })
     }
 }
-function fetchProductTypes() {
+export function fetchProductTypes() {
     return dispatch => {
         fetch(PRODUCT_TYPES)
             .then(response => response.json())
@@ -217,6 +237,21 @@ function fetchProductTypes() {
                 type: FETCH_PRODUCT_TYPES,
                 data
             }))
+    }
+}
+
+function fetchUser() {
+    return function () {
+        fetch(USER)
+            .then(function (res) {
+                return res.json()
+            })
+            .then(function (data) {
+                store.dispatch({
+                    type: FETCH_USER,
+                    payload: data
+                })
+            })
     }
 }
 
