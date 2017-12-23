@@ -1,7 +1,15 @@
 import React from 'react'
-import { Table, Button, ButtonToolbar } from 'react-bootstrap' 
+import { Table, Button, ButtonToolbar, Image } from 'react-bootstrap' 
+import logo from '../../images/cropped-logo.png';
 
 export default class ProductRow extends React.Component {
+    getImageUrl(imageUrl) {
+        if (imageUrl === '' || imageUrl === undefined) {
+            return logo
+        }
+        return imageUrl
+    }
+
     render() {
         return (
             <tr>
@@ -12,7 +20,7 @@ export default class ProductRow extends React.Component {
                 <td>{this.props.description}</td>
                 <td>{this.props.brand}</td>
                 <td>{this.props.producer}</td>
-                <td>{this.props.imageUrl}</td>
+                <td><Image src={this.getImageUrl(this.props.imageUrl)} style={{ maxHeight: 100 + 'px', minHeight: 100 + 'px' }} /></td>
                 <td>
                 {
                 <ButtonToolbar>

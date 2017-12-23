@@ -1,13 +1,14 @@
 import React from 'react'
 import ProductRow from './ProductRow'
-import EditProduct from './EditProduct.jsx'
-import AddProduct from './AddProduct.jsx'
-import { Table, Button, ButtonToolbar } from 'react-bootstrap' 
+import EditProduct2 from './EditProduct2.jsx'
+import AddProduct2 from './AddProduct2.jsx'
+
+import { Table, Button, ButtonToolbar } from 'react-bootstrap'
 
 export default class ProductTable extends React.Component {
     constructor() {
         super()
-        this.state ={editing: null}
+        this.state = { editing: null, showPopup: false }
         this.handleProductUpdate = this.handleProductUpdate.bind(this)
         this.handleAddProduct = this.handleAddProduct.bind(this)
     }
@@ -17,38 +18,31 @@ export default class ProductTable extends React.Component {
     }
 
     handleAddProduct(product) {
+        this.togglePopup()
         this.props.handleAddProduct(product)
     }
     handleProductUpdate(update) {
-        this.setState({editing: null})
+        this.setState({ editing: null })
         this.props.handleUpdateProduct(update)
     }
 
-    toggleEditing(productId) {
-        this.setState({editing: productId})
+    toggleEditing(product) {
+        this.setState({ editing: product})
     }
 
-    renderProductOrEditFields(product) {
-        if (this.state.editing === product._id) {
-            return <EditProduct 
-                    key={`editing-${product._id}`}
-                    {...product} 
-                    handleProductUpdate={this.handleProductUpdate}
-                    />
-        } else {
-            return <ProductRow 
-            toggleEditing={this.toggleEditing.bind(this, product._id)}
-            deleteProduct={this.handleDeleteProduct.bind(this, product._id)} 
-            key={product._id} 
-            {...product}
-            />
-        }
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
 
     render() {
+        
         return (
             <div>
-                <Table striped bordered condensed hover> 
+                <h1>Products <span><Button bsStyle="success" onClick={this.togglePopup.bind(this)}>ADD NEW</Button></span>
+                </h1>
+                <Table striped bordered condensed hover>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -63,12 +57,27 @@ export default class ProductTable extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {this.props.products.map((product) => {
-                        return this.renderProductOrEditFields(product);
-                    })}
-                    <AddProduct handleAddProduct={this.handleAddProduct}/>
+                        {this.props.products.map((product) => {
+                            return <ProductRow
+                                toggleEditing={this.toggleEditing.bind(this, product)}
+                                deleteProduct={this.handleDeleteProduct.bind(this, product._id)}
+                                key={product._id}
+                                {...product}
+                            />;
+                        })}
+
                     </tbody>
-                </Table> 
+                </Table>
+                {this.state.showPopup ? 
+                    <AddProduct2 togglePopup={this.togglePopup.bind(this)} handleAddProduct={this.handleAddProduct} />
+                : null}
+                {this.state.editing ?
+                    <EditProduct2
+                        key={`editing-${this.state.editing._id}`}
+                        {...this.state.editing}
+                        handleProductUpdate={this.handleProductUpdate}
+                    />
+                : null}
             </div>
         );
     }
