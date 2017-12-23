@@ -53,7 +53,7 @@ export default class CheckoutPage extends React.Component {
 
     addTotal() {
         var total = 0
-        var products = this.props.cartItems
+        var products = this.props.cartItems && this.props.cartItems.length > 0 ? this.props.cartItems : []
         products.forEach(function (p) {
             total += Number(p.price) * Number(p.quantity)
         })
@@ -91,51 +91,58 @@ export default class CheckoutPage extends React.Component {
     render() {
         return (
             <div style={{ position: 'relative', top: 59 + 'px', minHeight: 100 + '%', paddingBottom: 100 + 'px' }}>
-                <Table striped bordered condensed hover>
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.cartItems.map(p => {
-
-                            let quantityTd = null
-                            if (this.state.editing === p.id)
-                                quantityTd = <QuantityEditing quantity={p.quantity} id={p.id} handleUpdateQuantity={this.handleUpdateQuantity.bind(this)} />
-                            else
-                                quantityTd = <QuantityNotEditing quantity={p.quantity} toggleEditing={this.toggleEditing.bind(this, p.id)} />
-
-                            return (
-                                <tr key={p.id}>
-                                    <td><Image src={this.getImageUrl(p.imageUrl)} style={{ maxHeight: 100 + 'px', minHeight: 100 + 'px' }} /></td>
-                                    <td>{p.name}</td>
-                                    <td>{p.price}</td>
-                                    <td>{quantityTd}</td>
-                                    <td><Button bsStyle="danger" onClick={(e) => {
-                                        if (confirm(`Are you sure you want to delete product '${p.name}'?`)) {
-                                            this.handleDeleteCartItem(p.id)
-                                        }
-                                    }}>
-                                        DELETE</Button></td>
+                {this.props.cartItems && this.props.cartItems.length > 0 ?
+                    <div>
+                        <Table striped bordered condensed hover>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
                                 </tr>
-                            )
-                        })}
-                        <tr>
+                            </thead>
+                            <tbody>
+                                {this.props.cartItems.map(p => {
 
-                        </tr>
-                    </tbody>
+                                    let quantityTd = null
+                                    if (this.state.editing === p.id)
+                                        quantityTd = <QuantityEditing quantity={p.quantity} id={p.id} handleUpdateQuantity={this.handleUpdateQuantity.bind(this)} />
+                                    else
+                                        quantityTd = <QuantityNotEditing quantity={p.quantity} toggleEditing={this.toggleEditing.bind(this, p.id)} />
 
-                </Table>
+                                    return (
+                                        <tr key={p.id}>
+                                            <td><Image src={this.getImageUrl(p.imageUrl)} style={{ maxHeight: 100 + 'px', minHeight: 100 + 'px' }} /></td>
+                                            <td>{p.name}</td>
+                                            <td>{p.price}</td>
+                                            <td>{quantityTd}</td>
+                                            <td><Button bsStyle="danger" onClick={(e) => {
+                                                if (confirm(`Are you sure you want to delete product '${p.name}'?`)) {
+                                                    this.handleDeleteCartItem(p.id)
+                                                }
+                                            }}>
+                                                DELETE</Button></td>
+                                        </tr>
+                                    )
+                                })}
+                                <tr>
 
-                <h3>Total: ${this.addTotal()}</h3>
-                <hr />
-                <AddCustomer handleAddCartAndReset={this.handleAddCartAndReset.bind(this)} />
+                                </tr>
+                            </tbody>
 
+                        </Table>
+
+                        <h3>Total: ${this.addTotal()}</h3>
+                        <hr />
+                        <AddCustomer handleAddCartAndReset={this.handleAddCartAndReset.bind(this)} />
+                    </div> :
+                    <div style={{ textAlign: 'center' }}>
+                        <h2>There are no items in your Shopping Cart!</h2>
+                        <p>Go to our store and find some nice products you can add to your cart.</p>
+                    </div>
+                }
             </div>
         )
     }
