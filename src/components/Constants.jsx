@@ -39,6 +39,17 @@ export const LOGOUT = 'LOGOUT'
 export const LOGIN = 'LOGIN'
 export const FETCH_USER = 'FETCH_USER'
 
+// Order
+export const ORDER_STATUS_ENUM = {
+    NEW: { id: 0, label: 'New' },
+    PROCESSING: { id: 1, label: 'Processing' },
+    DELIVERED: { id: 2, label: 'Delivered' },
+    COMPLETED: { id: 3, label: 'Completed' },
+    PROBLEM: { id: 4, label: 'Problem' }
+}
+export const FETCH_ORDERS = 'FETCH_ORDERS'
+export const UPDATE_ORDER = 'UPDATE_ORDER'
+
 // Visibility
 export const VISIBILITY_ABOUTUS = 'VISIBILITY_ABOUTUS'
 export const VISIBILITY_SHOPPINGCART = 'VISIBILITY_SHOPPINGCART'
@@ -50,6 +61,7 @@ export const PRODUCTS = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/p
 export const PRODUCT_TYPES = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/productTypes/'
 export const SHOPPING_CART = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/shoppingCarts/'
 export const USER = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/user/'
+export const ORDERS = 'http://ec2-34-227-110-10.compute-1.amazonaws.com:8080/orders/'
 
 // Routing  
 export const ROUTE_BASE = '/'

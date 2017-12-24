@@ -1,4 +1,4 @@
-import { PRODUCTS, PRODUCT_TYPES } from '../../components/Constants.jsx'
+import { PRODUCTS, PRODUCT_TYPES, ORDERS, FETCH_ORDERS } from '../../components/Constants.jsx'
 
 export const addProduct = product => {
     return dispatch => {
@@ -106,5 +106,31 @@ export function fetchProductTypes() {
                 type: 'FETCH_PRODUCT_TYPES',
                 data
             }))
+    }
+}
+
+export function fetchOrders() {
+    return dispatch => {
+        fetch(ORDERS)
+            .then(response => response.json())
+            .then(data => dispatch({
+                type: FETCH_ORDERS,
+                data
+            }))
+    }
+}
+
+export const updateOrder = update => {
+    return dispatch => {
+        fetch(ORDERS + update._id, {
+            headers: {
+                'Accept': 'application.json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            method: 'put',
+            body: JSON.stringify(update)
+        })
+            .then(res => res.json())
+            .then(() => dispatch(fetchOrders()))
     }
 }
