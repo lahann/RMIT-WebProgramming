@@ -1,3 +1,5 @@
+Assignment 1:
+
 /dist - Directory
     - For easier deployment we wanted only a few files
     - We added a new script in package.json, 'build'. Webpack then compress our whole code into the 'bundle.js' file
@@ -47,3 +49,12 @@ webpack.config.js - File
     - Webpack configuration file
     - 'output' to specify our bundled filename and the path where to find it
     - 'file-loader'/ 'image-webpack-loader' to load images
+
+
+Assignment 2:
+
+\admin-site\actions\index.js - Admin actions
+    - Naming of fetchOrders() / updateOrder() - We don't have a own collection for the orders, 
+        instead we put the order status inside of the shopping cart, 
+        therefore we fetch from the shopping cart collection
+        and we only update the order status, not the customer or the products in the shopping cart
