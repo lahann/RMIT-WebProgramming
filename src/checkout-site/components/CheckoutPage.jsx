@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Button, FormControl, Image } from 'react-bootstrap'
 import logo from '../../images/cropped-logo.png';
 import AddCustomer from './AddCustomer.jsx'
+import {ORDER_STATUS_ENUM} from '../../components/Constants.jsx'
 
 class QuantityNotEditing extends React.Component {
     render() {
@@ -76,9 +77,17 @@ export default class CheckoutPage extends React.Component {
 
     handleAddCartAndReset(customer) {
         let products = this.props.cartItems.map(p => {
-            return { id: p.id, quantity: p.quantity }
+            return { id: p.id, imageUrl: p.imageUrl, name: p.name, price: p.price, quantity: p.quantity }
         })
-        this.props.handleAddCartAndReset({ customer, products })
+        let status = ORDER_STATUS_ENUM.NEW.id
+
+        let d = new Date()
+        var curr_date = d.getDate()
+        var curr_month = d.getMonth() + 1 //Months are zero based
+        var curr_year = d.getFullYear()
+        let date = curr_date + "-" + curr_month + "-" + curr_year
+        let total = this.addTotal()
+        this.props.handleAddCartAndReset({ customer, products, status, date, total })
     }
 
     getImageUrl(imageUrl) {

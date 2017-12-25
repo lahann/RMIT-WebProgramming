@@ -13,14 +13,6 @@ export default class OrderTable extends React.Component {
         this.props.handleOrderUpdate(update)
     }
 
-    renderOrderFields(order) {
-        return <OrderRow
-            handleOrderUpdate={this.handleOrderUpdate}
-            key={order._id}
-            {...order}
-        />
-    }
-
     render() {
         return (
             <div>
@@ -28,18 +20,26 @@ export default class OrderTable extends React.Component {
                     <Table striped bordered condensed hover>
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Order</th>
+                                <th>Date</th>
+                                <th>Customer</th>
                                 <th>Status</th>
+                                <th>Total</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {this.props.orders.map((order) => {
-                                return this.renderOrderFields(order);
+                                return <OrderRow
+                                    handleOrderUpdate={this.handleOrderUpdate}
+                                    key={order._id}
+                                    {...order}
+                                />
                             })}
 
                         </tbody>
-                    </Table> :
+                    </Table> 
+                    :
                     <div style={{ textAlign: 'center' }}>
                         <h2>There are no orders yet</h2>
                     </div>

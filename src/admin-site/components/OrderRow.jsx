@@ -1,23 +1,24 @@
 import React from 'react'
 import { Table, Button, ButtonToolbar, MenuItem, DropdownButton } from 'react-bootstrap'
 import { ORDER_STATUS_ENUM } from '../../components/Constants.jsx'
+import OrderDetaisl from './OrderDetails.jsx'
 
 export default class OrderRow extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            id: props.id,
-            status: this.determineStatus(props.status)
+            id: this.props.status ? this.props.status : 0,
+            status: this.props.status ? this.determineStatus(this.props.status) : this.determineStatus(0),
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            id: nextProps.id,
-            status: this.determineStatus(nextProps.status)
-        })
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({
+    //         id: nextProps.status,
+    //         status: this.determineStatus(nextProps.status)
+    //     })
+    // }
 
     determineStatus(id) {
         switch (id) {
@@ -40,18 +41,29 @@ export default class OrderRow extends React.Component {
     }
 
     handleOrderUpdate(newStatus) {
+        this.setState({
+            id: newStatus.id,
+            status: newStatus
+        })
+        let _id = this.props._id
+        let customer = this.props.customer
+        let products = this.props.products
+        let date = this.props.date
+        let total = this.props.total
+        let status = newStatus.id
         this.props.handleOrderUpdate({
-            _id: this.props._id,
-            id: this.state.id,
-            status: newStatus.id
+            _id, customer, products, status, date, total
         })
     }
 
     render() {
         return (
             <tr>
-                <td>{this.state.id}</td>
+                <td onClick={this.props.togglePopup}>{this.props._id}</td>
+                <td>{this.props.date}</td>
+                <td>{this.props.customer.name}</td>
                 <td>{this.state.status.label}</td>
+                <td>{this.props.total}</td>
                 <td>
                     {
                         <ButtonToolbar>
@@ -90,6 +102,7 @@ export default class OrderRow extends React.Component {
                         </ButtonToolbar>
                     }
                 </td>
+                
             </tr>
         )
     }
