@@ -1,5 +1,6 @@
 import React from 'react'
 import OrderRow from './OrderRow.jsx'
+import OrderDetails from './OrderDetails.jsx'
 import { Table, Button, ButtonToolbar } from 'react-bootstrap'
 import { ORDER_STATUS_ENUM } from '../../components/Constants.jsx'
 
@@ -7,6 +8,12 @@ export default class OrderTable extends React.Component {
     constructor() {
         super()
         this.handleOrderUpdate = this.handleOrderUpdate.bind(this)
+        this.state = {order: null}
+    }
+
+    togglePopup(order) {
+        this.setState({order})
+        
     }
 
     handleOrderUpdate(update) {
@@ -17,7 +24,8 @@ export default class OrderTable extends React.Component {
         return (
             <div>
                 {this.props.orders && this.props.orders.length > 0 ?
-                    <Table striped bordered condensed hover>
+                    <div>
+                         <Table striped bordered condensed hover>
                         <thead>
                             <tr>
                                 <th>Order</th>
@@ -31,6 +39,7 @@ export default class OrderTable extends React.Component {
                         <tbody>
                             {this.props.orders.map((order) => {
                                 return <OrderRow
+                                    togglePopup={this.togglePopup.bind(this, order)}
                                     handleOrderUpdate={this.handleOrderUpdate}
                                     key={order._id}
                                     {...order}
@@ -39,8 +48,16 @@ export default class OrderTable extends React.Component {
 
                         </tbody>
                     </Table> 
-                    :
-                    <div style={{ textAlign: 'center' }}>
+                    {this.state.order ? 
+                        <OrderDetails 
+                            key={`editing-${this.state.order._id}`}
+                            {...this.state.order}
+                            togglePopup={this.togglePopup.bind(this, null)}
+                        />
+                    : null}
+                    </div>
+                    
+                    : <div style={{ textAlign: 'center' }}>
                         <h2>There are no orders yet</h2>
                     </div>
                 }

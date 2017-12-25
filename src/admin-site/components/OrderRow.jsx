@@ -57,9 +57,13 @@ export default class OrderRow extends React.Component {
     }
 
     render() {
+        const span = {
+            backgroundColor: 'rgb(232,243,236)',
+            cursor: 'pointer'
+        }
         return (
             <tr>
-                <td onClick={this.props.togglePopup}>{this.props._id}</td>
+                <td onClick={this.props.togglePopup}><span style={span}>{this.props._id}</span></td>
                 <td>{this.props.date}</td>
                 <td>{this.props.customer.name}</td>
                 <td>{this.state.status.label}</td>

@@ -58,3 +58,4 @@ Assignment 2:
         instead we put the order status inside of the shopping cart, 
         therefore we fetch from the shopping cart collection
         and we only update the order status, not the customer or the products in the shopping cart
+    - Click on an order ID to view its details (customer info and products)
