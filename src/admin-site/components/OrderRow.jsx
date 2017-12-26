@@ -10,6 +10,7 @@ export default class OrderRow extends React.Component {
         this.state = {
             id: this.props.status ? this.props.status : 0,
             status: this.props.status ? this.determineStatus(this.props.status) : this.determineStatus(0),
+            animationName: ''
         }
     }
 
@@ -41,6 +42,7 @@ export default class OrderRow extends React.Component {
     }
 
     handleOrderUpdate(newStatus) {
+        this.handleStatusChangeAnimation(newStatus.id === 4)
         this.setState({
             id: newStatus.id,
             status: newStatus
@@ -56,22 +58,54 @@ export default class OrderRow extends React.Component {
         })
     }
 
+    handleStatusChangeAnimation(problem) {
+        let styleSheet = document.styleSheets[0];
+
+        let animationName = `animation${Math.round(Math.random() * 100)}`;
+
+        let keyframes = problem ?
+            `@-webkit-keyframes ${animationName} {    
+                0% {background: red}
+                100% {background: none;}
+            }`:
+            `@-webkit-keyframes ${animationName} {    
+                0% {background: rgb(0, 228, 0)}
+                100% {background: none;}
+            }`;
+
+        styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+
+        this.setState({
+            animationName: animationName
+        });
+    }
+
     render() {
         const span = {
             backgroundColor: 'rgb(232,243,236)',
             cursor: 'pointer'
         }
+        let style = {
+            animationName: this.state.animationName,
+            animationTimingFunction: 'ease-in-out',
+            animationDuration: '0.6s',
+            animationDelay: '0.0s',
+            animationIterationCount: 1,
+            animationDirection: 'normal',
+            animationFillMode: 'forwards'
+        }
+
         return (
             <tr>
                 <td onClick={this.props.togglePopup}><span style={span}>{this.props._id}</span></td>
                 <td>{this.props.date}</td>
                 <td>{this.props.customer.name}</td>
-                <td>{this.state.status.label}</td>
+                <td style={style}>{this.state.status.label}</td>
                 <td>{this.props.total}</td>
                 <td>
                     {
                         <ButtonToolbar>
-                            <DropdownButton title='Change order status' id='order-status-dropdown'>
+                            <DropdownButton title='Change status' id='order-status-dropdown'>
                                 <MenuItem
                                     bsStyle={this.state.status.id !== ORDER_STATUS_ENUM.PROCESSING.id - 1 &&
                                         this.state.status.id !== ORDER_STATUS_ENUM.PROBLEM.id ? "default" : "success"}
@@ -106,7 +140,7 @@ export default class OrderRow extends React.Component {
                         </ButtonToolbar>
                     }
                 </td>
-                
+
             </tr>
         )
     }
