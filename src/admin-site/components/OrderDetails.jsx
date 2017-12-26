@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Button, FormControl, Image } from 'react-bootstrap'
+import logo from '../../images/cropped-logo.png'
 
 export default class OrderDetails extends React.Component {
     getImageUrl(imageUrl) {
