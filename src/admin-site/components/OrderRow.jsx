@@ -73,7 +73,7 @@ export default class OrderRow extends React.Component {
                 100% {background: none;}
             }`;
 
-        styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+        styleSheet.insertRule(keyframes, styleSheet.cssRules !== undefined ? styleSheet.cssRules.length : 0);
 
         this.setState({
             animationName: animationName
