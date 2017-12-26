@@ -32,6 +32,7 @@ class Root extends React.Component {
                             categories={this.props.categories}
                             filter={this.props.filter}
                             currentProduct={this.props.currentProduct}
+                            isMobileView={window.innerWidth <= 500}
                         />
                     )} />
                     <Route exact path={ROUTE_ABOUTUS} render={() => (
@@ -40,9 +41,9 @@ class Root extends React.Component {
 
                     <Route exact path={ROUTE_ADMIN} render={() => (
                         this.props.auth.loggedIn ? <Admin /> :
-                            <LoginPage 
-                            user={this.props.auth.user} 
-                            login={() => this.props.dispatch({ type: LOGIN })} />
+                            <LoginPage
+                                user={this.props.auth.user}
+                                login={() => this.props.dispatch({ type: LOGIN })} />
                     )} />
 
                     < Route exact path={ROUTE_SHOPPINGCART} render={() => (

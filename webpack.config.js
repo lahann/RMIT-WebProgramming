@@ -26,10 +26,6 @@ var config = {
         }
       },
       {
-        test: /\.css$/,
-        use: ['css-loader']
-      },
-      {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
           {

@@ -25,7 +25,9 @@ export default class App extends React.Component {
             onProductClick={(p) => this.props.dispatch({ type: SET_CURRENTPRODUCT, payload: p })}
             switchView={() => this.props.dispatch({ type: SWITCH_VIEW })}
             setSortBy={(v) => this.props.dispatch({ type: SET_SORTBY, payload: v })}
-            resetFilter={() => this.props.dispatch({ type: RESET_FILTER })} />
+            resetFilter={() => this.props.dispatch({ type: RESET_FILTER })}
+            isMobileView={this.props.isMobileView}
+          />
         </div>
       )
     } else {

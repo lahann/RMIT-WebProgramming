@@ -20,9 +20,11 @@ export default class ProductOverviewPage extends React.Component {
 
     createOuterStructure() {
         if (this.props.filter.view === VIEW_PRODUCT_GRID) {
+            let width = this.props.isMobileView ? 100 + '%' : 85 + '%'
+            let top = this.props.isMobileView ? 0 + 'px' : 51 + 'px'
             const gridStyle = {
-                top: 51,
-                width: 85 + '%',
+                top: top,
+                width: width,
                 marginRight: 0 + 'px',
                 position: 'relative',
                 paddingBottom: 100 + 'px',
@@ -65,7 +67,9 @@ export default class ProductOverviewPage extends React.Component {
                     categories={this.props.categories}
                     switchView={this.props.switchView}
                     setSortBy={this.props.setSortBy}
-                    resetFilter={this.props.resetFilter} />
+                    resetFilter={this.props.resetFilter}
+                    isMobileView={this.props.isMobileView}
+                />
 
                 {outerStructure}
 

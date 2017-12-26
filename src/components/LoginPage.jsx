@@ -34,14 +34,17 @@ export default class LoginPage extends React.Component {
     }
 
     render() {
+        const style = {
+            margin: 2 + 'px'
+        }
         const USERNAME = 'username'
         const PASSWORD = 'password'
         return (
             <div style={{ position: 'relative', top: 40 + 'px' }}>
-                <h1>Login Page</h1>
+                <h1 style={{ textAlign: 'center' }}>Login Page</h1>
 
                 <Form horizontal>
-                    <FormGroup controlId={USERNAME} validationState={this.getValidationState(USERNAME, this.props.user.username)}>
+                    <FormGroup style={style} controlId={USERNAME} validationState={this.getValidationState(USERNAME, this.props.user.username)}>
                         <Col componentClass={ControlLabel} sm={1}>
                             Username
                         </Col>
@@ -52,7 +55,7 @@ export default class LoginPage extends React.Component {
                         </Col>
                     </FormGroup>
 
-                    <FormGroup controlId={PASSWORD} validationState={this.getValidationState(PASSWORD, this.props.user.password)}>
+                    <FormGroup style={style} controlId={PASSWORD} validationState={this.getValidationState(PASSWORD, this.props.user.password)}>
                         <Col componentClass={ControlLabel} sm={1}>
                             Password
                         </Col>
@@ -63,7 +66,7 @@ export default class LoginPage extends React.Component {
                         </Col>
                     </FormGroup>
 
-                    <FormGroup>
+                    <FormGroup style={style} >
                         <Col smOffset={1} sm={1}>
                             <Button onClick={this.check.bind(this)}>
                                 Sign in

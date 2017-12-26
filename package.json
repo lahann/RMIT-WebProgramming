@@ -5,7 +5,11 @@
   "main": "bundle.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "clean": "rm -Rf node_modules/ && rm -f ./package-lock.json && npm cache clean -f",
+    "clean_windows": "IF EXIST node_modules rd /s /q node_modules && IF EXIST package-lock.json DEL package-lock.json && npm cache clean -f",
+    "rebuild": "npm run clean && npm i",
+    "rebuild_windows": "npm run clean_windows && npm i"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +21,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "react": "^16.1.0",
     "react-bootstrap": "^0.31.5",
+    "react-burger-menu": "^2.1.11",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-router-bootstrap": "^0.24.4",
@@ -30,7 +35,6 @@
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "css-loader": "^0.28.7",
     "file-loader": "^1.1.5",
     "image-webpack-loader": "^3.4.2"
   }
