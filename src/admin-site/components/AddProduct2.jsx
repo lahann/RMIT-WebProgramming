@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Form, FormGroup, FormControl, ControlLabel, ButtonToolbar, Button } from 'react-bootstrap'
+import { Col, Form, FormGroup, FormControl, ControlLabel, ButtonToolbar, Button, DropdownButton, MenuItem } from 'react-bootstrap'
 
 export default class AddProduct2 extends React.Component {
     constructor(props) {
@@ -9,17 +9,17 @@ export default class AddProduct2 extends React.Component {
         this.handleValidation = this.handleValidation.bind(this)
         this.state = {
             fields: {
-                id: '', 
-                name: '', 
-                productType: '',
-                price: '', 
-                description: '', 
-                brand: '', 
-                producer: '', 
+                id: '',
+                name: '',
+                productType: 'test',
+                price: '',
+                description: '',
+                brand: '',
+                producer: '',
                 imageUrl: '',
                 productType: ''
             },
-            errors: []
+            errors: [],
         }
     }
 
@@ -40,7 +40,7 @@ export default class AddProduct2 extends React.Component {
 
         if (fields.productType.charAt(0) !== 'c') {
             formIsValid = false
-            err.push("Type must start with 'c'.")
+            err.push("Please choose category")
         } 
 
         if (!/^\d+$/.test(fields.price)) {
@@ -66,24 +66,30 @@ export default class AddProduct2 extends React.Component {
         if (fields.imageUrl === '') {
             formIsValid = false
             err.push("Image URL cannot be empty.")
-        } 
-        
-        if (!formIsValid) 
-            this.setState({errors: err}, ()=> alert(this.state.errors.join("\n")))
-        else this.setState({errors: err})
+        }
+
+        if (!formIsValid)
+            this.setState({ errors: err }, () => alert(this.state.errors.join("\n")))
+        else this.setState({ errors: err })
         return formIsValid
     }
 
     handleAddProduct() {
+        console.log('type' + this.state.fields.productType)
         if (this.handleValidation()) {
             this.props.handleAddProduct(this.state.fields)
-        } 
+        }
     }
 
     handleChange(e) {
         let fields = this.state.fields
         fields[e.target.name] = e.target.value
-        this.setState({fields})
+        this.setState({ fields })
+    }
+
+    createSelectItems() {
+        let items = this.props.types.map((o, i) => <option key={o._id} value={o.id}>{o.name}</option>)
+        return items;
     }
 
     render() {
@@ -103,140 +109,141 @@ export default class AddProduct2 extends React.Component {
             position: 'absolute',
             left: '25%',
             right: '25%',
-            top:    '25%',
+            top: '25%',
             margin: 'auto',
             padding: '20px',
             background: 'white'
         }
-        
+
         return (
-            <div style={popup}>
-                <div style={popup_inner}>
-                    <Form horizontal>
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                ID
+            <div style={{ margin: '5%' }}>
+                <Form horizontal>
+                    <FormGroup>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            ID
                             </Col>
-                            <Col sm={8}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.fields.id}
-                                    name="id"
-                                    onChange={this.handleChange}
-                                />
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Name
-                            </Col>
-                            <Col sm={8}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.fields.name}
-                                    name="name"
-                                    onChange={this.handleChange}
-                                />                            
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Type
-                            </Col>
-                            <Col sm={8}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.fields.productType}
-                                    name="productType"
-                                    onChange={this.handleChange}
-                                />                            
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Price
-                            </Col>
-                            <Col sm={8}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.fields.price}
-                                    onChange={this.handleChange}
-                                    name="price"
-                                />
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Description
-                            </Col>
-                            <Col sm={8}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.fields.description}
-                                    onChange={this.handleChange}
-                                    name="description"
-                                />
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Brand
-                            </Col>
-                            <Col sm={8}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.fields.brand}
-                                    onChange={this.handleChange}
-                                    name="brand"
-                                />
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Producer
-                            </Col>
-                            <Col sm={8}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.fields.producer}
-                                    onChange={this.handleChange}
-                                    name="producer"
-                                />
-                            </Col>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                Image URL
-                            </Col>
-                            <Col sm={8}>
-                                <FormControl
-                                    type="text"
-                                    value={this.state.fields.imageUrl}
-                                    onChange={this.handleChange}
-                                    name="imageUrl"
-                                />
-                            </Col>
-                        </FormGroup>
-
-                        <Col sm={2}></Col>
                         <Col sm={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.fields.id}
+                                name="id"
+                                onChange={this.handleChange}
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Name
+                            </Col>
+                        <Col sm={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.fields.name}
+                                name="name"
+                                onChange={this.handleChange}
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Type
+                            </Col>
+
+                        <Col sm={8}>
+                            <FormControl
+                                componentClass="select"
+                                value={this.state.fields.productType}
+                                name="productType"
+                                onChange={this.handleChange}
+                            >
+                                <option value="0">Choose category</option>
+                                {this.createSelectItems()}
+                                )}
+                                    </FormControl>
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Price
+                            </Col>
+                        <Col sm={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.fields.price}
+                                onChange={this.handleChange}
+                                name="price"
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Description
+                            </Col>
+                        <Col sm={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.fields.description}
+                                onChange={this.handleChange}
+                                name="description"
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Brand
+                            </Col>
+                        <Col sm={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.fields.brand}
+                                onChange={this.handleChange}
+                                name="brand"
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Producer
+                            </Col>
+                        <Col sm={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.fields.producer}
+                                onChange={this.handleChange}
+                                name="producer"
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Image URL
+                            </Col>
+                        <Col sm={8}>
+                            <FormControl
+                                type="text"
+                                value={this.state.fields.imageUrl}
+                                onChange={this.handleChange}
+                                name="imageUrl"
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <Col sm={2}></Col>
+                    <Col sm={8}>
                         <ButtonToolbar>
-                        <Button onClick={this.props.togglePopup}>CANCEL</Button>
-                        <Button bsStyle="success" onClick={this.handleAddProduct}>ADD PRODUCT</Button>
+                            <Button onClick={this.props.togglePopup}>CANCEL</Button>
+                            <Button bsStyle="success" onClick={this.handleAddProduct}>ADD PRODUCT</Button>
                         </ButtonToolbar>
 
-                        </Col>
-                    </Form>
-
-                </div>
-
+                    </Col>
+                </Form>
             </div>
         )
     }

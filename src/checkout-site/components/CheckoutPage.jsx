@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Button, FormControl, Image } from 'react-bootstrap'
+import { Table, Button, FormControl, Image, Grid, Row, Col } from 'react-bootstrap'
 import logo from '../../images/cropped-logo.png';
 import AddCustomer from './AddCustomer.jsx'
 import { ORDER_STATUS_ENUM } from '../../components/Constants.jsx'
@@ -32,7 +32,7 @@ class QuantityEditing extends React.Component {
     render() {
         return (
             <div>
-                <FormControl
+                <FormControl style={{ width: '15%' }}
                     type="text"
                     inputRef={node => this.state.quantity = node}
                     name="quantity"
@@ -103,7 +103,7 @@ export default class CheckoutPage extends React.Component {
             top: 59 + 'px',
             minHeight: 100 + '%',
             paddingBottom: 100 + 'px',
-            margin: 2 + 'px'
+            margin: '2%'
         }
         Object.assign(divStyle, window.innerWidth <= 500 ? { maxWidth: 407 + 'px' } : {})
 
@@ -118,50 +118,52 @@ export default class CheckoutPage extends React.Component {
             <div style={divStyle}>
                 {this.props.cartItems && this.props.cartItems.length > 0 ?
                     <div>
-                        <Table striped bordered condensed hover>
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.props.cartItems.map(p => {
+                        <Grid>
+                            <Row className="show-grid">
+                                <Col xs={12} md={8}>
+                                    <Table striped bordered condensed hover>
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {this.props.cartItems.map(p => {
 
-                                    let quantityTd = null
-                                    if (this.state.editing === p.id)
-                                        quantityTd = <QuantityEditing quantity={p.quantity} id={p.id} handleUpdateQuantity={this.handleUpdateQuantity.bind(this)} />
-                                    else
-                                        quantityTd = <QuantityNotEditing quantity={p.quantity} toggleEditing={this.toggleEditing.bind(this, p.id)} />
+                                                let quantityTd = null
+                                                if (this.state.editing === p.id)
+                                                    quantityTd = <QuantityEditing quantity={p.quantity} id={p.id} handleUpdateQuantity={this.handleUpdateQuantity.bind(this)} />
+                                                else
+                                                    quantityTd = <QuantityNotEditing quantity={p.quantity} toggleEditing={this.toggleEditing.bind(this, p.id)} />
 
-                                    return (
-                                        <tr key={p.id}>
-                                            <td><Image src={this.getImageUrl(p.imageUrl)} style={imageStyle} /></td>
-                                            <td>{p.name}</td>
-                                            <td>{p.price}</td>
-                                            <td>{quantityTd}</td>
-                                            <td><Button bsStyle="danger" onClick={(e) => {
-                                                if (confirm(`Are you sure you want to delete product '${p.name}'?`)) {
-                                                    this.handleDeleteCartItem(p.id)
-                                                }
-                                            }}>
-                                                DELETE</Button></td>
-                                        </tr>
-                                    )
-                                })}
-                                <tr>
-
-                                </tr>
-                            </tbody>
-
-                        </Table>
-
-                        <h3>Total: ${this.addTotal()}</h3>
-                        <hr />
-                        <AddCustomer handleAddCartAndReset={this.handleAddCartAndReset.bind(this)} />
+                                                return (
+                                                    <tr key={p.id}>
+                                                        <td><Image src={this.getImageUrl(p.imageUrl)} style={imageStyle} /></td>
+                                                        <td>{p.name}</td>
+                                                        <td>{p.price}</td>
+                                                        <td>{quantityTd}</td>
+                                                        <td><Button bsStyle="danger" onClick={(e) => {
+                                                            if (confirm(`Are you sure you want to delete product '${p.name}'?`)) {
+                                                                this.handleDeleteCartItem(p.id)
+                                                            }
+                                                        }}>
+                                                            DELETE</Button></td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </Table>
+                                    <h3>Total: ${this.addTotal()}</h3>
+                                </Col>
+                                <Col xs={6} md={4}>
+                                    <AddCustomer handleAddCartAndReset={this.handleAddCartAndReset.bind(this)} />
+                                </Col>
+                            </Row>
+                        </Grid>
                     </div> :
                     <div style={{ textAlign: 'center' }}>
                         <h2>There are no items in your Shopping Cart!</h2>

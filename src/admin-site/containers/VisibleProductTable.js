@@ -3,7 +3,7 @@ import { addProduct, updateProduct, deleteProduct } from '../actions'
 import ProductTable from '../components/ProductTable.jsx'
 
 const mapStateToProps = state => {
-    return {products: state.products}
+    return {products: state.products, productTypes: state.productTypes}
 }
 
 const mapDispatchToProps = dispatch => {

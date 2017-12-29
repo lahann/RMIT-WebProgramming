@@ -1,18 +1,21 @@
 import React from 'react'
+import { Tabs, Tab } from 'react-bootstrap'
 import VisibleProductTable from '../containers/VisibleProductTable'
 import VisibleProductTypeTable from '../containers/VisibleProductTypeTable'
 import VisibleOrderTable from '../containers/VisibleOrderTable'
 
 const App = () => (
-    <div>
-        <VisibleProductTable />
-        <hr />
-        <h1>Product Types</h1>
-        <VisibleProductTypeTable />
-        <hr />
-        <h1>Orders</h1>
-        <VisibleOrderTable />
-    </div>
+     
+    <Tabs defaultActiveKey={1} style={style}>
+        <Tab eventKey={1} title="Products"><VisibleProductTable /></Tab>
+        <Tab eventKey={2} title="Product Types"><VisibleProductTypeTable /></Tab>
+        <Tab eventKey={3} title="Orders"><VisibleOrderTable /></Tab>
+    </Tabs>
 )
+
+const style = {
+    marginLeft: '5%',
+    marginRight: '5%'
+}
 
 export default App

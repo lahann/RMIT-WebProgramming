@@ -11,31 +11,9 @@ export default class OrderDetails extends React.Component {
     }
 
     render() {
-        const popup = {
-            position: 'fixed',
-            width: 100 + '%',
-            height: 100 + '%',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            margin: 'auto',
-            backgroundColor: 'rgba(0,0,0, 0.5)'
-        }
-
-        const popup_inner = {
-            position: 'absolute',
-            left: '25%',
-            right: '25%',
-            top: '25%',
-            margin: 'auto',
-            padding: '20px',
-            background: 'white'
-        }
 
         return (
-            <div style={popup}>
-                <div style={popup_inner}>
+            <div >
                     <Table striped bordered condensed hover>
                         <thead>
                             <tr><th>Customer Info</th></tr>
@@ -74,8 +52,24 @@ export default class OrderDetails extends React.Component {
                             })}
                         </tbody>
                     </Table>
-                    <Button onClick={this.props.togglePopup}>CLOSE</Button>
-                </div>
+                    <Table>
+                        <tbody>
+                        <tr>
+                                <th>Total</th>
+                                <td>${this.props.total}</td>
+                            </tr>
+                            <tr>
+                                <th>Date</th>
+                                <td>{this.props.date}</td>
+                            </tr>
+                            {/* <tr>
+                                <td align="left"><Button onClick={this.props.togglePopup}>CLOSE</Button></td>
+                                <td></td>
+                            </tr> */}
+                        </tbody>
+                    </Table>
+                    <p align="right"><Button onClick={this.props.togglePopup}>CLOSE</Button></p>
+                    
             </div>
         )
     }

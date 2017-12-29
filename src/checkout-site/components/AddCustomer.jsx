@@ -77,7 +77,7 @@ export default class AddCustomer extends React.Component {
 
     render() {
         return (
-            <Form horizontal style={{ margin: 10 + 'px' }}>
+            <Form horizontal>
                 <FormGroup>
                     <Col componentClass={ControlLabel} sm={1}>
                         Full name

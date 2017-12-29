@@ -46,7 +46,7 @@ export default class ProductTypeTable extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginTop: '2%'}}>
                 <Table striped bordered condensed hover> 
                     <thead>
                         <tr>

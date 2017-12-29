@@ -40,7 +40,9 @@ export default class ProductTable extends React.Component {
         
         return (
             <div>
-                <h1>Products <span><Button bsStyle="success" onClick={this.togglePopup.bind(this)}>ADD NEW</Button></span>
+                {!this.state.showPopup && !this.state.editing ?
+                <div>
+                <h1><Button bsStyle="success" onClick={this.togglePopup.bind(this)}>ADD NEW</Button>
                 </h1>
                 <Table striped bordered condensed hover>
                     <thead>
@@ -67,17 +69,21 @@ export default class ProductTable extends React.Component {
                         })}
 
                     </tbody>
-                </Table>
+                    </Table>
+                </div>
+                : null}
                 {this.state.showPopup ? 
-                    <AddProduct2 togglePopup={this.togglePopup.bind(this)} handleAddProduct={this.handleAddProduct} />
+                    <AddProduct2 types={this.props.productTypes} togglePopup={this.togglePopup.bind(this)} handleAddProduct={this.handleAddProduct} />
                 : null}
                 {this.state.editing ?
                     <EditProduct2
+                        types={this.props.productTypes}
                         key={`editing-${this.state.editing._id}`}
                         {...this.state.editing}
                         handleProductUpdate={this.handleProductUpdate}
                     />
                 : null}
+
             </div>
         );
     }

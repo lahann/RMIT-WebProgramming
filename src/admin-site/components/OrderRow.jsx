@@ -82,7 +82,8 @@ export default class OrderRow extends React.Component {
 
     render() {
         const span = {
-            backgroundColor: 'rgb(232,243,236)',
+            color: 'blue',
+            textDecoration: 'underline',
             cursor: 'pointer'
         }
         let style = {
@@ -98,10 +99,7 @@ export default class OrderRow extends React.Component {
         return (
             <tr>
                 <td onClick={this.props.togglePopup}><span style={span}>{this.props._id}</span></td>
-                <td>{this.props.date}</td>
-                <td>{this.props.customer.name}</td>
                 <td style={style}>{this.state.status.label}</td>
-                <td>{this.props.total}</td>
                 <td>
                     {
                         <ButtonToolbar>
