@@ -1,14 +1,14 @@
 import React from 'react'
-import { Col, Form, FormGroup, FormControl, ControlLabel, ButtonToolbar, Button} from 'react-bootstrap'
+import { Col, Form, FormGroup, FormControl, ControlLabel, ButtonToolbar, Button } from 'react-bootstrap'
 
-export default class AddCustomer extends React.Component { 
+export default class AddCustomer extends React.Component {
     constructor() {
         super()
         this.state = {
             fields: {
-                name: '', 
-                address: '', 
-                email: '', 
+                name: '',
+                address: '',
+                email: '',
                 phone: ''
             },
             errors: []
@@ -21,7 +21,7 @@ export default class AddCustomer extends React.Component {
     handleChange(e) {
         let fields = this.state.fields
         fields[e.target.name] = e.target.value
-        this.setState({fields})
+        this.setState({ fields })
     }
 
     handleValidation() {
@@ -46,7 +46,7 @@ export default class AddCustomer extends React.Component {
             errors.push("Email cannot be empty.")
         } else if (!re.test(fields.email)) {
             formIsValid = false
-            errors.push(fields.email + " is not valid.") 
+            errors.push(fields.email + " is not valid.")
         }
 
         if (!/^\d+$/.test(fields.phone)) {
@@ -54,9 +54,9 @@ export default class AddCustomer extends React.Component {
             errors.push("Phone must be a number.")
         }
 
-        if (!formIsValid) 
-            this.setState({errors: errors}, ()=> alert(this.state.errors.join("\n")))
-        else this.setState({errors: errors})
+        if (!formIsValid)
+            this.setState({ errors: errors }, () => alert(this.state.errors.join("\n")))
+        else this.setState({ errors: errors })
         return formIsValid
     }
 
@@ -64,24 +64,26 @@ export default class AddCustomer extends React.Component {
         if (this.handleValidation()) {
             alert('Your order has been placed.')
             this.props.handleAddCartAndReset(this.state.fields)
-            this.setState({fields: {
-                name: '', 
-                address: '', 
-                email: '', 
-                phone: ''
-            }})
-        } 
+            this.setState({
+                fields: {
+                    name: '',
+                    address: '',
+                    email: '',
+                    phone: ''
+                }
+            })
+        }
     }
 
     render() {
         return (
-            <Form horizontal>
+            <Form horizontal style={{ margin: 10 + 'px' }}>
                 <FormGroup>
-                    <Col componentClass={ControlLabel} sm={2}>
+                    <Col componentClass={ControlLabel} sm={1}>
                         Full name
                     </Col>
-                    <Col sm={4}>
-                        <FormControl 
+                    <Col sm={3}>
+                        <FormControl
                             type="text"
                             value={this.state.fields.name}
                             name="name"
@@ -91,11 +93,11 @@ export default class AddCustomer extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col componentClass={ControlLabel} sm={2}>
+                    <Col componentClass={ControlLabel} sm={1}>
                         Address
                     </Col>
-                    <Col sm={4}>
-                        <FormControl 
+                    <Col sm={3}>
+                        <FormControl
                             type="text"
                             value={this.state.fields.address}
                             name="address"
@@ -105,11 +107,11 @@ export default class AddCustomer extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col componentClass={ControlLabel} sm={2}>
+                    <Col componentClass={ControlLabel} sm={1}>
                         Email
                     </Col>
-                    <Col sm={4}>
-                        <FormControl 
+                    <Col sm={3}>
+                        <FormControl
                             type="text"
                             value={this.state.fields.email}
                             name="email"
@@ -119,11 +121,11 @@ export default class AddCustomer extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col componentClass={ControlLabel} sm={2}>
+                    <Col componentClass={ControlLabel} sm={1}>
                         Phone
                     </Col>
-                    <Col sm={4}>
-                        <FormControl 
+                    <Col sm={3}>
+                        <FormControl
                             type="text"
                             value={this.state.fields.phone}
                             name="phone"
@@ -131,8 +133,8 @@ export default class AddCustomer extends React.Component {
                         />
                     </Col>
                 </FormGroup>
-                <Col sm={2}></Col>
-                <Col sm={4}>
+                <Col sm={1}></Col>
+                <Col sm={3}>
                     <ButtonToolbar >
                         <Button bsStyle="success" onClick={this.handleAddCartAndReset}>PLACE MY ORDER</Button>
                     </ButtonToolbar>

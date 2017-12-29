@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Button, FormControl, Image } from 'react-bootstrap'
 import logo from '../../images/cropped-logo.png';
 import AddCustomer from './AddCustomer.jsx'
-import {ORDER_STATUS_ENUM} from '../../components/Constants.jsx'
+import { ORDER_STATUS_ENUM } from '../../components/Constants.jsx'
 
 class QuantityNotEditing extends React.Component {
     render() {
@@ -98,8 +98,24 @@ export default class CheckoutPage extends React.Component {
     }
 
     render() {
+        const divStyle = {
+            position: 'relative',
+            top: 59 + 'px',
+            minHeight: 100 + '%',
+            paddingBottom: 100 + 'px',
+            margin: 2 + 'px'
+        }
+        Object.assign(divStyle, window.innerWidth <= 500 ? { maxWidth: 407 + 'px' } : {})
+
+        const imageStyle = window.innerWidth <= 500 ? {
+            width: 100 + 'px'
+        }
+            : {
+                maxHeight: 100 + 'px',
+                minHeight: 100 + 'px'
+            }
         return (
-            <div style={{ position: 'relative', top: 59 + 'px', minHeight: 100 + '%', paddingBottom: 100 + 'px' }}>
+            <div style={divStyle}>
                 {this.props.cartItems && this.props.cartItems.length > 0 ?
                     <div>
                         <Table striped bordered condensed hover>
@@ -123,7 +139,7 @@ export default class CheckoutPage extends React.Component {
 
                                     return (
                                         <tr key={p.id}>
-                                            <td><Image src={this.getImageUrl(p.imageUrl)} style={{ maxHeight: 100 + 'px', minHeight: 100 + 'px' }} /></td>
+                                            <td><Image src={this.getImageUrl(p.imageUrl)} style={imageStyle} /></td>
                                             <td>{p.name}</td>
                                             <td>{p.price}</td>
                                             <td>{quantityTd}</td>
