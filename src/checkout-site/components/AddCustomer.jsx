@@ -76,13 +76,15 @@ export default class AddCustomer extends React.Component {
     }
 
     render() {
+        const smLabel = 3
+        const smValue = 7
         return (
             <Form horizontal>
                 <FormGroup>
-                    <Col componentClass={ControlLabel} sm={1}>
+                    <Col componentClass={ControlLabel} sm={smLabel}>
                         Full name
                     </Col>
-                    <Col sm={3}>
+                    <Col sm={smValue}>
                         <FormControl
                             type="text"
                             value={this.state.fields.name}
@@ -93,10 +95,10 @@ export default class AddCustomer extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col componentClass={ControlLabel} sm={1}>
+                    <Col componentClass={ControlLabel} sm={smLabel}>
                         Address
                     </Col>
-                    <Col sm={3}>
+                    <Col sm={smValue}>
                         <FormControl
                             type="text"
                             value={this.state.fields.address}
@@ -107,10 +109,10 @@ export default class AddCustomer extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col componentClass={ControlLabel} sm={1}>
+                    <Col componentClass={ControlLabel} sm={smLabel}>
                         Email
                     </Col>
-                    <Col sm={3}>
+                    <Col sm={smValue}>
                         <FormControl
                             type="text"
                             value={this.state.fields.email}
@@ -121,10 +123,10 @@ export default class AddCustomer extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                    <Col componentClass={ControlLabel} sm={1}>
+                    <Col componentClass={ControlLabel} sm={smLabel}>
                         Phone
                     </Col>
-                    <Col sm={3}>
+                    <Col sm={smValue}>
                         <FormControl
                             type="text"
                             value={this.state.fields.phone}
@@ -133,8 +135,7 @@ export default class AddCustomer extends React.Component {
                         />
                     </Col>
                 </FormGroup>
-                <Col sm={1}></Col>
-                <Col sm={3}>
+                <Col smOffset={smLabel} sm={smValue}>
                     <ButtonToolbar >
                         <Button bsStyle="success" onClick={this.handleAddCartAndReset}>PLACE MY ORDER</Button>
                     </ButtonToolbar>
