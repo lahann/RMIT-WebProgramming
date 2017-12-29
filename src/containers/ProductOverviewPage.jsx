@@ -37,14 +37,17 @@ export default class ProductOverviewPage extends React.Component {
                 </Grid>
             )
         } else if (this.props.filter.view === VIEW_PRODUCT_LIST) {
+            let width = this.props.isMobileView ? 100 + '%' : 129 + '%'
+            let marginLeft = this.props.isMobileView ? 0 + '%' : 15 + '%'
+
             const listStyle = {
                 top: 51,
-                width: 129 + '%',
+                width: width,
                 position: 'relative',
                 paddingRight: 15 + 'px',
                 paddingLeft: 15 + 'px',
                 marginRight: 0 + 'px',
-                marginLeft: 15 + '%',
+                marginLeft: marginLeft,
                 paddingBottom: 100 + 'px',
                 minHeight: 100 + '%'
             }

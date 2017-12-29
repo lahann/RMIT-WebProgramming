@@ -37,6 +37,7 @@ export default class App extends React.Component {
             currentProduct={this.props.currentProduct}
             addToCart={(p) => this.props.dispatch({ type: ADD_TO_CART, payload: p })}
             closeProduct={() => this.props.dispatch({ type: EMPTY_CURRENTPRODUCT })}
+            isMobileView={this.props.isMobileView}
           />
         </div>
       )

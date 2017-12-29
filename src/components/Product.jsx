@@ -2,7 +2,7 @@ import React from 'react'
 import ReactTooltip from 'react-tooltip'
 import logo from '../images/cropped-logo.png';
 import cross from '../images/cross.jpg';
-import { Panel, Image, ListGroupItem, Button } from 'react-bootstrap'
+import { Panel, Image, ListGroupItem, Button, Row } from 'react-bootstrap'
 import { VIEW_PRODUCT_DETAILS, VIEW_PRODUCT_EDIT, VIEW_PRODUCT_LIST, VIEW_PRODUCT_GRID } from '../components/Constants.jsx'
 
 export default class Product extends React.Component {
@@ -79,76 +79,38 @@ export default class Product extends React.Component {
     }
 
     details() {
-        const panelStyle = {
+        let panelStyle = {
             top: 59,
             position: 'relative',
             marginRight: 10 + 'px',
-            marginLeft: 10 + 'px',
-            maxHeight: 800 + 'px'
-        }
-        const secondTdStyle = {
-            width: 100 + '%',
-            width: 100 + '%',
-            top: 200 + 'px',
-            left: 20 + '%',
-            position: 'fixed'
-        }
-        const thirdTdStyle = {
-            width: 10 + '%',
-            position: 'fixed',
-            top: 320 + 'px',
-            right: 690 + 'px'
-        }
-        const h1Style = {
-            textAlign: 'center',
-            position: 'relative',
-            top: -160 + 'px'
-        }
-        const h3Style = {
-            textAlign: 'center',
-            position: 'relative',
-            top: -100 + 'px',
-            lineBreak: 'auto',
-            maxWidth: 600 + 'px',
-            marginLeft: 29 + '%'
-        }
-        const h4Style = {
-            textAlign: 'center',
-            position: 'relative',
+            marginLeft: 10 + 'px'
         }
         const crossStyle = {
             width: 25 + 'px',
             cursor: 'pointer',
-            position: 'relative',
-            top: -247 + 'px',
-            right: -780 + 'px',
-            zIndex: 1
+            zIndex: 1,
+            float: 'right',
+            marginRight: 1 + '%'
         }
-
         return (
             <div>
                 <Panel style={panelStyle}>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <Image src={this.getImageUrl(this.state.imageUrl)} />
-                                </td>
-                                <td style={secondTdStyle}>
-                                    <h1 style={h1Style}>{this.state.name}</h1>
-                                    <h3 style={h3Style}>
-                                        {this.state.description}
-                                    </h3>
-                                    <h4 style={h4Style}>
-                                        {this.state.brand} produced by {this.state.producer}
-                                    </h4>
-                                </td>
-                                <td style={thirdTdStyle}>
-                                    <Image src={cross} style={crossStyle} onClick={this.props.closeProduct.bind(this)} />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <Row>
+                        <Image src={cross} style={crossStyle} onClick={this.props.closeProduct.bind(this)} />
+                    </Row>
+                    <Row>
+                        <Image src={this.getImageUrl(this.state.imageUrl)} style={{ maxWidth: 100 + '%' }} />
+                    </Row>
+                    <Row style={{ textAlign: 'center' }}>
+                        <h1>{this.state.name}</h1>
+
+                        <h3>
+                            {this.state.description}
+                        </h3>
+                        <h4>
+                            {this.state.brand} produced by {this.state.producer}
+                        </h4>
+                    </Row>
 
                     <div style={{ textAlign: 'right' }} >
                         For only: {this.state.price} $ &nbsp;

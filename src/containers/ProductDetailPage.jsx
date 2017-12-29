@@ -11,6 +11,7 @@ export default class ProductDetailPage extends React.Component {
                     mode={VIEW_PRODUCT_DETAILS}
                     addToCart={this.props.addToCart}
                     closeProduct={this.props.closeProduct}
+                    isMobileView={this.props.isMobileView}
                 />}
             </div>
         )
