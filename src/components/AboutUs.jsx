@@ -35,6 +35,10 @@ export default class AboutUs extends React.Component {
                                 <p>Worked on..</p>
                                 <ul>
                                     <li>..admin product form</li>
+                                    <li>..order</li>
+                                    <li>..improvement - admin page</li>
+                                    <li>..improvement - validation</li>
+                                    <li>..improvement - checkout page</li>
                                 </ul>
                             </Panel>
                         </Col>
@@ -51,9 +55,8 @@ export default class AboutUs extends React.Component {
                                 <h4>Assignment 1</h4>
                                 <p>Worked on..</p>
                                 <ul>
-                                    <li>..header</li>
+                                    <li>..header/ filter</li>
                                     <li>..product overview/ detail page</li>
-                                    <li>..filter</li>
                                     <li>..about us</li>
                                     <li>..deployment</li>
                                 </ul>
@@ -62,6 +65,8 @@ export default class AboutUs extends React.Component {
                                 <ul>
                                     <li>..configuration of NodeJS/ MongoDB</li>
                                     <li>..deployment</li>
+                                    <li>..login</li>
+                                    <li>..responsiveness</li>
                                 </ul>
                             </Panel>
                         </Col>
