@@ -25,20 +25,17 @@ export default class AboutUs extends React.Component {
                                     <li>Studies Information Technology at RMIT Vietnam</li>
                                 </ul>
                                 <h4>Assignment 1</h4>
-                                <p>Worked on..</p>
+                                <p>Worked on:</p>
                                 <ul>
-                                    <li>..admin (main)</li>
-                                    <li>..checkout (main)</li>
-                                    <li>..filter by category (minor)</li>
+                                    <li>Admin Page</li>
+                                    <li>Checkout Page</li>
+                                    <li>Filter by category</li>
                                 </ul>
                                 <h4>Assignment 2</h4>
-                                <p>Worked on..</p>
+                                <p>Worked on:</p>
                                 <ul>
-                                    <li>..admin product form</li>
-                                    <li>..order</li>
-                                    <li>..improvement - admin page</li>
-                                    <li>..improvement - validation</li>
-                                    <li>..improvement - checkout page</li>
+                                    <li>Admin Page</li>
+                                    <li>Checkout Page</li>
                                 </ul>
                             </Panel>
                         </Col>
